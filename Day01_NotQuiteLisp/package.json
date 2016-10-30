@@ -1,0 +1,9 @@
+{
+  "readme": "README.md",
+  "license": "MIT",
+  "repository": "put your repo here",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "description": "Advent of Code."
+}
