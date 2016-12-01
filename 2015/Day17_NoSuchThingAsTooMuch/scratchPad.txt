@@ -1,0 +1,18 @@
+5, 20, 5, 15, 10
+
+20, 5 - (2)
+20, 5 - (2)
+15, 5, 5 - (1)
+10, 15 - (3)
+
+(1) Need to not repeat exact combinations
+(2) Need to allow repetitions when we have two identical containers
+(3) Standard Case
+
+
+Container Object -
+  container size - integer
+  unique identifier (Memory Location I guess...)
+
+Parse through array.  If addition will get us closer to total without going over, recursively call on remainder of array.
+If addition gets us to total.  Stop here and return.

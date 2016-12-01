@@ -1,0 +1,45 @@
+H => HO
+H => OH
+O => HH
+
+H, O, H
+
+HOOH
+OHOH
+HHHH
+HOHO
+HOOH
+
+
+H => HO
+H => OH
+O => HH
+Na => OO
+
+Na,O,H,Na
+
+
+OOOHNa
+NaHHHNa
+NaOHONa
+NaOOHNa
+NaOHOO
+
+
+
+
+for each molecule.
+  store everything up to that molecule.
+  store everything after that molecule
+  make the swap, prepend and append
+  store each resulting string
+end forEach
+cycle through list and remove duplicates (use a hash for this).
+
+
+285
+32
+32
+10
+
+285 - 32 - 2*10 - 1 = 232

@@ -1,0 +1,64 @@
+
+Character
+ - name
+ - Armor
+ - Damage
+ - Hit Point max
+ - Current Hit Points
+
+extended by Player
+ - Equipment
+ - Gold
+
+Item
+ - type
+ - name
+ - Cost
+ - DamageIncrease
+ - ArmorIncrease
+
+Shop
+ - Calculate Cost
+
+Battle
+
+Main(Orchestrator)
+ - Compute Permutations of equipment.
+
+
+dagger, none, (none, none)
+dagger, none, (D+1, none)
+dagger, none, (D+2, none)
+dagger, none, (A+1, none)
+dagger, none, (D+1, D+2)
+dagger, none, (D+1, A+1)
+dagger, none, (D+2, A+1)
+
+dagger, Leather, (none, none)
+dagger, Leather, (D+1, none)
+dagger, Leather, (D+2, none)
+dagger, Leather, (A+1, none)
+dagger, Leather, (D+1, D+2)
+dagger, Leather, (D+1, A+1)
+dagger, Leather, (D+2, A+1)
+
+etc...
+
+
+ new Item('weapon', 'Dagger', 8, 4, 0),
+ new Item('weapon', 'Shortsword', 10, 5, 0),
+
+ new Item('armor', 'Leather', 13, 0, 1),
+ new Item('armor', 'Chainmail', 31, 0, 2),
+
+ new Item('ring', 'Damage +1', 25, 1, 0),
+ new Item('ring', 'Damage +2', 50, 2, 0),
+ new Item('ring', 'Defense +1', 20, 0, 1),
+
+42 Combinations in total;
+For each equipment type
+  get all groupings minus duplicates
+    - keep foreaching until you get all combos.  When names are identical, bail.
+end for
+
+Then foreach each of these resulting groups to get the final combos.
