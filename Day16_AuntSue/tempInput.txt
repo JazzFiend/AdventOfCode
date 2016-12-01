@@ -1,4 +1,0 @@
-Sue 124: vizslas: 10, pomeranians: 7, akitas: 5
-Sue 125: perfumes: 4, cats: 5, vizslas: 0
-Sue 126: cars: 2, samoyeds: 2, akitas: 3
-Sue 127: trees: 3, goldfish: 5, akitas: 0
