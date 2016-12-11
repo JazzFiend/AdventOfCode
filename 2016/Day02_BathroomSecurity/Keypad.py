@@ -1,23 +1,14 @@
 class Keypad():
     # Constants
-    WIDTH = 3
-    HEIGHT = 3
     LOCATION_X = 0
     LOCATION_Y = 1
 
     # Constructor
-    def __init__(self, location = (1, 1)):
-        self._keypad = [[0 for x in range(self.WIDTH)] for y in range(self.HEIGHT)]
-        self._keypad[0][0] = '1'
-        self._keypad[1][0] = '2'
-        self._keypad[2][0] = '3'
-        self._keypad[0][1] = '4'
-        self._keypad[1][1] = '5'
-        self._keypad[2][1] = '6'
-        self._keypad[0][2] = '7'
-        self._keypad[1][2] = '8'
-        self._keypad[2][2] = '9'
+    def __init__(self, location, keypad, width, height):
+        self._keypad = keypad
         self._location = location
+        self._width = width
+        self._height = height
 
     # Location Property - 2 Integer Tuple
     def locationGet(self):
@@ -34,26 +25,33 @@ class Keypad():
     # Movement Functions
     def moveLocationUp(self):
         currentLocation = self.locationGet()
-        if(not (currentLocation[self.LOCATION_Y] == 0)):
+        if((not (currentLocation[self.LOCATION_Y] == 0)) and not self._isLocationNone(currentLocation[self.LOCATION_X], currentLocation[self.LOCATION_Y] - 1)):
             self.locationSet((currentLocation[self.LOCATION_X], currentLocation[self.LOCATION_Y] - 1))
 
     def moveLocationDown(self):
         currentLocation = self.locationGet()
-        if(not (currentLocation[self.LOCATION_Y] == self.HEIGHT - 1)):
+        if(not (currentLocation[self.LOCATION_Y] == self.HEIGHT - 1) and not self._isLocationNone(currentLocation[self.LOCATION_X], currentLocation[self.LOCATION_Y] + 1)):
             self.locationSet((currentLocation[self.LOCATION_X], currentLocation[self.LOCATION_Y] + 1))
 
     def moveLocationLeft(self):
         currentLocation = self.locationGet()
-        if(not (currentLocation[self.LOCATION_X] == 0)):
+        if(not (currentLocation[self.LOCATION_X] == 0) and not self._isLocationNone(currentLocation[self.LOCATION_X] - 1, currentLocation[self.LOCATION_Y])):
             self.locationSet((currentLocation[self.LOCATION_X] - 1, currentLocation[self.LOCATION_Y]))
 
     def moveLocationRight(self):
         currentLocation = self.locationGet()
-        if(not (currentLocation[self.LOCATION_X] == self.WIDTH - 1)):
+        if(not (currentLocation[self.LOCATION_X] == self.WIDTH - 1) and not self._isLocationNone(currentLocation[self.LOCATION_X] + 1, currentLocation[self.LOCATION_Y])):
             self.locationSet((currentLocation[self.LOCATION_X] + 1, currentLocation[self.LOCATION_Y]))
+
+    # Local Functions
+    def _isLocationNone(self, x, y):
+        if(self._keypad[x][y] == None):
+            return True
+        else:
+            return False
 
     # Display Function
     def displayLocation(self):
         locationToPrint = self.locationGet()
-        # print locationToPrint
+        print locationToPrint
         print self._keypad[locationToPrint[self.LOCATION_X]][locationToPrint[self.LOCATION_Y]]

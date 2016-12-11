@@ -1,4 +1,5 @@
-import Keypad
+import StandardKeypad
+import AnnoyingKeypad
 
 def moveBasedOnChar(keypad, char):
     if(char == 'U'):
@@ -15,7 +16,8 @@ def moveBasedOnChar(keypad, char):
 # Start Here
 TEST_INSTRUCTIONS = ["ULL", "RRDDD", "LURDL", "UUUUD"]
 f = open('input.txt', 'r')
-location = (1, 1)
+# location = (1, 1)
+location = (0, 2)
 password = ''
 getFileInput = True;
 instructionList = []
@@ -28,10 +30,12 @@ while(getFileInput):
         getFileInput = False
 
 for instruction in instructionList:
-    bathroomKeypad = Keypad.Keypad(location)
+    # bathroomKeypad = StandardKeypad.StandardKeypad(location)
+    bathroomKeypad = AnnoyingKeypad.AnnoyingKeypad(location)
     for character in instruction:
         if(not character == '\n'):
             moveBasedOnChar(bathroomKeypad, character)
+        # bathroomKeypad.displayLocation()
     location = bathroomKeypad.locationGet()
     password += bathroomKeypad.buttonPress()
 
