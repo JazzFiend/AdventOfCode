@@ -41,6 +41,21 @@ def extractFiveMostCommonChars(string):
         break
   return fiveMostCommon
 
+def stateOfTheArtCipher(encryptedString, iterations):
+  decryptedString = ''
+  for character in encryptedString:
+    if(character == '-'):
+      decryptedString += ' '
+      continue
+    currentAscii = ord(character);
+    for i in range(0, iterations):
+      if(currentAscii == 122):
+        currentAscii = 97
+      else:
+        currentAscii = currentAscii + 1
+    decryptedString += chr(currentAscii)
+  return decryptedString
+
 # Start Here
 sectorTotal = 0
 getFileInput = True
@@ -70,5 +85,6 @@ for room in roomList:
       break
   if(not decoy):
     sectorTotal += int(sectorID)
+    print(stateOfTheArtCipher(encryptedName, int(sectorID)), sectorID)
 
 print("Sector Total: %s" % sectorTotal)
