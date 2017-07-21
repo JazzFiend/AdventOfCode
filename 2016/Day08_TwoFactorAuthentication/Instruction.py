@@ -35,6 +35,32 @@ class Instruction():
     else:
       raise ValueError('Incorrect Instruction: %s' % tokenizedInstruction[0])
 
+  def _turnOnRectangle(self, screen, width, height):
+    screen.turnOnRange(width, height)
+
+  def _shiftDown(self, screen, column, distance):
+    startingPoint = distance % screen.getHeight()
+    originalColumn = []
+    pointer = startingPoint
+    for i in range(0, screen.getHeight()):
+      originalColumn.append(screen.getPixelState(column, i))
+    for i in range(0, screen.getHeight()):
+      screen.setPixel(column, pointer, originalColumn[i])
+      pointer += 1
+      if(pointer == screen.getHeight()):
+        pointer = 0
+
+  def _shiftRight(self, screen, row, distance):
+    startingPoint = distance % screen.getWidth()
+    originalRow = []
+    pointer = startingPoint
+    for i in range(0, screen.getWidth()):
+      originalRow.append(screen.getPixelState(i, row))
+    for i in range(0, screen.getWidth()):
+      screen.setPixel(pointer, row, originalRow[i])
+      pointer += 1
+      if(pointer == screen.getWidth()):
+        pointer = 0
 
   # Public Functions
   def display(self):
@@ -43,5 +69,12 @@ class Instruction():
     print "Arg2: %s" % self.argument2
     print "\n"
 
-  def execute(screen)
-    
+  def execute(self, screen):
+    if(self.instruction == INSTRUCTION_TYPE.RECT):
+      self._turnOnRectangle(screen, self.argument1, self.argument2)
+    elif(self.instruction == INSTRUCTION_TYPE.ROTATE_COLUMN):
+      self._shiftDown(screen, self.argument1, self.argument2)
+    elif(self.instruction == INSTRUCTION_TYPE.ROTATE_ROW):
+      self._shiftRight(screen, self.argument1, self.argument2)
+    else:
+      raise ValueError('Incorrect Instruction: %s' % self.instruction)
