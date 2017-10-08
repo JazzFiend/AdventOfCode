@@ -1,0 +1,25 @@
+public class FloorCalculator {
+  public static int calculateFloor(String floorPlan) {
+    int total = 0;
+    for(int i = 0; i < floorPlan.length(); i++) {
+      if (floorPlan.charAt(i) == '(') {
+        total++;
+      } else if(floorPlan.charAt(i) == ')') {
+        total--;
+      } else {
+        System.out.print("Bad character seen");
+      }
+    }
+    return total;
+  }
+
+  public static void main(String[] args) {
+    System.out.print("Final Floor: " + FloorCalculator.calculateFloor("(())"));
+    System.out.print("\nFinal Floor: " + FloorCalculator.calculateFloor("((("));
+    System.out.print("\nFinal Floor: " + FloorCalculator.calculateFloor("))((((("));
+    System.out.print("\nFinal Floor: " + FloorCalculator.calculateFloor("))("));
+    System.out.print("\nFinal Floor: " + FloorCalculator.calculateFloor(")())())"));
+  }
+}
+
+

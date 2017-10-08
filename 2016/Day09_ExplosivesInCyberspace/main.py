@@ -1,5 +1,6 @@
 file = 'inputTemp.txt'
 compressedStrings = []
+getFileInput = True
 
 f = open(file, 'r')
 while(getFileInput):
@@ -10,4 +11,4 @@ while(getFileInput):
   else:
     getFileInput = False
 
-print 
+print compressedStrings
