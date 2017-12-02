@@ -1,2 +1,5 @@
 # Python Class Files
 *.pyc
+
+# Java Class Files
+*.class
