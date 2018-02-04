@@ -83,7 +83,6 @@ public class MemoryAllocator {
     firstRepeatedMemory = generateString(memory);
     continueLoop = true;
     cycleCount = 0;
-
     while(continueLoop) {
       cycleCount++;
       memory = allocateMemory(memory);
