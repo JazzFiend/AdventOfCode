@@ -40,6 +40,10 @@ public class Node {
     parent = parentNode;
   }
 
+  public boolean hasChildren() {
+    return !children.isEmpty();
+  }
+
   public String toString() {
     StringBuilder toReturn = new StringBuilder();
     toReturn.append(name);

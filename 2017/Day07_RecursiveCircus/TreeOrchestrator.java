@@ -65,11 +65,42 @@ public class TreeOrchestrator {
     return null;
   }
 
+  private static boolean allElementsEqual(List<Integer> list) {
+    int value = list.get(0);
+    for(int i = 0; i < list.size(); i++) {
+      if(list.get(i) != value) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private static int getTreeWeight(Node rootNode) {
+    if(!rootNode.hasChildren()) {
+      return rootNode.getWeight();
+    }
+    int totalWeight = 0;
+    ArrayList<Integer> weightList = new ArrayList<Integer>();
+    for(Node child : rootNode.getChildren()) {
+      int treeWeight = getTreeWeight(child);
+      weightList.add(treeWeight);
+      totalWeight += treeWeight;
+    }
+    if(!allElementsEqual(weightList)) {
+      for(Node child : rootNode.getChildren()) {
+        System.out.print(String.format("%s -> %d\n", child.getName(), getTreeWeight(child)));
+      }
+      System.out.print("\n");
+    }
+
+    totalWeight += rootNode.getWeight();
+    return totalWeight;
+  }
+
   public static void main(String[] args) {
     final String treeSetupFilename = "input.txt";
     List<String> treeSetup = parseTreeFile(treeSetupFilename);
     Collection<Node> tree = buildTree(treeSetup);
-    System.out.print(findRoot(tree).getName());
-    System.out.print("\n");
+    getTreeWeight(findRoot(tree));
   }
 }
