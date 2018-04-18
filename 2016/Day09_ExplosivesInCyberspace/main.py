@@ -1,14 +1,12 @@
-file = 'inputTemp.txt'
-compressedStrings = []
-getFileInput = True
+from Decompressor import Decompressor
 
-f = open(file, 'r')
-while(getFileInput):
-  line = f.readline()
-  if(not line == ''):
-    line = line[:-1]
-    compressedStrings.append(line)
-  else:
-    getFileInput = False
+def readCompressedString(fileName):
+  f = open(fileName, 'r')
+  return f.readline()
 
-print compressedStrings
+# main
+compressedString = readCompressedString("input.txt")
+#compressedString = "X(8x2)(3x3)ABCY"
+decompressor = Decompressor(compressedString)
+decompressedLength = decompressor.calculateUncompressedLength()
+print "Decompressed Length: %i" % decompressedLength
