@@ -1,28 +1,26 @@
 from DecompressionState import DecompressionState
 
 class Decompressor:
-  # Constructor
-  def __init__(self, compressedString):
-    self.compressedString = compressedString
+  def __init__(self):
     self.decompressionState = DecompressionState.NOT_COMPRESSED
-    self.decompressedLength = 0
     self.charLength = ""
     self.duplicateLength = ""
+    return
 
-  # Public Methods
-  def calculateUncompressedLength(self):
+  def calculateUncompressedLength(self, compressedString):
     self.decompressedLength = 0
+    decompressionState = DecompressionState.NOT_COMPRESSED
     self.charLength = ""
     self.duplicateLength = ""
     skipCounter = 1
-    for character in self.compressedString:
-      if(self.decompressionState == DecompressionState.NOT_COMPRESSED):
-        self.notCompressedAction(character)
-      elif(self.decompressionState == DecompressionState.EXTRACT_CHAR_LENGTH):
-        self.extractCharLengthAction(character)
-      elif(self.decompressionState == DecompressionState.EXTRACT_DUPLICATES):
-        self.extractDuplicatesAction(character)
-      elif(self.decompressionState == DecompressionState.SKIP_DUPLICATES):
+    for character in compressedString:
+      if(decompressionState == DecompressionState.NOT_COMPRESSED):
+        self.__notCompressedAction(character)
+      elif(decompressionState == DecompressionState.EXTRACT_CHAR_LENGTH):
+        self.__extractCharLengthAction(character)
+      elif(decompressionState == DecompressionState.EXTRACT_DUPLICATES):
+        self.__extractDuplicatesAction(character)
+      elif(decompressionState == DecompressionState.SKIP_DUPLICATES):
         if(skipCounter < int(self.charLength)):
           skipCounter += 1
         else:
@@ -32,38 +30,31 @@ class Decompressor:
           self.decompressionState = DecompressionState.NOT_COMPRESSED
 
     return self.decompressedLength
-  
-  def getDecompressedLength(self):
-    if(self.decompressedLength == 0):
-      return self.calculateUncompressedLength()
-    else:
-      return self.decompressedLength
 
-  # Private Methods
-  def notCompressedAction(self, character):
-    if(self.isStartMarker(character)):
+  def __notCompressedAction(self, character):
+    if(self.__isStartMarker(character)):
       self.decompressionState = DecompressionState.EXTRACT_CHAR_LENGTH
     else:
       self.decompressedLength += 1
 
-  def extractCharLengthAction(self, character):
-    if(self.isMidMarker(character)):
+  def __extractCharLengthAction(self, character):
+    if(self.__isMidMarker(character)):
       self.decompressionState  = DecompressionState.EXTRACT_DUPLICATES
     else:
       self.charLength += character
 
-  def extractDuplicatesAction(self, character):
-    if(self.isEndMarker(character)):
+  def __extractDuplicatesAction(self, character):
+    if(self.__isEndMarker(character)):
       self.decompressionState = DecompressionState.SKIP_DUPLICATES
       self.decompressedLength += (int(self.charLength) * int(self.duplicateLength))
     else:
       self.duplicateLength += character
 
-  def isStartMarker(self, character):
+  def __isStartMarker(self, character):
     return character == '('
 
-  def isMidMarker(self, character):
+  def __isMidMarker(self, character):
     return character == 'x'
   
-  def isEndMarker(self, character):
+  def __isEndMarker(self, character):
     return character == ')'
