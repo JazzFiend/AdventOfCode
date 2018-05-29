@@ -9,18 +9,18 @@ class Decompressor:
 
   def calculateUncompressedLength(self, compressedString):
     self.decompressedLength = 0
-    decompressionState = DecompressionState.NOT_COMPRESSED
+    self.decompressionState = DecompressionState.NOT_COMPRESSED
     self.charLength = ""
     self.duplicateLength = ""
     skipCounter = 1
     for character in compressedString:
-      if(decompressionState == DecompressionState.NOT_COMPRESSED):
+      if(self.decompressionState == DecompressionState.NOT_COMPRESSED):
         self.__notCompressedAction(character)
-      elif(decompressionState == DecompressionState.EXTRACT_CHAR_LENGTH):
+      elif(self.decompressionState == DecompressionState.EXTRACT_CHAR_LENGTH):
         self.__extractCharLengthAction(character)
-      elif(decompressionState == DecompressionState.EXTRACT_DUPLICATES):
+      elif(self.decompressionState == DecompressionState.EXTRACT_DUPLICATES):
         self.__extractDuplicatesAction(character)
-      elif(decompressionState == DecompressionState.SKIP_DUPLICATES):
+      elif(self.decompressionState == DecompressionState.SKIP_DUPLICATES):
         if(skipCounter < int(self.charLength)):
           skipCounter += 1
         else:
