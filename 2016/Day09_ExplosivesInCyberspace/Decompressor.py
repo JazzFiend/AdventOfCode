@@ -7,7 +7,7 @@ class Decompressor:
     self.duplicateLength = ""
     return
 
-  def calculateUncompressedLength(self, compressedString):
+  def calculateUncompressedLengthV1(self, compressedString):
     self.decompressedLength = 0
     self.decompressionState = DecompressionState.NOT_COMPRESSED
     self.charLength = ""
@@ -20,6 +20,30 @@ class Decompressor:
         self.__extractCharLengthAction(character)
       elif(self.decompressionState == DecompressionState.EXTRACT_DUPLICATES):
         self.__extractDuplicatesAction(character)
+      elif(self.decompressionState == DecompressionState.SKIP_DUPLICATES):
+        if(skipCounter < int(self.charLength)):
+          skipCounter += 1
+        else:
+          skipCounter = 1
+          self.charLength = ""
+          self.duplicateLength = ""
+          self.decompressionState = DecompressionState.NOT_COMPRESSED
+
+    return self.decompressedLength
+
+  def calculateUncompressedLengthV2(self, compressedString):
+    self.decompressedLength = 0
+    self.decompressionState = DecompressionState.NOT_COMPRESSED
+    self.charLength = ""
+    self.duplicateLength = ""
+    skipCounter = 1
+    for i in range(0, len(compressedString)):
+      if(self.decompressionState == DecompressionState.NOT_COMPRESSED):
+        self.__notCompressedAction(compressedString[i])
+      elif(self.decompressionState == DecompressionState.EXTRACT_CHAR_LENGTH):
+        self.__extractCharLengthAction(compressedString[i])
+      elif(self.decompressionState == DecompressionState.EXTRACT_DUPLICATES):
+        self.__extractDuplicatesAction(compressedString[i])
       elif(self.decompressionState == DecompressionState.SKIP_DUPLICATES):
         if(skipCounter < int(self.charLength)):
           skipCounter += 1
