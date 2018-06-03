@@ -12,9 +12,9 @@ class DecompressorAcceptanceTest(unittest.TestCase):
     decompressor = Decompressor.Decompressor()
     self.assertEqual(decompressor.calculateUncompressedLengthV1('A(1x5)BC'), 7)
 
-  # def test_v1ManyCharactersCompressed(self):
-  #   decompressor = Decompressor.Decompressor()
-  #   self.assertEqual(decompressor.calculateUncompressedLengthV1('(3x3)XYZ'), 9)
+  def test_v1ManyCharactersCompressed(self):
+    decompressor = Decompressor.Decompressor()
+    self.assertEqual(decompressor.calculateUncompressedLengthV1('(3x3)XYZ'), 9)
 
   # def test_v1ManyDecompressions(self):
   #   decompressor = Decompressor.Decompressor()

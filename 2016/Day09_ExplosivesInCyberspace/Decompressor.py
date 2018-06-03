@@ -24,38 +24,39 @@ class Decompressor:
           skipCounter += 1
         else:
           skipCounter = 1
-          self.charLength = ""
-          self.duplicateLength = ""
-          decompressionStatus.decompressionState = DecompressionState.NOT_COMPRESSED
+          decompressionStatus.reset()
     return self._decompressedLength
 
   def calculateUncompressedLengthV2(self, compressedString):
     return self.calculateUncompressedLengthV1(compressedString)
 
   def __notCompressedAction(self, character, decompressionStatus):
-    modifiedDecompressionStatus = DecompressionStatusFields.clone(decompressionStatus)
+    newDS = DecompressionStatusFields.clone(decompressionStatus)
     if(self.__isStartMarker(character)):
-      modifiedDecompressionStatus.decompressionState = DecompressionState.EXTRACT_CHAR_LENGTH
+      newDS.decompressionState = DecompressionState.EXTRACT_CHAR_LENGTH
     else:
       self._decompressedLength += 1
-    return modifiedDecompressionStatus
+    return newDS
 
   def __extractCharLengthAction(self, character, decompressionStatus):
-    modifiedDecompressionStatus = DecompressionStatusFields.clone(decompressionStatus)
+    newDS = DecompressionStatusFields.clone(decompressionStatus)
     if(self.__isMidMarker(character)):
-      modifiedDecompressionStatus.decompressionState = DecompressionState.EXTRACT_DUPLICATES
+      newDS.decompressionState = DecompressionState.EXTRACT_DUPLICATES
     else:
-      modifiedDecompressionStatus.charLength += character
-    return modifiedDecompressionStatus
+      newDS.charLength += character
+    return newDS
 
   def __extractDuplicatesAction(self, character, decompressionStatus):
-    modifiedDecompressionStatus = DecompressionStatusFields.clone(decompressionStatus)
+    newDS = DecompressionStatusFields.clone(decompressionStatus)
     if(self.__isEndMarker(character)):
-      modifiedDecompressionStatus.decompressionState = DecompressionState.SKIP_DUPLICATES
-      self._decompressedLength += (int(modifiedDecompressionStatus.charLength) * int(modifiedDecompressionStatus.duplicateLength))
+      newDS.decompressionState = DecompressionState.SKIP_DUPLICATES
+      self._decompressedLength += self.__computeLength(newDS)
     else:
-      modifiedDecompressionStatus.duplicateLength += character
-    return modifiedDecompressionStatus
+      newDS.duplicateLength += character
+    return newDS
+
+  def __computeLength(self, decompressionStatus):
+    return (int(decompressionStatus.charLength) * int(decompressionStatus.duplicateLength))
 
   def __isStartMarker(self, character):
     return character == '('
