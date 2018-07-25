@@ -1,6 +1,14 @@
 module.exports = class MoleculeRules {
-  constructor() {
+  constructor(rules) {
     this.ruleList = {};
+    rules.forEach((rule) => {
+      this.parseRule(rule)
+    });
+  }
+
+  parseRule(rule) {
+    var tokenizedRule = rule.split(' ');
+    this.addRule(tokenizedRule[0], tokenizedRule[2]);
   }
 
   addRule(start, finish) {
