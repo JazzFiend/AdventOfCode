@@ -1,35 +1,33 @@
-function MoleculeRules() {
-  this.ruleList = {};
-}
+module.exports = class MoleculeRules {
+  constructor() {
+    this.ruleList = {};
+  }
 
-MoleculeRules.prototype = {
-  constructor: MoleculeRules,
-
-  addRule: function(start, finish) {
+  addRule(start, finish) {
     if (this.ruleList[start] === undefined) {
       this.ruleList[start] = [];
     }
     this.ruleList[start].push(finish);
-  },
+  }
 
-  displayRules: function() {
+  displayRules() {
     var rules = this.ruleList;
     Object.keys(rules).forEach(function(startMolecule) {
       rules[startMolecule].forEach(function(endMolecule) {
         console.log(startMolecule + ' =>', endMolecule);
       });
     });
-  },
+  }
 
-  removeDuplicates: function(array) {
+  removeDuplicates(array) {
     var hashMap = {};
     array.forEach(function(element) {
       hashMap[element] = 1;
     });
     return Object.keys(hashMap);
-  },
+  }
 
-  advanceFormula: function(moleculeArray) {
+  advanceFormula(moleculeArray) {
     var formulaList = [];
     var rules = this.ruleList;
 
@@ -55,5 +53,3 @@ MoleculeRules.prototype = {
     return formulaList;
   }
 };
-
-module.exports = MoleculeRules;

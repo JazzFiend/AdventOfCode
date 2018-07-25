@@ -3,11 +3,15 @@
   "license": "MIT",
   "repository": "put your repo here",
   "scripts": {
-    "start": "node main.js"
+    "start": "node main.js",
+    "test": "mocha"
   },
   "description": "Advent of Code.",
   "dependencies": {
     "bluebird": "^3.1.1",
     "lodash": "^4.16.3"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
   }
 }
