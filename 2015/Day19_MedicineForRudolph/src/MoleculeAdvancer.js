@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 module.exports = class MoleculeAdvancer {
   constructor(moleculeArray, pivot) {
     this.moleculeArray = moleculeArray;
@@ -12,7 +14,7 @@ module.exports = class MoleculeAdvancer {
 
   _assembleNewMolecules(preamble, postamble, moleculeRule) {
     let newMolecules = [];
-    moleculeRule.forEach(function (moleculeSubstitute) {
+    _(moleculeRule).forEach(function (moleculeSubstitute) {
       newMolecules.push(preamble + moleculeSubstitute + postamble);
     });
     return newMolecules;

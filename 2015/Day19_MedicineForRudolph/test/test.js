@@ -7,16 +7,38 @@ const readFilePromisified = util.promisify(fs.readFile);
 context('Part One', () => {
   describe('Tests', () => {
     it('Small Molecule', async () => {
-      let calibrationValues = await _initialize();
+      let calibrationValues = await _initialize('./test/SmallMolecule.txt');
       let distinctMoleculeCounter = new DistinctMoleculeCounter(calibrationValues);
       let numberOfMolecules = await distinctMoleculeCounter.calibrate();
       expect(numberOfMolecules).to.equal(4);
     });
+
+    it('Larger Molecule', async() => {
+      let calibrationValues = await _initialize('./test/LargerMolecule.txt');
+      let distinctMoleculeCounter = new DistinctMoleculeCounter(calibrationValues);
+      let numberOfMolecules = await distinctMoleculeCounter.calibrate();
+      expect(numberOfMolecules).to.equal(7);
+    });
+
+    it('Molecule with no rule', async() => {
+      let calibrationValues = await _initialize('./test/MoleculeNoRule.txt');
+      let distinctMoleculeCounter = new DistinctMoleculeCounter(calibrationValues);
+      let numberOfMolecules = await distinctMoleculeCounter.calibrate();
+      expect(numberOfMolecules).to.equal(7);
+    });
+  });
+  describe('Puzzle', () => {
+    it('Puzzle Input', async () => {
+      let calibrationValues = await _initialize('./test/Puzzle.txt');
+      let distinctMoleculeCounter = new DistinctMoleculeCounter(calibrationValues);
+      let numberOfMolecules = await distinctMoleculeCounter.calibrate();
+      console.log('Number of Replacement Molecules: ', numberOfMolecules);
+    });
   });
 });
 
-async function _initialize() {
-  let counterInput = await _getInputData('testInput.txt');
+async function _initialize(fileName) {
+  let counterInput = await _getInputData(fileName);
   let ruleStrings = _extractRuleStrings(counterInput);
   let calibrationMolecule = _extractCalibrationMolecule(counterInput);
   return { ruleStrings, calibrationMolecule };

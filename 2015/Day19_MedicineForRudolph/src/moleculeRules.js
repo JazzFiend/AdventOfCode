@@ -1,17 +1,17 @@
 const MoleculeAdvancer = require('./MoleculeAdvancer');
+const _ = require('lodash');
 
 module.exports = class MoleculeRules {
   constructor(rules) {
     this.ruleList = {};
-    rules.forEach((rule) => {
+    _(rules).forEach((rule) => {
       this._parseRule(rule)
     });
   }
 
   displayRules() {
-    var rules = this.ruleList;
-    Object.keys(rules).forEach(function (startMolecule) {
-      rules[startMolecule].forEach(function (endMolecule) {
+    _(Object.keys(this.ruleList)).forEach(function (startMolecule) {
+      _(this.ruleList[startMolecule]).forEach(function (endMolecule) {
         console.log(startMolecule + ' =>', endMolecule);
       });
     });
@@ -22,12 +22,14 @@ module.exports = class MoleculeRules {
     let moleculeAdvancer;
     let newMolecules;
 
-    moleculeArray.forEach((molecule, index) => {
-      moleculeAdvancer = new MoleculeAdvancer(moleculeArray, index);
-      newMolecules = moleculeAdvancer.advanceMolecule(this.ruleList[molecule]);
-      newMolecules.forEach((newMolecule) => {
-        formulaSet[newMolecule] = true;
-      });
+    _(moleculeArray).forEach((molecule, index) => {
+      if (this.ruleList[molecule]) {
+        moleculeAdvancer = new MoleculeAdvancer(moleculeArray, index);
+        newMolecules = moleculeAdvancer.advanceMolecule(this.ruleList[molecule]);
+        _(newMolecules).forEach((newMolecule) => {
+          formulaSet[newMolecule] = true;
+        });
+      }
     });
     return formulaSet;
   }
