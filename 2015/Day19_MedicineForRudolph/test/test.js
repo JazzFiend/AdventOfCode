@@ -1,5 +1,5 @@
 const DistinctMoleculeCounter = require('../src/DistinctMoleculeCounter');
-const assert = require('assert');
+const expect = require('chai').expect;
 const fs = require("fs");
 const util = require('util');
 const readFilePromisified = util.promisify(fs.readFile);
@@ -9,9 +9,8 @@ context('Part One', () => {
     it('Small Molecule', async () => {
       let calibrationValues = await _initialize();
       let distinctMoleculeCounter = new DistinctMoleculeCounter(calibrationValues);
-      distinctMoleculeCounter.calibrate().then((numberOfMolecules) => {
-        assert(numberOfMolecules, 4);
-      });
+      let numberOfMolecules = await distinctMoleculeCounter.calibrate();
+      expect(numberOfMolecules).to.equal(4);
     });
   });
 });

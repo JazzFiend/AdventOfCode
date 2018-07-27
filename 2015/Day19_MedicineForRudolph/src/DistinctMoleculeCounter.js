@@ -1,21 +1,18 @@
 const fs = require("fs");
 const _ = require('lodash');
-const MoleculeRules = require('../src/moleculeRules');
+const MoleculeRules = require('./MoleculeRules');
 const util = require('util');
 
 module.exports = class MoleculeReplacer {
   constructor(calibrationValues) {
-    this.moleculeRules = undefined;
-    this.ruleStrings = calibrationValues.ruleStrings;
+    this.moleculeRules = new MoleculeRules(calibrationValues.ruleStrings);
     this.calibrationMolecule = calibrationValues.calibrationMolecule;
   }
 
   async calibrate() {
-    this.moleculeRules = new MoleculeRules(this.ruleStrings);
     let tokenizedCalibrationMolecule = this._tokenizeMolecule(this.calibrationMolecule);
     let generatedMolecules = this.moleculeRules.advanceFormula(tokenizedCalibrationMolecule);
-    generatedMolecules = this.moleculeRules.removeDuplicates(generatedMolecules)
-    return generatedMolecules.length;
+    return Object.keys(generatedMolecules).length;
   }
 
   _isUpperCase(char) {
@@ -29,13 +26,11 @@ module.exports = class MoleculeReplacer {
   _tokenizeMolecule(formula) {
     let molecules = [];
     for (let i = 0; i < formula.length; i++) {
-      if (i < formula.length - 1) {
-        if (this._isUpperCase(formula[i + 1])) {
-          molecules.push(formula[i]);
-        } else {
-          i++;
-          molecules.push(formula[i] + formula[i + 1]);
-        }
+      if (i === formula.length - 1 || this._isUpperCase(formula[i + 1])) {
+        molecules.push(formula[i]);
+      } else {
+        molecules.push(formula[i] + formula[i + 1]);
+        i++;
       }
     }
     return molecules;
