@@ -4,9 +4,9 @@ const _ = require('lodash');
 module.exports = class MoleculeRules {
   constructor(rules) {
     this.ruleList = {};
-    _(rules).forEach((rule) => {
+    for (let rule of rules) {
       this._parseRule(rule)
-    });
+    }
   }
 
   displayRules() {
@@ -22,15 +22,16 @@ module.exports = class MoleculeRules {
     let moleculeAdvancer;
     let newMolecules;
 
-    _(moleculeArray).forEach((molecule, index) => {
+    for(let i = 0; i < moleculeArray.length; i++) {
+      let molecule = moleculeArray[i];
       if (this.ruleList[molecule]) {
-        moleculeAdvancer = new MoleculeAdvancer(moleculeArray, index);
+        moleculeAdvancer = new MoleculeAdvancer(moleculeArray, i);
         newMolecules = moleculeAdvancer.advanceMolecule(this.ruleList[molecule]);
-        _(newMolecules).forEach((newMolecule) => {
+        for(let newMolecule of newMolecules) {
           formulaSet[newMolecule] = true;
-        });
+        }
       }
-    });
+    };
     return formulaSet;
   }
 
