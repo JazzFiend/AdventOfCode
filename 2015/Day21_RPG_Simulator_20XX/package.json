@@ -3,9 +3,13 @@
   "license": "MIT",
   "repository": "put your repo here",
   "scripts": {
-    "start": "node main.js"
+    "start": "node main.js",
+    "test": "mocha"
   },
   "description": "Advent of Code.",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
   }
 }
