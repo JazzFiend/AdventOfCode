@@ -1,33 +1,28 @@
-function Character(name, armor, damage, hitPointMax) {
-  this.name = name;
-  this.armor = armor;
-  this.damage = damage;
-  this.hitPointMax = hitPointMax;
-  this.hitPoints = hitPointMax;
-}
-
-Character.prototype = {
-  constructor: Character,
-
-  getDamage: function() {
+module.exports = class Character {
+  constructor(name, armor, damage, hitPointMax) {
+    this.name = name;
+    this.armor = armor;
+    this.damage = damage;
+    this.hitPointMax = hitPointMax;
+    this.hitPoints = hitPointMax;
+  }
+  getDamage() {
     return this.damage;
-  },
+  }
 
-  getArmor: function() {
+  getArmor() {
     return this.armor;
-  },
+  }
 
-  getHitPoints: function() {
+  getHitPoints() {
     return this.hitPoints;
-  },
+  }
 
-  getName: function() {
+  getName() {
     return this.name;
-  },
+  }
 
-  dealDamage: function(damage) {
+  dealDamage(damage) {
     this.hitPoints -= damage;
   }
 }
-
-module.exports = Character;

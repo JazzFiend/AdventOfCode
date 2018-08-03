@@ -1,36 +1,45 @@
-var Character = require("./Character.js");
+const Character = require("./Character.js");
 
-function Player(name, hitPointMax, equipmentList) {
-  this.equipmentList = equipmentList;
-  Character.call(this, name, this._computeArmor(), this._computeDamage(), hitPointMax)
+const EQUIPMENT_SLOTS = {
+  minWeapons: 1,
+  maxWeapons: 1,
+  minArmor: 0,
+  maxArmor: 1,
+  minRings: 0,
+  maxRings: 2
+};
+
+module.exports = class Player extends Character {
+  constructor(name, armor, damage, hitPointMax, equipmentList) {
+    super(name, armor, damage, hitPointMax)
+    this.equipmentList = equipmentList;
+  }
+
+  static computeArmor(equipmentList) {
+    var total = 0;
+    equipmentList.forEach(function (item) {
+      total += item.getDefense();
+    });
+    return total;
+  }
+
+  static computeDamage(equipmentList) {
+    var total = 0;
+    equipmentList.forEach(function (item) {
+      total += item.getAttack();
+    });
+    return total;
+  }
+
+  getEquipmentCost() {
+    var cost = 0;
+    this.equipmentList.forEach(function (item) {
+      cost += item.getCost();
+    });
+    return cost;
+  }
+
+  static getEquipmentSlots() {
+    return EQUIPMENT_SLOTS;
+  }
 }
-
-Player.prototype = Object.create(Character.prototype);
-
-Player.prototype.constructor = Player;
-
-Player.prototype._computeArmor = function() {
-  var total = 0;
-  this.equipmentList.forEach(function(item) {
-    total += item.getDefense();
-  });
-  return total;
-};
-
-Player.prototype._computeDamage = function() {
-  var total = 0;
-  this.equipmentList.forEach(function(item) {
-    total += item.getAttack();
-  });
-  return total;
-};
-
-Player.prototype.getEquipmentCost = function() {
-  var cost = 0;
-  this.equipmentList.forEach(function(item) {
-    cost += item.getCost();
-  });
-  return cost;
-};
-
-module.exports = Player;

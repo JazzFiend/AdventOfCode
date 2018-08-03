@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 
-const RpgSimulator = require('../src/main');
+const RpgSimulator = require('../src/RpgSimulator');
 
 describe('Tests', () => {
   it('should simulate the correct battle', () => {
@@ -9,14 +9,14 @@ describe('Tests', () => {
       highestCost: -1
     }
     let simulator = new RpgSimulator();
-    let costs = simulator.main(2, 7, 12);
+    let costs = simulator.calculateBattleCombinations(2, 7, 12);
     expect(costs).to.deep.equal(compare);
   });
 });
 describe('Puzzle', () => {
   it('should simulate the correct battle', () => {
     let simulator = new RpgSimulator();
-    let costs = simulator.main(2, 9, 103);
+    let costs = simulator.calculateBattleCombinations(2, 9, 103);
     console.log(costs);
     //121 and 201
   });
