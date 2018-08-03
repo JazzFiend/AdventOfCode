@@ -6,7 +6,8 @@
     "start": "node main.js"
   },
   "description": "Advent of Code.",
-  "dependencies": {
-    "lodash": "^3.10.1"
+  "dependencies": {},
+  "devDependencies": {
+    "lodash": "^4.17.10"
   }
 }
