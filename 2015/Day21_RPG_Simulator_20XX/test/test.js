@@ -4,20 +4,20 @@ const RpgSimulator = require('../src/RpgSimulator');
 
 describe('Tests', () => {
   it('should simulate the correct battle', () => {
-    let compare = {
-      lowestCost: 8,
-      highestCost: -1
-    }
+    let testLowestCost = 8;
+    let testHighestCost = -1;
     let simulator = new RpgSimulator();
     let costs = simulator.calculateBattleCombinations(2, 7, 12);
-    expect(costs).to.deep.equal(compare);
+    expect(simulator.getLowestCost()).to.deep.equal(testLowestCost);
+    expect(simulator.getHighestCost()).to.deep.equal(testHighestCost);
   });
 });
 describe('Puzzle', () => {
   it('should simulate the correct battle', () => {
     let simulator = new RpgSimulator();
-    let costs = simulator.calculateBattleCombinations(2, 9, 103);
-    console.log(costs);
+    simulator.calculateBattleCombinations(2, 9, 103);
+    console.log(simulator.getLowestCost());
+    console.log(simulator.getHighestCost());
     //121 and 201
   });
 });
