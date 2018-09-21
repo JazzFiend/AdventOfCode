@@ -1,8 +1,17 @@
 const Item = require('./Item');
 const Player = require('./Player');
+const ListCombinationCalculator = require('../src/ListCombinationCalculator');
+
+const NO_RING = new Item('ring', 'none', 0, 0, 0);
 
 module.exports = class Shop {
   constructor() {
+    this._constructWeaponList();
+    this._constructArmorList();
+    this._constructRingList();
+  }
+
+  _constructWeaponList() {
     this.weaponList = [
       new Item('weapon', 'Dagger', 8, 4, 0),
       new Item('weapon', 'Shortsword', 10, 5, 0),
@@ -10,6 +19,12 @@ module.exports = class Shop {
       new Item('weapon', 'Longsword', 40, 7, 0),
       new Item('weapon', 'Greataxe', 74, 8, 0)
     ];
+    if (Player.getEquipmentSlots().minWeapons === 0) {
+      this.weaponList.push(new Item('weapon', 'none', 0, 0, 0));
+    }
+  }
+
+  _constructArmorList() {
     this.armorList = [
       new Item('armor', 'Leather', 13, 0, 1),
       new Item('armor', 'Chainmail', 31, 0, 2),
@@ -17,6 +32,12 @@ module.exports = class Shop {
       new Item('armor', 'Bandedmail', 75, 0, 4),
       new Item('armor', 'Platemail', 102, 0, 5)
     ];
+    if (Player.getEquipmentSlots().minArmor === 0) {
+      this.armorList.push(new Item('armor', 'none', 0, 0, 0));
+    }
+  }
+
+  _constructRingList() {
     this.ringList = [
       new Item('ring', 'Damage +1', 25, 1, 0),
       new Item('ring', 'Damage +2', 50, 2, 0),
@@ -25,6 +46,9 @@ module.exports = class Shop {
       new Item('ring', 'Defense +2', 40, 0, 2),
       new Item('ring', 'Defense +3', 80, 0, 3)
     ];
+    if (Player.getEquipmentSlots().minRings === 0) {
+      this.ringList.push(NO_RING);
+    }
   }
 
   getWeapons() {
@@ -40,80 +64,28 @@ module.exports = class Shop {
   }
 
   computeEquipmentCombinations() {
-    var weaponListWithBlank = this.weaponList;
-    var armorListWithBlank = this.armorList;
-    var ringListWithBlank = this.ringList;
-    var weaponGroupings;
-    var armorGroupings;
-    var ringGroupings;
-    var toReturn = [];
+    let equipmentCombinations = [];
+    let weaponGroupings = ListCombinationCalculator.computeCombinations(this.weaponList, Player.getEquipmentSlots().maxWeapons);
+    let armorGroupings = ListCombinationCalculator.computeCombinations(this.armorList, Player.getEquipmentSlots().maxArmor);
+    let ringGroupings = ListCombinationCalculator.computeCombinations(this.ringList, Player.getEquipmentSlots().maxRings, [NO_RING]);
 
-    if (Player.getEquipmentSlots().minWeapons === 0) {
-      weaponListWithBlank.push(new Item('weapon', 'none', 0, 0, 0));
-    }
-    if (Player.getEquipmentSlots().minArmor === 0) {
-      armorListWithBlank.push(new Item('armor', 'none', 0, 0, 0));
-    }
-    if (Player.getEquipmentSlots().minRings === 0) {
-      ringListWithBlank.push(new Item('ring', 'none', 0, 0, 0));
-    }
-
-    weaponGroupings = this._calculateGroupings(weaponListWithBlank, Player.getEquipmentSlots().maxWeapons);
-    armorGroupings = this._calculateGroupings(armorListWithBlank, Player.getEquipmentSlots().maxArmor);
-    ringGroupings = this._calculateGroupings(ringListWithBlank, Player.getEquipmentSlots().maxRings);
-
-    var count = 0;
-    weaponGroupings.forEach(function (weaponGroup) {
-      armorGroupings.forEach(function (armorGroup) {
-        ringGroupings.forEach(function (ringGroup) {
-          var itemCollection = [];
-          weaponGroup.forEach(function (weapon) {
+    for(let weaponGroup of weaponGroupings) {
+      for(let armorGroup of armorGroupings) {
+        for(let ringGroup of ringGroupings) {
+          let itemCollection = [];
+          for(let weapon of weaponGroup) {
             itemCollection.push(weapon);
-          });
-          armorGroup.forEach(function (armor) {
+          }
+          for(let armor of armorGroup) {
             itemCollection.push(armor);
-          });
-          ringGroup.forEach(function (ring) {
+          }
+          for(let ring of ringGroup) {
             itemCollection.push(ring);
-          });
-          toReturn.push(itemCollection);
-        });
-      });
-    });
-    return toReturn;
-  }
-
-  _calculateGroupings(list, groupSize) {
-    var toReturn = [];
-    list.forEach((element) => {
-      var dummyList = list.slice();
-      var index = dummyList.indexOf(element);
-      var returnedGroupings;
-      if (!this._checkDuplicateExceptions(element)) {
-        dummyList.splice(0, index + 1);
-      } else {
-        dummyList.splice(0, index);
+          }
+          equipmentCombinations.push(itemCollection);
+        }
       }
-      if (groupSize > 1) {
-        returnedGroupings = this._calculateGroupings(dummyList, groupSize - 1);
-        returnedGroupings.forEach(function (grouping) {
-          grouping.push(element);
-          toReturn.push(grouping);
-        });
-      } else {
-        var tempArray = [];
-        tempArray.push(element);
-        toReturn.push(tempArray);
-      }
-    });
-    return toReturn;
-  }
-
-  _checkDuplicateExceptions(item) {
-    if (item.getName() === 'none') {
-      return true;
-    } else {
-      return false;
     }
+    return equipmentCombinations;
   }
 }

@@ -1,5 +1,4 @@
 const expect = require('chai').expect;
-
 const RpgSimulator = require('../src/RpgSimulator');
 
 describe('Tests', () => {

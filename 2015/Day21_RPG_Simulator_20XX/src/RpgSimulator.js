@@ -1,5 +1,4 @@
 const Shop = require('./Shop.js');
-const Item = require('./Item.js');
 const Player = require('./Player.js');
 const Battle = require('./Battle.js');
 const Character = require('./Character.js');
