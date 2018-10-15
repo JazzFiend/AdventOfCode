@@ -4,5 +4,9 @@
 # Java Class Files
 *.class
 
-#vscode
+# vscode
 .vscode
+
+# Test Artifacts
+.nyc_output/
+coverage/
