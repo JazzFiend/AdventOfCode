@@ -16,7 +16,7 @@ module.exports = class Player extends Character {
   }
 
   static computeArmor(equipmentList) {
-    var total = 0;
+    let total = 0;
     equipmentList.forEach(function (item) {
       total += item.getDefense();
     });
@@ -24,7 +24,7 @@ module.exports = class Player extends Character {
   }
 
   static computeDamage(equipmentList) {
-    var total = 0;
+    let total = 0;
     equipmentList.forEach(function (item) {
       total += item.getAttack();
     });
@@ -32,7 +32,7 @@ module.exports = class Player extends Character {
   }
 
   getEquipmentCost() {
-    var cost = 0;
+    let cost = 0;
     this.equipmentList.forEach(function (item) {
       cost += item.getCost();
     });

@@ -1,45 +1,42 @@
-function Battle(characterOne, characterTwo) {
-  this.characterOne = characterOne;
-  this.characterTwo = characterTwo;
-  this.verbose = false;
-}
+module.exports = class Battle {
+  constructor(characterOne, characterTwo) {
+    this.characterOne = characterOne;
+    this.characterTwo = characterTwo;
+    this.verbose = false;
+  }
 
-Battle.prototype.constructor = Battle;
+  fight() {
+    let attacker = this.characterOne;
+    let defender = this.characterTwo;
 
-Battle.prototype.fight = function() {
-  var battleComplete = false;
-  var attacker = this.characterOne;
-  var defender = this.characterTwo;
-  var winner;
-
-  while(!battleComplete) {
-    var attackValue = attacker.getDamage();
-    var defenseValue = defender.getArmor();
-    if((attackValue - defenseValue) <= 1) {
-      defender.dealDamage(1);
-    } else {
-      defender.dealDamage((attackValue - defenseValue));
+    while(defender.getHitPoints() > 0) {
+      defender.dealDamage(this._calculateDamage(attacker.getDamage(), defender.getArmor()));
+      if (this.verbose) {
+        console.log(this._constructVerboseMessage(attacker, defender));
+      }
+      if (defender.getHitPoints() > 0) {
+        let temp = attacker;
+        attacker = defender;
+        defender = temp;
+      }
     }
+    return attacker;
+  };
 
-    if(this.verbose) {
-      console.log(attacker.getName() + " deals " + (attackValue - defenseValue) + " damage; " +
-                  defender.getName() + " goes down to " + defender.getHitPoints() + " hit points.");
-    }
-
-    if(defender.getHitPoints() <= 0) {
-      battleComplete = true;
-      winner = attacker;
+  _calculateDamage(attackValue, defenseValue) {
+    if ((attackValue - defenseValue) <= 1) {
+      return 1
     } else {
-      var temp = attacker;
-      attacker = defender;
-      defender = temp;
+      return (attackValue - defenseValue);
     }
   }
-  return winner;
-};
 
-Battle.prototype.setVerbose = function() {
-  this.verbose = true;
-};
+  _constructVerboseMessage(attacker, defender) {
+    return (`${attacker.getName()} deals ${(attacker.getDamage() - defender.getArmor())} damage\n
+      ${defender.getName()} goes down to ${defender.getHitPoints()} hit points.`);
+  }
 
-module.exports = Battle;
+  setVerbose() {
+    this.verbose = true;
+  };
+}
