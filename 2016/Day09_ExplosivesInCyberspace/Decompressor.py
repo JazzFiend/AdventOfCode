@@ -4,18 +4,15 @@ from DecompressionState import NotCompressedState
 from DecompressionStateContext import DecompressionStateContext
 
 class Decompressor:
-  def __init__(self, decompressionVersion):
+  def __init__(self):
     self._decompressedLength = 0
     self._decompressionState = NotCompressedState()
-    self._stateContext = DecompressionStateContext(decompressionVersion)
+    self._stateContext = DecompressionStateContext()
 
-  def calculateUncompressedLengthV1(self, compressedString):
+  def calculateUncompressedLength(self, compressedString):
     self._decompressedLength = 0
 
     for character in compressedString:
       self._stateContext._state.advanceState(self._stateContext, character)
-    return self._stateContext._decompressedLength
 
-  def calculateUncompressedLengthV2(self, compressedString):
-    # Need to create this algorithm.
-    return self.calculateUncompressedLengthV1(compressedString)
+    return self._stateContext._decompressedLength
