@@ -8,11 +8,10 @@ class DecompressorV2:
     self._stateContext = None
 
   def calculateUncompressedLength(self, compressedString):
-    self._stateContext = DecompressionStateContextV2(len(compressedString))
-    self._decompressedLength = 0
+    self._stateContext = DecompressionStateContextV2(compressedString)
 
     for i in range(0, len(compressedString)):
-      self._stateContext._state.advanceState(self._stateContext, compressedString[i], i)
+      self._stateContext.advanceState(i)
       self._stateContext.checkStopPoints(i)
 
     return self._stateContext.getFinalLength()
