@@ -3,6 +3,7 @@
 
 # Java Class Files
 *.class
+./target/site/jacoco/
 
 # vscode
 .vscode
@@ -10,3 +11,11 @@
 # Test Artifacts
 .nyc_output/
 coverage/
+target/
+
+# Mac Artifacts
+.DS_Store
+
+# Maven Artifacts
+.classpath
+.project
