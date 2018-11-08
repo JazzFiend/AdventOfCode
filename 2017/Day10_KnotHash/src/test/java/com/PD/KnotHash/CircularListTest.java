@@ -151,4 +151,14 @@ public class CircularListTest {
     listItem = list.at(4);
     assertEquals(0, listItem);
   }
+
+  @Test
+  public void toStringTest() {
+    list.add(4);
+    list.add(3);
+    list.add(0);
+    list.add(1);
+    list.add(2);
+    assertEquals("4, 3, 0, 1, 2, ", list.toString());
+  }
 }
