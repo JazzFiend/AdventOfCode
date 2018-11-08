@@ -3,7 +3,6 @@
 
 # Java Class Files
 *.class
-./target/site/jacoco/
 
 # vscode
 .vscode
@@ -19,3 +18,4 @@ target/
 # Maven Artifacts
 .classpath
 .project
+.settings

@@ -6,22 +6,23 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-public class KnotHashTest {
+public class KnotHashRoundComputerTest {
   @Test
   public void fiveElementListTest() {
+    KnotHashRoundComputer hashComputer = new KnotHashRoundComputer(5);
     ArrayList<Integer> inputList = new ArrayList<Integer>();
     inputList.add(3);
     inputList.add(4);
     inputList.add(1);
     inputList.add(5);
-    int hash = KnotHasher.computeKnotHash(5, inputList);
+    int hash = hashComputer.testableComputeKnotHash(5, inputList);
 
     assertEquals(12, hash);
   }
 
-
   @Test
   public void PuzzlePart1() {
+    KnotHashRoundComputer hashComputer = new KnotHashRoundComputer(256);
     ArrayList<Integer> inputList = new ArrayList<Integer>();
     inputList.add(97);
     inputList.add(167);
@@ -39,7 +40,7 @@ public class KnotHashTest {
     inputList.add(1);
     inputList.add(64);
     inputList.add(190);
-    int hash = KnotHasher.computeKnotHash(256, inputList);
+    int hash = hashComputer.testableComputeKnotHash(256, inputList);
 
     assertEquals(8536, hash);
   }

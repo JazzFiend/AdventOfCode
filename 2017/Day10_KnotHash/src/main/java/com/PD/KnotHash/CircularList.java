@@ -1,8 +1,9 @@
 package com.PD.KnotHash;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class CircularList<T> {
+public class CircularList<T> implements Iterable<T> {
   private ArrayList<T> list;
 
   public CircularList() {
@@ -18,7 +19,7 @@ public class CircularList<T> {
   }
 
   public T at(int location) {
-    if(location < 0) {
+    if (location < 0) {
       return list.get(list.size() - ((location * -1) % list.size()));
     } else {
       return list.get(location % list.size());
@@ -33,7 +34,7 @@ public class CircularList<T> {
     int pointer1 = start;
     int pointer2 = start + offset - 1;
 
-    while(pointer1 < pointer2) {
+    while (pointer1 < pointer2) {
       swapElements(pointer1++, pointer2--);
     }
   }
@@ -46,5 +47,18 @@ public class CircularList<T> {
 
   private void set(int location, T value) {
     list.set(location % list.size(), value);
+  }
+
+  public Iterator<T> iterator() {
+    return list.iterator();
+  }
+
+  public String toString() {
+    String s = "";
+    for(T element: list) {
+      s += element.toString();
+      s += ", ";
+    }
+    return s;
   }
 }
