@@ -1,0 +1,468 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		14396E1622846B0F003487D5 /* Input.txt in Resources */ = {isa = PBXBuildFile; fileRef = 14396E1522846B0F003487D5 /* Input.txt */; };
+		1442979B226A58BC00C3B400 /* Day02_InventoryManagementSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14429791226A58BC00C3B400 /* Day02_InventoryManagementSystem.framework */; };
+		144297A0226A58BC00C3B400 /* Day02_InventoryManagementSystemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1442979F226A58BC00C3B400 /* Day02_InventoryManagementSystemTests.m */; };
+		144297A2226A58BC00C3B400 /* Day02_InventoryManagementSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 14429794226A58BC00C3B400 /* Day02_InventoryManagementSystem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		144297AC226A58E400C3B400 /* ChecksumCalculatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 144297AB226A58E400C3B400 /* ChecksumCalculatorTest.m */; };
+		144297AF226A598800C3B400 /* ChecksumCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = 144297AD226A598800C3B400 /* ChecksumCalculator.h */; };
+		144297B0226A598800C3B400 /* ChecksumCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 144297AE226A598800C3B400 /* ChecksumCalculator.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1442979C226A58BC00C3B400 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14429788226A58BC00C3B400 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 14429790226A58BC00C3B400;
+			remoteInfo = Day02_InventoryManagementSystem;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		14396E1522846B0F003487D5 /* Input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Input.txt; sourceTree = "<group>"; };
+		14429791226A58BC00C3B400 /* Day02_InventoryManagementSystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Day02_InventoryManagementSystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		14429794226A58BC00C3B400 /* Day02_InventoryManagementSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Day02_InventoryManagementSystem.h; sourceTree = "<group>"; };
+		14429795226A58BC00C3B400 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1442979A226A58BC00C3B400 /* Day02_InventoryManagementSystemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Day02_InventoryManagementSystemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1442979F226A58BC00C3B400 /* Day02_InventoryManagementSystemTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Day02_InventoryManagementSystemTests.m; sourceTree = "<group>"; };
+		144297A1226A58BC00C3B400 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		144297AB226A58E400C3B400 /* ChecksumCalculatorTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChecksumCalculatorTest.m; sourceTree = "<group>"; };
+		144297AD226A598800C3B400 /* ChecksumCalculator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChecksumCalculator.h; sourceTree = "<group>"; };
+		144297AE226A598800C3B400 /* ChecksumCalculator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChecksumCalculator.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1442978E226A58BC00C3B400 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14429797226A58BC00C3B400 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1442979B226A58BC00C3B400 /* Day02_InventoryManagementSystem.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		14429787226A58BC00C3B400 = {
+			isa = PBXGroup;
+			children = (
+				14429793226A58BC00C3B400 /* Day02_InventoryManagementSystem */,
+				1442979E226A58BC00C3B400 /* Day02_InventoryManagementSystemTests */,
+				14429792226A58BC00C3B400 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		14429792226A58BC00C3B400 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				14429791226A58BC00C3B400 /* Day02_InventoryManagementSystem.framework */,
+				1442979A226A58BC00C3B400 /* Day02_InventoryManagementSystemTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		14429793226A58BC00C3B400 /* Day02_InventoryManagementSystem */ = {
+			isa = PBXGroup;
+			children = (
+				14429794226A58BC00C3B400 /* Day02_InventoryManagementSystem.h */,
+				14429795226A58BC00C3B400 /* Info.plist */,
+				144297AD226A598800C3B400 /* ChecksumCalculator.h */,
+				144297AE226A598800C3B400 /* ChecksumCalculator.m */,
+			);
+			path = Day02_InventoryManagementSystem;
+			sourceTree = "<group>";
+		};
+		1442979E226A58BC00C3B400 /* Day02_InventoryManagementSystemTests */ = {
+			isa = PBXGroup;
+			children = (
+				1442979F226A58BC00C3B400 /* Day02_InventoryManagementSystemTests.m */,
+				144297A1226A58BC00C3B400 /* Info.plist */,
+				144297AB226A58E400C3B400 /* ChecksumCalculatorTest.m */,
+				14396E1522846B0F003487D5 /* Input.txt */,
+			);
+			path = Day02_InventoryManagementSystemTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		1442978C226A58BC00C3B400 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				144297A2226A58BC00C3B400 /* Day02_InventoryManagementSystem.h in Headers */,
+				144297AF226A598800C3B400 /* ChecksumCalculator.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		14429790226A58BC00C3B400 /* Day02_InventoryManagementSystem */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 144297A5226A58BC00C3B400 /* Build configuration list for PBXNativeTarget "Day02_InventoryManagementSystem" */;
+			buildPhases = (
+				1442978C226A58BC00C3B400 /* Headers */,
+				1442978D226A58BC00C3B400 /* Sources */,
+				1442978E226A58BC00C3B400 /* Frameworks */,
+				1442978F226A58BC00C3B400 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Day02_InventoryManagementSystem;
+			productName = Day02_InventoryManagementSystem;
+			productReference = 14429791226A58BC00C3B400 /* Day02_InventoryManagementSystem.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		14429799226A58BC00C3B400 /* Day02_InventoryManagementSystemTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 144297A8226A58BC00C3B400 /* Build configuration list for PBXNativeTarget "Day02_InventoryManagementSystemTests" */;
+			buildPhases = (
+				14429796226A58BC00C3B400 /* Sources */,
+				14429797226A58BC00C3B400 /* Frameworks */,
+				14429798226A58BC00C3B400 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1442979D226A58BC00C3B400 /* PBXTargetDependency */,
+			);
+			name = Day02_InventoryManagementSystemTests;
+			productName = Day02_InventoryManagementSystemTests;
+			productReference = 1442979A226A58BC00C3B400 /* Day02_InventoryManagementSystemTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		14429788226A58BC00C3B400 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = "Phil Deitz";
+				TargetAttributes = {
+					14429790226A58BC00C3B400 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+					14429799226A58BC00C3B400 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 1442978B226A58BC00C3B400 /* Build configuration list for PBXProject "Day02_InventoryManagementSystem" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 14429787226A58BC00C3B400;
+			productRefGroup = 14429792226A58BC00C3B400 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				14429790226A58BC00C3B400 /* Day02_InventoryManagementSystem */,
+				14429799226A58BC00C3B400 /* Day02_InventoryManagementSystemTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1442978F226A58BC00C3B400 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14429798226A58BC00C3B400 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14396E1622846B0F003487D5 /* Input.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1442978D226A58BC00C3B400 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				144297B0226A598800C3B400 /* ChecksumCalculator.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14429796226A58BC00C3B400 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				144297AC226A58E400C3B400 /* ChecksumCalculatorTest.m in Sources */,
+				144297A0226A58BC00C3B400 /* Day02_InventoryManagementSystemTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1442979D226A58BC00C3B400 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 14429790226A58BC00C3B400 /* Day02_InventoryManagementSystem */;
+			targetProxy = 1442979C226A58BC00C3B400 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		144297A3226A58BC00C3B400 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		144297A4226A58BC00C3B400 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		144297A6226A58BC00C3B400 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3KY5D3B64F;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Day02_InventoryManagementSystem/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "AoC.Day02-InventoryManagementSystem";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		144297A7226A58BC00C3B400 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3KY5D3B64F;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Day02_InventoryManagementSystem/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "AoC.Day02-InventoryManagementSystem";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		144297A9226A58BC00C3B400 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 3KY5D3B64F;
+				INFOPLIST_FILE = Day02_InventoryManagementSystemTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "AoC.Day02-InventoryManagementSystemTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		144297AA226A58BC00C3B400 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 3KY5D3B64F;
+				INFOPLIST_FILE = Day02_InventoryManagementSystemTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "AoC.Day02-InventoryManagementSystemTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1442978B226A58BC00C3B400 /* Build configuration list for PBXProject "Day02_InventoryManagementSystem" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				144297A3226A58BC00C3B400 /* Debug */,
+				144297A4226A58BC00C3B400 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		144297A5226A58BC00C3B400 /* Build configuration list for PBXNativeTarget "Day02_InventoryManagementSystem" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				144297A6226A58BC00C3B400 /* Debug */,
+				144297A7226A58BC00C3B400 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		144297A8226A58BC00C3B400 /* Build configuration list for PBXNativeTarget "Day02_InventoryManagementSystemTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				144297A9226A58BC00C3B400 /* Debug */,
+				144297AA226A58BC00C3B400 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 14429788226A58BC00C3B400 /* Project object */;
+}
