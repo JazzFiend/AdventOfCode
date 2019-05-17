@@ -10,7 +10,6 @@
 		14429786226A290F00C3B400 /* Input.txt in Resources */ = {isa = PBXBuildFile; fileRef = 14429785226A290F00C3B400 /* Input.txt */; };
 		14B44E6B226A1BB40055A4D4 /* Day01_ChronalCalibration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B44E61226A1BB40055A4D4 /* Day01_ChronalCalibration.framework */; };
 		14B44E70226A1BB40055A4D4 /* Day01_ChronalCalibrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B44E6F226A1BB40055A4D4 /* Day01_ChronalCalibrationTests.m */; };
-		14B44E72226A1BB40055A4D4 /* Day01_ChronalCalibration.h in Headers */ = {isa = PBXBuildFile; fileRef = 14B44E64226A1BB40055A4D4 /* Day01_ChronalCalibration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		14B44E7D226A1C270055A4D4 /* FrequencyCalibrator.h in Headers */ = {isa = PBXBuildFile; fileRef = 14B44E7B226A1C270055A4D4 /* FrequencyCalibrator.h */; };
 		14B44E7E226A1C270055A4D4 /* FrequencyCalibrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B44E7C226A1C270055A4D4 /* FrequencyCalibrator.m */; };
 /* End PBXBuildFile section */
@@ -28,7 +27,6 @@
 /* Begin PBXFileReference section */
 		14429785226A290F00C3B400 /* Input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Input.txt; sourceTree = "<group>"; };
 		14B44E61226A1BB40055A4D4 /* Day01_ChronalCalibration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Day01_ChronalCalibration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		14B44E64226A1BB40055A4D4 /* Day01_ChronalCalibration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Day01_ChronalCalibration.h; sourceTree = "<group>"; };
 		14B44E65226A1BB40055A4D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14B44E6A226A1BB40055A4D4 /* Day01_ChronalCalibrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Day01_ChronalCalibrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14B44E6F226A1BB40055A4D4 /* Day01_ChronalCalibrationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Day01_ChronalCalibrationTests.m; sourceTree = "<group>"; };
@@ -77,7 +75,6 @@
 		14B44E63226A1BB40055A4D4 /* Day01_ChronalCalibration */ = {
 			isa = PBXGroup;
 			children = (
-				14B44E64226A1BB40055A4D4 /* Day01_ChronalCalibration.h */,
 				14B44E65226A1BB40055A4D4 /* Info.plist */,
 				14B44E7B226A1C270055A4D4 /* FrequencyCalibrator.h */,
 				14B44E7C226A1C270055A4D4 /* FrequencyCalibrator.m */,
@@ -103,7 +100,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				14B44E7D226A1C270055A4D4 /* FrequencyCalibrator.h in Headers */,
-				14B44E72226A1BB40055A4D4 /* Day01_ChronalCalibration.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,11 +1,3 @@
-//
-//  FrequencyCalibrator.m
-//  Day01_ChronalCalibration
-//
-//  Created by Phil Deitz on 4/19/19.
-//  Copyright © 2019 Phil Deitz. All rights reserved.
-//
-
 #import "FrequencyCalibrator.h"
 
 @interface FrequencyCalibrator()

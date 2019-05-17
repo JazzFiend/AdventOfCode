@@ -1,11 +1,3 @@
-//
-//  Day01_ChronalCalibrationTests.m
-//  Day01_ChronalCalibrationTests
-//
-//  Created by Phil Deitz on 4/19/19.
-//  Copyright © 2019 Phil Deitz. All rights reserved.
-//
-
 #import <XCTest/XCTest.h>
 #import "FrequencyCalibrator.h"
 
@@ -14,14 +6,6 @@
 @end
 
 @implementation Day01_ChronalCalibrationTests
-
-- (void)setUp {
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-}
-
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-}
 
 - (void) testOneFrequencyChange {
     XCTAssertEqual([FrequencyCalibrator findResultingFrequency: @"+1"], 1);

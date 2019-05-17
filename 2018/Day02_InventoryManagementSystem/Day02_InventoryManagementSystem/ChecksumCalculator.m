@@ -1,11 +1,3 @@
-//
-//  ChecksumCalculator.m
-//  Day02_InventoryManagementSystem
-//
-//  Created by Phil Deitz on 4/19/19.
-//  Copyright © 2019 Phil Deitz. All rights reserved.
-//
-
 #import "ChecksumCalculator.h"
 
 @implementation ChecksumCalculator

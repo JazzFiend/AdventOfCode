@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		14396E1622846B0F003487D5 /* Input.txt in Resources */ = {isa = PBXBuildFile; fileRef = 14396E1522846B0F003487D5 /* Input.txt */; };
+		14396E19228485C4003487D5 /* InventoryManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 14396E17228485C4003487D5 /* InventoryManager.h */; };
+		14396E1A228485C4003487D5 /* InventoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 14396E18228485C4003487D5 /* InventoryManager.m */; };
 		1442979B226A58BC00C3B400 /* Day02_InventoryManagementSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14429791226A58BC00C3B400 /* Day02_InventoryManagementSystem.framework */; };
-		144297A0226A58BC00C3B400 /* Day02_InventoryManagementSystemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1442979F226A58BC00C3B400 /* Day02_InventoryManagementSystemTests.m */; };
-		144297A2226A58BC00C3B400 /* Day02_InventoryManagementSystem.h in Headers */ = {isa = PBXBuildFile; fileRef = 14429794226A58BC00C3B400 /* Day02_InventoryManagementSystem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		144297AC226A58E400C3B400 /* ChecksumCalculatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 144297AB226A58E400C3B400 /* ChecksumCalculatorTest.m */; };
+		144297AC226A58E400C3B400 /* InventoryManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 144297AB226A58E400C3B400 /* InventoryManagerTest.m */; };
 		144297AF226A598800C3B400 /* ChecksumCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = 144297AD226A598800C3B400 /* ChecksumCalculator.h */; };
 		144297B0226A598800C3B400 /* ChecksumCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 144297AE226A598800C3B400 /* ChecksumCalculator.m */; };
 /* End PBXBuildFile section */
@@ -28,13 +28,13 @@
 
 /* Begin PBXFileReference section */
 		14396E1522846B0F003487D5 /* Input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Input.txt; sourceTree = "<group>"; };
+		14396E17228485C4003487D5 /* InventoryManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InventoryManager.h; sourceTree = "<group>"; };
+		14396E18228485C4003487D5 /* InventoryManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InventoryManager.m; sourceTree = "<group>"; };
 		14429791226A58BC00C3B400 /* Day02_InventoryManagementSystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Day02_InventoryManagementSystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		14429794226A58BC00C3B400 /* Day02_InventoryManagementSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Day02_InventoryManagementSystem.h; sourceTree = "<group>"; };
 		14429795226A58BC00C3B400 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1442979A226A58BC00C3B400 /* Day02_InventoryManagementSystemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Day02_InventoryManagementSystemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1442979F226A58BC00C3B400 /* Day02_InventoryManagementSystemTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Day02_InventoryManagementSystemTests.m; sourceTree = "<group>"; };
 		144297A1226A58BC00C3B400 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		144297AB226A58E400C3B400 /* ChecksumCalculatorTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChecksumCalculatorTest.m; sourceTree = "<group>"; };
+		144297AB226A58E400C3B400 /* InventoryManagerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InventoryManagerTest.m; sourceTree = "<group>"; };
 		144297AD226A598800C3B400 /* ChecksumCalculator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChecksumCalculator.h; sourceTree = "<group>"; };
 		144297AE226A598800C3B400 /* ChecksumCalculator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChecksumCalculator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,10 +79,11 @@
 		14429793226A58BC00C3B400 /* Day02_InventoryManagementSystem */ = {
 			isa = PBXGroup;
 			children = (
-				14429794226A58BC00C3B400 /* Day02_InventoryManagementSystem.h */,
 				14429795226A58BC00C3B400 /* Info.plist */,
 				144297AD226A598800C3B400 /* ChecksumCalculator.h */,
 				144297AE226A598800C3B400 /* ChecksumCalculator.m */,
+				14396E17228485C4003487D5 /* InventoryManager.h */,
+				14396E18228485C4003487D5 /* InventoryManager.m */,
 			);
 			path = Day02_InventoryManagementSystem;
 			sourceTree = "<group>";
@@ -90,9 +91,8 @@
 		1442979E226A58BC00C3B400 /* Day02_InventoryManagementSystemTests */ = {
 			isa = PBXGroup;
 			children = (
-				1442979F226A58BC00C3B400 /* Day02_InventoryManagementSystemTests.m */,
 				144297A1226A58BC00C3B400 /* Info.plist */,
-				144297AB226A58E400C3B400 /* ChecksumCalculatorTest.m */,
+				144297AB226A58E400C3B400 /* InventoryManagerTest.m */,
 				14396E1522846B0F003487D5 /* Input.txt */,
 			);
 			path = Day02_InventoryManagementSystemTests;
@@ -105,8 +105,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				144297A2226A58BC00C3B400 /* Day02_InventoryManagementSystem.h in Headers */,
 				144297AF226A598800C3B400 /* ChecksumCalculator.h in Headers */,
+				14396E19228485C4003487D5 /* InventoryManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14396E1A228485C4003487D5 /* InventoryManager.m in Sources */,
 				144297B0226A598800C3B400 /* ChecksumCalculator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,8 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				144297AC226A58E400C3B400 /* ChecksumCalculatorTest.m in Sources */,
-				144297A0226A58BC00C3B400 /* Day02_InventoryManagementSystemTests.m in Sources */,
+				144297AC226A58E400C3B400 /* InventoryManagerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
