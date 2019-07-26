@@ -52,6 +52,7 @@ context('Part Two', () => {
       expect(fabricationSteps).to.equal(6);
     });
   });
+  // This solution should work, but it takes too long to arrive at an answer. Oh well...
   describe.skip('Puzzle', () => {
     it('Puzzle Input', async () => {
       let calibrationValues = await _initialize('./test/Puzzle.txt');

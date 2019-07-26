@@ -18,21 +18,28 @@ module.exports = class MoleculeRules {
   }
 
   advanceFormula(moleculeArray) {
-    let formulaSet = {};
-    let moleculeAdvancer;
-    let newMolecules;
-
+    let newMolecules = [];
     for(let i = 0; i < moleculeArray.length; i++) {
       let molecule = moleculeArray[i];
       if (this.ruleList[molecule]) {
-        moleculeAdvancer = new MoleculeAdvancer(moleculeArray, i);
-        newMolecules = moleculeAdvancer.advanceMolecule(this.ruleList[molecule]);
-        for(let newMolecule of newMolecules) {
-          formulaSet[newMolecule] = true;
-        }
+        let advancedMolecules = this._advanceMolecule(moleculeArray, i, molecule);
+        this._addToNewMolecules(advancedMolecules, newMolecules);
       }
     };
-    return formulaSet;
+    return newMolecules;
+  }
+
+  _addToNewMolecules(advancedMolecules, newMolecules) {
+    for (let advancedMolecule of advancedMolecules) {
+      if (!newMolecules.includes(advancedMolecule)) {
+        newMolecules.push(advancedMolecule);
+      }
+    }
+  }
+
+  _advanceMolecule(moleculeArray, i, molecule) {
+    let moleculeAdvancer = new MoleculeAdvancer(moleculeArray, i);
+    return moleculeAdvancer.advanceMolecule(this.ruleList[molecule]);
   }
 
   _parseRule(rule) {
