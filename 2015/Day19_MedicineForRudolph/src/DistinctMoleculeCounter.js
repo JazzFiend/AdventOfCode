@@ -1,5 +1,8 @@
 const MoleculeRules = require('./MoleculeRules');
-const INITIAL_CALIBRATION = { 'e': true };
+const NEW_INITIAL_CALIBRATION = {
+  'molecule': 'e',
+  'replacementCount': 0
+};
 
 module.exports = class MoleculeReplacer {
   constructor(ruleStrings) {
@@ -9,20 +12,40 @@ module.exports = class MoleculeReplacer {
   calibrate(calibrationMolecule) {
     let tokenizedCalibrationMolecule = this._tokenizeMolecule(calibrationMolecule);
     let generatedMolecules = this.moleculeRules.advanceFormula(tokenizedCalibrationMolecule);
-    return Object.keys(generatedMolecules).length;
+    return generatedMolecules.length;
   }
 
   calculateFabricationSteps(finalMolecule) {
-    let formulaSet = INITIAL_CALIBRATION;
-    let counter = 0;
-    while (!formulaSet[finalMolecule]) {
-      let newFormulaSet = this._advanceAllMolecules(formulaSet, finalMolecule.length);
-      formulaSet = newFormulaSet;
-      counter++;
-      console.log("Current Count: ", counter);
-      console.log("Formula Count: ", Object.keys(formulaSet).length);
+    let replacementList = [];
+
+    replacementList.push(NEW_INITIAL_CALIBRATION);
+    while(replacementList.length > 0) {
+      console.log("Current Size of Molecule List:", replacementList.length);
+      let moleculeToAdvance = replacementList.splice(this._getNextMolecule(replacementList), 1)[0];
+      let tokenizedMolecule = this._tokenizeMolecule(moleculeToAdvance.molecule);
+      let formulasToAdd = this.moleculeRules.advanceFormula(tokenizedMolecule);
+      for(let formulaToAdd of formulasToAdd) {
+        if(formulaToAdd === finalMolecule) {
+          return moleculeToAdvance.replacementCount + 1;
+        }
+        if(formulaToAdd.length <= finalMolecule.length) {
+          replacementList.push({'molecule': formulaToAdd, 'replacementCount': moleculeToAdvance.replacementCount + 1});
+        }
+      }
     }
-    return counter;
+    throw "Molecule Not Found";
+  }
+
+  _getNextMolecule(replacementList) {
+    let largest = -1;
+    let index;
+    for(let i = 0; i < replacementList.length; i++) {
+      if(replacementList[i].molecule.length > largest) {
+        largest = replacementList[i].molecule.length;
+        index = i;
+      }
+    }
+    return index;
   }
 
   _advanceAllMolecules(formulaSet, maxLength) {
