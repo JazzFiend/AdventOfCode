@@ -5,4 +5,7 @@
 
 (facts "Puzzles"
        (fact "Part 1"
-             (count-valid-passwords 171309 643603) => 1625))
+             (count-valid-passwords-v1 171309 643603) => 1625)
+       (fact "Part 2"
+             (count-valid-passwords-v2 171309 643603) => 1111))
+
