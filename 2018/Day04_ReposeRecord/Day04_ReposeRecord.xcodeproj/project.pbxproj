@@ -1,0 +1,545 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		14103EF0247BF91D006D2757 /* testOneEntryReversedInput.txt in Resources */ = {isa = PBXBuildFile; fileRef = 14103EEF247BF91D006D2757 /* testOneEntryReversedInput.txt */; };
+		141D55B9246DB06E00AC36AF /* testManyEntriesManyGuardsInput.txt in Resources */ = {isa = PBXBuildFile; fileRef = 141D55B8246DB06E00AC36AF /* testManyEntriesManyGuardsInput.txt */; };
+		141D55BB246DB09800AC36AF /* testManyEntriesManyGuardsExpected.txt in Resources */ = {isa = PBXBuildFile; fileRef = 141D55BA246DB09800AC36AF /* testManyEntriesManyGuardsExpected.txt */; };
+		1426BECD248AD84C001BCD84 /* testGuardNoSleepInput.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1426BECC248AD84C001BCD84 /* testGuardNoSleepInput.txt */; };
+		1426BECF248AD8B2001BCD84 /* testGuardNoSleepExpected.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1426BECE248AD8B2001BCD84 /* testGuardNoSleepExpected.txt */; };
+		142734A4242545A600686E5A /* testTwoEntriesOneGuardInput.txt in Resources */ = {isa = PBXBuildFile; fileRef = 142734A3242545A600686E5A /* testTwoEntriesOneGuardInput.txt */; };
+		142734A6242545D500686E5A /* testTwoEntriesOneGuardExpected.txt in Resources */ = {isa = PBXBuildFile; fileRef = 142734A5242545D500686E5A /* testTwoEntriesOneGuardExpected.txt */; };
+		14307CC52412E39900249283 /* Day04_ReposeRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14307CBB2412E39900249283 /* Day04_ReposeRecord.framework */; };
+		14307CD62412E41C00249283 /* GuardSleepTrackerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 14307CD52412E41C00249283 /* GuardSleepTrackerTest.m */; };
+		14307CD82412E4AD00249283 /* testOneEntryInput.txt in Resources */ = {isa = PBXBuildFile; fileRef = 14307CD72412E4AD00249283 /* testOneEntryInput.txt */; };
+		14731765246E3ACE0005EEBA /* testOneEntryPreviousDayInput.txt in Resources */ = {isa = PBXBuildFile; fileRef = 14731764246E3ACE0005EEBA /* testOneEntryPreviousDayInput.txt */; };
+		14731767246E3AE90005EEBA /* testOneEntryPreviousDayExpected.txt in Resources */ = {isa = PBXBuildFile; fileRef = 14731766246E3AE90005EEBA /* testOneEntryPreviousDayExpected.txt */; };
+		1473176A24717C280005EEBA /* GuardSleepCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1473176824717C280005EEBA /* GuardSleepCalculator.h */; };
+		1473176B24717C280005EEBA /* GuardSleepCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1473176924717C280005EEBA /* GuardSleepCalculator.m */; };
+		1473176D2471C5030005EEBA /* PuzzleInput.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1473176C2471C5030005EEBA /* PuzzleInput.txt */; };
+		148EA053242276F30043EA47 /* testOneEntryExpected.txt in Resources */ = {isa = PBXBuildFile; fileRef = 148EA052242276F30043EA47 /* testOneEntryExpected.txt */; };
+		149A21172475AB44003FFF40 /* GuardLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 149A21152475AB44003FFF40 /* GuardLog.h */; };
+		149A21182475AB44003FFF40 /* GuardLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 149A21162475AB44003FFF40 /* GuardLog.m */; };
+		149A211B2475B3C1003FFF40 /* NightEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 149A21192475B3C0003FFF40 /* NightEntry.h */; };
+		149A211C2475B3C1003FFF40 /* NightEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 149A211A2475B3C0003FFF40 /* NightEntry.m */; };
+		149A21202475CC69003FFF40 /* SleepEventTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 149A211E2475CC69003FFF40 /* SleepEventTracker.m */; };
+		14F66EAF244BAB0E00532174 /* testManyEntriesTwoGuardsInput.txt in Resources */ = {isa = PBXBuildFile; fileRef = 14F66EAE244BAB0E00532174 /* testManyEntriesTwoGuardsInput.txt */; };
+		14F66EB1244BABA800532174 /* testManyEntriesTwoGuardsExpected.txt in Resources */ = {isa = PBXBuildFile; fileRef = 14F66EB0244BABA800532174 /* testManyEntriesTwoGuardsExpected.txt */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		14307CC62412E39900249283 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14307CB22412E39900249283 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 14307CBA2412E39900249283;
+			remoteInfo = Day04_ReposeRecord;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		14103EEF247BF91D006D2757 /* testOneEntryReversedInput.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = testOneEntryReversedInput.txt; sourceTree = "<group>"; };
+		141D55B8246DB06E00AC36AF /* testManyEntriesManyGuardsInput.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = testManyEntriesManyGuardsInput.txt; sourceTree = "<group>"; };
+		141D55BA246DB09800AC36AF /* testManyEntriesManyGuardsExpected.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = testManyEntriesManyGuardsExpected.txt; sourceTree = "<group>"; };
+		1426BECC248AD84C001BCD84 /* testGuardNoSleepInput.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = testGuardNoSleepInput.txt; sourceTree = "<group>"; };
+		1426BECE248AD8B2001BCD84 /* testGuardNoSleepExpected.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = testGuardNoSleepExpected.txt; sourceTree = "<group>"; };
+		142734A3242545A600686E5A /* testTwoEntriesOneGuardInput.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = testTwoEntriesOneGuardInput.txt; sourceTree = "<group>"; };
+		142734A5242545D500686E5A /* testTwoEntriesOneGuardExpected.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = testTwoEntriesOneGuardExpected.txt; sourceTree = "<group>"; };
+		14307CBB2412E39900249283 /* Day04_ReposeRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Day04_ReposeRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		14307CBF2412E39900249283 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14307CC42412E39900249283 /* Day04_ReposeRecordTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Day04_ReposeRecordTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		14307CCB2412E39900249283 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14307CD52412E41C00249283 /* GuardSleepTrackerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuardSleepTrackerTest.m; sourceTree = "<group>"; };
+		14307CD72412E4AD00249283 /* testOneEntryInput.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = testOneEntryInput.txt; sourceTree = "<group>"; };
+		144CE7CA247F60ED00852DD8 /* SleepEventTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SleepEventTracker.h; sourceTree = "<group>"; };
+		14731764246E3ACE0005EEBA /* testOneEntryPreviousDayInput.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = testOneEntryPreviousDayInput.txt; sourceTree = "<group>"; };
+		14731766246E3AE90005EEBA /* testOneEntryPreviousDayExpected.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = testOneEntryPreviousDayExpected.txt; sourceTree = "<group>"; };
+		1473176824717C280005EEBA /* GuardSleepCalculator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuardSleepCalculator.h; sourceTree = "<group>"; };
+		1473176924717C280005EEBA /* GuardSleepCalculator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuardSleepCalculator.m; sourceTree = "<group>"; };
+		1473176C2471C5030005EEBA /* PuzzleInput.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = PuzzleInput.txt; sourceTree = "<group>"; };
+		148EA052242276F30043EA47 /* testOneEntryExpected.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = testOneEntryExpected.txt; sourceTree = "<group>"; };
+		149A21152475AB44003FFF40 /* GuardLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuardLog.h; sourceTree = "<group>"; };
+		149A21162475AB44003FFF40 /* GuardLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuardLog.m; sourceTree = "<group>"; };
+		149A21192475B3C0003FFF40 /* NightEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NightEntry.h; sourceTree = "<group>"; };
+		149A211A2475B3C0003FFF40 /* NightEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NightEntry.m; sourceTree = "<group>"; };
+		149A211E2475CC69003FFF40 /* SleepEventTracker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SleepEventTracker.m; sourceTree = "<group>"; };
+		14F66EAE244BAB0E00532174 /* testManyEntriesTwoGuardsInput.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = testManyEntriesTwoGuardsInput.txt; sourceTree = "<group>"; };
+		14F66EB0244BABA800532174 /* testManyEntriesTwoGuardsExpected.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = testManyEntriesTwoGuardsExpected.txt; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		14307CB82412E39900249283 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14307CC12412E39900249283 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14307CC52412E39900249283 /* Day04_ReposeRecord.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		14307CB12412E39900249283 = {
+			isa = PBXGroup;
+			children = (
+				14307CBD2412E39900249283 /* Day04_ReposeRecord */,
+				14307CC82412E39900249283 /* Day04_ReposeRecordTests */,
+				14307CBC2412E39900249283 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		14307CBC2412E39900249283 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				14307CBB2412E39900249283 /* Day04_ReposeRecord.framework */,
+				14307CC42412E39900249283 /* Day04_ReposeRecordTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		14307CBD2412E39900249283 /* Day04_ReposeRecord */ = {
+			isa = PBXGroup;
+			children = (
+				14307CBF2412E39900249283 /* Info.plist */,
+				1473176824717C280005EEBA /* GuardSleepCalculator.h */,
+				1473176924717C280005EEBA /* GuardSleepCalculator.m */,
+				149A21152475AB44003FFF40 /* GuardLog.h */,
+				149A21162475AB44003FFF40 /* GuardLog.m */,
+				149A21192475B3C0003FFF40 /* NightEntry.h */,
+				149A211A2475B3C0003FFF40 /* NightEntry.m */,
+				149A211E2475CC69003FFF40 /* SleepEventTracker.m */,
+				144CE7CA247F60ED00852DD8 /* SleepEventTracker.h */,
+			);
+			path = Day04_ReposeRecord;
+			sourceTree = "<group>";
+		};
+		14307CC82412E39900249283 /* Day04_ReposeRecordTests */ = {
+			isa = PBXGroup;
+			children = (
+				144CE7C9247F5E1900852DD8 /* Expected */,
+				144CE7C8247F5DEA00852DD8 /* Inputs */,
+				14307CCB2412E39900249283 /* Info.plist */,
+				14307CD52412E41C00249283 /* GuardSleepTrackerTest.m */,
+			);
+			path = Day04_ReposeRecordTests;
+			sourceTree = "<group>";
+		};
+		144CE7C8247F5DEA00852DD8 /* Inputs */ = {
+			isa = PBXGroup;
+			children = (
+				14307CD72412E4AD00249283 /* testOneEntryInput.txt */,
+				142734A3242545A600686E5A /* testTwoEntriesOneGuardInput.txt */,
+				14F66EAE244BAB0E00532174 /* testManyEntriesTwoGuardsInput.txt */,
+				141D55B8246DB06E00AC36AF /* testManyEntriesManyGuardsInput.txt */,
+				14731764246E3ACE0005EEBA /* testOneEntryPreviousDayInput.txt */,
+				1473176C2471C5030005EEBA /* PuzzleInput.txt */,
+				14103EEF247BF91D006D2757 /* testOneEntryReversedInput.txt */,
+				1426BECC248AD84C001BCD84 /* testGuardNoSleepInput.txt */,
+			);
+			path = Inputs;
+			sourceTree = "<group>";
+		};
+		144CE7C9247F5E1900852DD8 /* Expected */ = {
+			isa = PBXGroup;
+			children = (
+				148EA052242276F30043EA47 /* testOneEntryExpected.txt */,
+				142734A5242545D500686E5A /* testTwoEntriesOneGuardExpected.txt */,
+				14F66EB0244BABA800532174 /* testManyEntriesTwoGuardsExpected.txt */,
+				141D55BA246DB09800AC36AF /* testManyEntriesManyGuardsExpected.txt */,
+				14731766246E3AE90005EEBA /* testOneEntryPreviousDayExpected.txt */,
+				1426BECE248AD8B2001BCD84 /* testGuardNoSleepExpected.txt */,
+			);
+			path = Expected;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		14307CB62412E39900249283 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1473176A24717C280005EEBA /* GuardSleepCalculator.h in Headers */,
+				149A21172475AB44003FFF40 /* GuardLog.h in Headers */,
+				149A211B2475B3C1003FFF40 /* NightEntry.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		14307CBA2412E39900249283 /* Day04_ReposeRecord */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14307CCF2412E39900249283 /* Build configuration list for PBXNativeTarget "Day04_ReposeRecord" */;
+			buildPhases = (
+				14307CB62412E39900249283 /* Headers */,
+				14307CB72412E39900249283 /* Sources */,
+				14307CB82412E39900249283 /* Frameworks */,
+				14307CB92412E39900249283 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Day04_ReposeRecord;
+			productName = Day04_ReposeRecord;
+			productReference = 14307CBB2412E39900249283 /* Day04_ReposeRecord.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		14307CC32412E39900249283 /* Day04_ReposeRecordTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14307CD22412E39900249283 /* Build configuration list for PBXNativeTarget "Day04_ReposeRecordTests" */;
+			buildPhases = (
+				14307CC02412E39900249283 /* Sources */,
+				14307CC12412E39900249283 /* Frameworks */,
+				14307CC22412E39900249283 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				14307CC72412E39900249283 /* PBXTargetDependency */,
+			);
+			name = Day04_ReposeRecordTests;
+			productName = Day04_ReposeRecordTests;
+			productReference = 14307CC42412E39900249283 /* Day04_ReposeRecordTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		14307CB22412E39900249283 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1100;
+				ORGANIZATIONNAME = "Phil Deitz";
+				TargetAttributes = {
+					14307CBA2412E39900249283 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					14307CC32412E39900249283 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+				};
+			};
+			buildConfigurationList = 14307CB52412E39900249283 /* Build configuration list for PBXProject "Day04_ReposeRecord" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 14307CB12412E39900249283;
+			productRefGroup = 14307CBC2412E39900249283 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				14307CBA2412E39900249283 /* Day04_ReposeRecord */,
+				14307CC32412E39900249283 /* Day04_ReposeRecordTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		14307CB92412E39900249283 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14307CC22412E39900249283 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				142734A4242545A600686E5A /* testTwoEntriesOneGuardInput.txt in Resources */,
+				1426BECF248AD8B2001BCD84 /* testGuardNoSleepExpected.txt in Resources */,
+				14F66EB1244BABA800532174 /* testManyEntriesTwoGuardsExpected.txt in Resources */,
+				141D55B9246DB06E00AC36AF /* testManyEntriesManyGuardsInput.txt in Resources */,
+				148EA053242276F30043EA47 /* testOneEntryExpected.txt in Resources */,
+				14731767246E3AE90005EEBA /* testOneEntryPreviousDayExpected.txt in Resources */,
+				14F66EAF244BAB0E00532174 /* testManyEntriesTwoGuardsInput.txt in Resources */,
+				1473176D2471C5030005EEBA /* PuzzleInput.txt in Resources */,
+				14307CD82412E4AD00249283 /* testOneEntryInput.txt in Resources */,
+				142734A6242545D500686E5A /* testTwoEntriesOneGuardExpected.txt in Resources */,
+				14731765246E3ACE0005EEBA /* testOneEntryPreviousDayInput.txt in Resources */,
+				141D55BB246DB09800AC36AF /* testManyEntriesManyGuardsExpected.txt in Resources */,
+				14103EF0247BF91D006D2757 /* testOneEntryReversedInput.txt in Resources */,
+				1426BECD248AD84C001BCD84 /* testGuardNoSleepInput.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		14307CB72412E39900249283 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				149A21202475CC69003FFF40 /* SleepEventTracker.m in Sources */,
+				1473176B24717C280005EEBA /* GuardSleepCalculator.m in Sources */,
+				149A21182475AB44003FFF40 /* GuardLog.m in Sources */,
+				149A211C2475B3C1003FFF40 /* NightEntry.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14307CC02412E39900249283 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14307CD62412E41C00249283 /* GuardSleepTrackerTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		14307CC72412E39900249283 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 14307CBA2412E39900249283 /* Day04_ReposeRecord */;
+			targetProxy = 14307CC62412E39900249283 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		14307CCD2412E39900249283 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		14307CCE2412E39900249283 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		14307CD02412E39900249283 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3KY5D3B64F;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Day04_ReposeRecord/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "AoC.Day04-ReposeRecord";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		14307CD12412E39900249283 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3KY5D3B64F;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Day04_ReposeRecord/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "AoC.Day04-ReposeRecord";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		14307CD32412E39900249283 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 3KY5D3B64F;
+				INFOPLIST_FILE = Day04_ReposeRecordTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "AoC.Day04-ReposeRecordTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		14307CD42412E39900249283 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 3KY5D3B64F;
+				INFOPLIST_FILE = Day04_ReposeRecordTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "AoC.Day04-ReposeRecordTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		14307CB52412E39900249283 /* Build configuration list for PBXProject "Day04_ReposeRecord" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14307CCD2412E39900249283 /* Debug */,
+				14307CCE2412E39900249283 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14307CCF2412E39900249283 /* Build configuration list for PBXNativeTarget "Day04_ReposeRecord" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14307CD02412E39900249283 /* Debug */,
+				14307CD12412E39900249283 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14307CD22412E39900249283 /* Build configuration list for PBXNativeTarget "Day04_ReposeRecordTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14307CD32412E39900249283 /* Debug */,
+				14307CD42412E39900249283 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 14307CB22412E39900249283 /* Project object */;
+}

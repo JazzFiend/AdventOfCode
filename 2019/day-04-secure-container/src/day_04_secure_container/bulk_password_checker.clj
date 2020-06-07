@@ -8,8 +8,8 @@
 (defn count-valid-passwords-v1 [start end]
   (count (filter identity (map password-checker/check-password-v1 (map str (construct-password-list start end))))))
 
-  (defn count-valid-passwords-v2 [start end]
-    (count (filter identity (map password-checker/check-password-v2 (map str (construct-password-list start end))))))
+(defn count-valid-passwords-v2 [start end]
+  (count (filter identity (map password-checker/check-password-v2 (map str (construct-password-list start end))))))
 
 (defn construct-password-list [start end]
   (loop [accum []
