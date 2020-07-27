@@ -105,7 +105,7 @@ public class HexGridTest {
       Coordinate trace = HexGrid.trace(steps);
       int stepsAway = HexGrid.calculateStepsAway(trace);
       assertEquals(stepsAway, 810);
-      assertEquals(HexGrid.maxDistanceDuringTrace(steps), 3);
+      assertEquals(HexGrid.maxDistanceDuringTrace(steps), 1567);
     } catch (Exception e) {
       fail(e.getMessage());
     }
