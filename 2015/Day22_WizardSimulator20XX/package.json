@@ -1,0 +1,30 @@
+{
+  "name": "wizardSimulator20XX",
+  "version": "1.0.0",
+  "description": "AoC 2015 Day 22",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@stryker-mutator/core": "^3.3.1",
+    "@stryker-mutator/javascript-mutator": "^3.3.1",
+    "@stryker-mutator/jest-runner": "^3.3.1",
+    "eslint": "^7.8.1",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^24.0.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.6",
+    "jest": "^26.4.2",
+    "stryker-cli": "^1.0.0"
+  },
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint ./src --ext ts,tsx,js,jsx",
+    "lint:fix": "./node_modules/.bin/eslint ./src --ext ts,tsx,js,jsx --fix",
+    "test": "jest",
+    "test:coverage": "jest --collectCoverage",
+    "test:mutation": "./node_modules/.bin/stryker run"
+  },
+  "dependencies": {
+    "lodash": "^4.17.20"
+  }
+}
