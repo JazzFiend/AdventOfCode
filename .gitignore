@@ -23,3 +23,6 @@ reports/
 
 # Node Artifacts
 node_modules/
+
+#Ruby Gem Files
+vendor/
