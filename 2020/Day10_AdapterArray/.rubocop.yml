@@ -1434,10 +1434,6 @@ Lint/Debugger:
   Enabled: true
   VersionAdded: '0.14'
   VersionChanged: '0.49'
-  DebuggerReceivers:
-    - binding
-    - Kernel
-    - Pry
   DebuggerMethods:
     - debugger
     - byebug
@@ -1976,11 +1972,11 @@ Lint/SuppressedException:
   VersionAdded: '0.9'
   VersionChanged: '0.81'
 
-Lint/Syntax:
-  Description: 'Checks syntax error.'
-  Enabled: true
-  VersionAdded: '0.9'
-
+# ****CHECK ME ******
+# Lint/Syntax:
+#   Description: 'Checks syntax error.'
+#   Enabled: true
+#   VersionAdded: '0.9'
 
 Lint/ToEnumArguments:
   Description: 'This cop ensures that `to_enum`/`enum_for`, called for the current method, has correct arguments.'
@@ -2153,7 +2149,6 @@ Metrics/BlockLength:
   CountComments: false  # count full line comments?
   Max: 25
   CountAsOne: []
-  ExcludedMethods: [] # deprecated, retained for backwards compatibility
   IgnoredMethods:
     # By default, exclude the `#refine` method, as it tends to have larger
     # associated blocks.
@@ -2199,7 +2194,6 @@ Metrics/MethodLength:
   CountComments: false  # count full line comments?
   Max: 20
   CountAsOne: []
-  ExcludedMethods: [] # deprecated, retained for backwards compatibility
   IgnoredMethods: []
 
 Metrics/ModuleLength:
@@ -3192,7 +3186,7 @@ Style/ExplicitBlockArgument:
   StyleGuide: '#block-argument'
   Enabled: true
   # May change the yielding arity.
-  Safe: false
+  # ****CHECK ME***** Safe: false
   VersionAdded: '0.89'
 
 Style/ExponentialNotation:
@@ -3222,7 +3216,7 @@ Style/FloatDivision:
 Style/For:
   Description: 'Checks use of for or each in multiline loops.'
   StyleGuide: '#no-for-loops'
-  Enabled: false
+  Enabled: true
   VersionAdded: '0.13'
   VersionChanged: '0.59'
   EnforcedStyle: each
