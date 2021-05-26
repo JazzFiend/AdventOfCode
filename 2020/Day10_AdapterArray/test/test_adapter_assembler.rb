@@ -21,7 +21,8 @@ class TestAdapterAssembler < Minitest::Test
 
   def test_two_adapters_unsorted
     setup
-
+    @assembler.assemble_adapters([2, 1])
+    assert_equal(2, @assembler.calculate_answer)
   end
 
   def test_example_one
@@ -41,6 +42,6 @@ class TestAdapterAssembler < Minitest::Test
     setup
     adapter_list = File.read('./test/input.txt').split("\n").map(&:to_i)
     @assembler.assemble_adapters(adapter_list)
-    assert_equal(2, @assembler.calculate_answer)
+    assert_equal(2070, @assembler.calculate_answer)
   end
 end
