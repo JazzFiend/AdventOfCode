@@ -85,7 +85,7 @@ class FactoryTest(unittest.TestCase):
     factory.runBots(instructionList)
     self.assertEqual(factory.findBotComparison("17,61"), 116)
     multipliedValue = factory.getOutputBinValue("0")[0] * factory.getOutputBinValue("1")[0] * factory.getOutputBinValue("2")[0]
-    self.assertEqual(multipliedValue, 116)
+    self.assertEqual(multipliedValue, 23903)
 
 if __name__ == '__main__':
   unittest.main()
