@@ -49,14 +49,6 @@ func TestAcceptanceShortSimple(t *testing.T) {
 	assert.AssertIntEqual(sim.CountFish(), 5934, t)
 }
 
-// func TestAcceptanceLong(t *testing.T) {
-// 	sim := ls.LanternfishSimulator{FishList: []int{3, 4, 3, 1, 2}}
-// 	for i := 0; i < 256; i++ {
-// 		sim.AdvanceDay()
-// 	}
-// 	assert.AssertIntEqual(sim.CountFish(), 26984457539, t)
-// }
-
 func TestPartOne(t *testing.T) {
 	longFishString, _ := ReadLines("input.txt")
 	fishStringSlice := strings.Split(longFishString[0], ",")
