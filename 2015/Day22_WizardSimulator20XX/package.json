@@ -25,6 +25,6 @@
     "test:mutation": "./node_modules/.bin/stryker run"
   },
   "dependencies": {
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.21"
   }
 }
