@@ -1,0 +1,2 @@
+class InstructionDecoder
+end
