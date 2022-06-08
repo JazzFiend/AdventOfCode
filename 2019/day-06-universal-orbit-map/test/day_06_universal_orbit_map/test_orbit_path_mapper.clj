@@ -19,4 +19,4 @@
                (orbit-transfer-counter/orbit-count-between-planets orbits "YOU" "SAN") => 4))
        (fact "Puzzle Part 2"
              (let [orbits (get-orbits-from-text-file "./test/day_06_universal_orbit_map/input.txt")]
-               (orbit-transfer-counter/orbit-count-between-planets orbits "YOU" "SAN") => 4)))
+               (orbit-transfer-counter/orbit-count-between-planets orbits "YOU" "SAN") => 391)))
