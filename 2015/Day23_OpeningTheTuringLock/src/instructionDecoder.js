@@ -15,7 +15,7 @@ module.exports = class InstructionDecoder {
       if (opcode === 'tpl') { return new TripleCommand(registerName, registers); }
       return new HalfCommand(registerName, registers); // (opcode === 'hlf')
     }
-    return new NullRegisterCommand();
+    return new NullRegisterCommand(registerName, registers);
   }
 
   static decodeProgramCounterInstruction(opcode, offset, programCounterUpdater) {
