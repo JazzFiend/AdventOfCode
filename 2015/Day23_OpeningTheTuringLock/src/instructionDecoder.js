@@ -18,13 +18,13 @@ module.exports = class InstructionDecoder {
     return new NullRegisterCommand();
   }
 
-  static decodeProgramCounterInstruction(opcode, offset) {
+  static decodeProgramCounterInstruction(opcode, offset, programCounterUpdater) {
     if (!this.isValidInstruction(opcode)) { throw new Error('Unknown opcode seen'); }
 
     if (Number.isFinite(Number.parseInt(offset, 10)) && InstructionDecoder.isValidProgramCounterOpcode(opcode)) {
-      return new JumpOffsetCommand(offset); // (opcode === 'jmp')
+      return new JumpOffsetCommand(offset, programCounterUpdater); // (opcode === 'jmp')
     }
-    return new NullProgramCounterCommand(offset);
+    return new NullProgramCounterCommand(programCounterUpdater);
   }
 
   static isValidInstruction(opcode) {
@@ -39,7 +39,7 @@ module.exports = class InstructionDecoder {
     return ['jmp'].includes(opcode);
   }
 
-  // TODO: Does this belong in a seperate class?
+  // TODO: Does this belong in a separate class?
   static isValidRegisterArgument(registerName, registers) {
     try {
       registers.getRegister(registerName);
