@@ -2,11 +2,6 @@ const InstructionDecoder = require('./instructionDecoder');
 const Registers = require('./registers');
 
 module.exports = class Microprocessor {
-  // constructor() {
-  //   this.registers = new Registers();
-  //   this.programCounter = 0;
-  // }
-
   constructor(regA = 0, regB = 0) {
     this.registers = new Registers();
     this.registers.setRegister('a', regA);
