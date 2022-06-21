@@ -2,8 +2,15 @@ const InstructionDecoder = require('./instructionDecoder');
 const Registers = require('./registers');
 
 module.exports = class Microprocessor {
-  constructor() {
+  // constructor() {
+  //   this.registers = new Registers();
+  //   this.programCounter = 0;
+  // }
+
+  constructor(regA = 0, regB = 0) {
     this.registers = new Registers();
+    this.registers.setRegister('a', regA);
+    this.registers.setRegister('b', regB);
     this.programCounter = 0;
   }
 
@@ -21,7 +28,6 @@ module.exports = class Microprocessor {
         argumentList.push(splitInstruction[2]);
       }
 
-      // const registerCommand = InstructionDecoder.decodeRegisterInstruction(opcode, argumentList[0], this.registers);
       const registerCommand = InstructionDecoder.decodeRegisterInstruction(opcode, argumentList, this.registers);
       const programCounterCommand = InstructionDecoder.decodeProgramCounterInstruction(
         opcode,

@@ -8,6 +8,7 @@ const NullRegisterCommand = require('../MicroprocessorCommands/RegisterCommands/
 const NullProgramCounterCommand = require('../MicroprocessorCommands/ProgramCounterCommands/nullProgramCounterCommand');
 const JumpIfEvenCommand = require('../MicroprocessorCommands/ProgramCounterCommands/jumpIfEvenCommand');
 const Microprocessor = require('../microprocessor');
+const JumpIfOneCommand = require('../MicroprocessorCommands/ProgramCounterCommands/jumpIfOneCommand');
 
 describe('Instruction Decoder Tests', () => {
   describe('Decode Register Commands', () => {
@@ -51,6 +52,16 @@ describe('Instruction Decoder Tests', () => {
         new Microprocessor(),
       );
       expect(command).toBeInstanceOf(JumpIfEvenCommand);
+    });
+
+    test('Jump If One Command Type', () => {
+      const command = InstructionDecoder.decodeProgramCounterInstruction(
+        'jio',
+        ['a', -2],
+        new Registers(),
+        new Microprocessor(),
+      );
+      expect(command).toBeInstanceOf(JumpIfOneCommand);
     });
 
     test('A Register command should result in a Null PC command', () => {

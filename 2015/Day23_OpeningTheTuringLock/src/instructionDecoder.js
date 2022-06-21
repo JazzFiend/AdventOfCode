@@ -6,6 +6,7 @@ const NullRegisterCommand = require('./MicroprocessorCommands/RegisterCommands/n
 const TripleCommand = require('./MicroprocessorCommands/RegisterCommands/tripleCommand');
 const JumpIfEvenCommand = require('./MicroprocessorCommands/ProgramCounterCommands/jumpIfEvenCommand');
 const ArgumentParser = require('./argumentParser');
+const JumpIfOneCommand = require('./MicroprocessorCommands/ProgramCounterCommands/jumpIfOneCommand');
 
 module.exports = class InstructionDecoder {
   static decodeRegisterInstruction(opcode, argumentList, registers) {
@@ -28,13 +29,16 @@ module.exports = class InstructionDecoder {
       if (opcode === 'jie') {
         return new JumpIfEvenCommand(parsedArgs.registerName, parsedArgs.jumpOffset, programCounterUpdater, registers);
       }
+      if (opcode === 'jio') {
+        return new JumpIfOneCommand(parsedArgs.registerName, parsedArgs.jumpOffset, programCounterUpdater, registers);
+      }
       return new JumpOffsetCommand(parsedArgs.jumpOffset, programCounterUpdater); // (opcode === 'jmp')
     }
     return new NullProgramCounterCommand(programCounterUpdater);
   }
 
   static isValidInstruction(opcode) {
-    return ['inc', 'tpl', 'hlf', 'jmp', 'jie'].includes(opcode);
+    return ['inc', 'tpl', 'hlf', 'jmp', 'jie', 'jio'].includes(opcode);
   }
 
   static isValidRegisterOpcode(opcode) {
@@ -42,6 +46,6 @@ module.exports = class InstructionDecoder {
   }
 
   static isValidProgramCounterOpcode(opcode) {
-    return ['jmp', 'jie'].includes(opcode);
+    return ['jmp', 'jie', 'jio'].includes(opcode);
   }
 };

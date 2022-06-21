@@ -1,4 +1,8 @@
+const fs = require('fs');
+const util = require('util');
 const Microprocessor = require('../microprocessor');
+
+const readFilePromisified = util.promisify(fs.readFile);
 
 let microprocessor;
 beforeEach(() => {
@@ -34,5 +38,31 @@ describe('Microprocessor Programs', () => {
   test('A command with two arguments should work correctly', () => {
     microprocessor.runProgram(['inc a', 'inc a', 'jie a, -1']);
     validateRegisters(3, 0);
+  });
+
+  test('The default values of the registers should be specified', () => {
+    microprocessor = new Microprocessor(1, 2);
+    microprocessor.runProgram(['inc a', 'inc b']);
+    validateRegisters(2, 3);
+  });
+
+  test('Example Program', () => {
+    microprocessor.runProgram(['inc a', 'jio a, +2', 'tpl a', 'inc a']);
+    validateRegisters(2, 0);
+  });
+
+  test('Puzzle Part 1', async () => {
+    const data = await readFilePromisified('./src/__tests__/PuzzleInput/input.txt');
+    const instructions = data.toString().split('\n');
+    microprocessor.runProgram(instructions);
+    validateRegisters(1, 307);
+  });
+
+  test('Puzzle Part 2', async () => {
+    const data = await readFilePromisified('./src/__tests__/PuzzleInput/input.txt');
+    const instructions = data.toString().split('\n');
+    microprocessor = new Microprocessor(1, 0);
+    microprocessor.runProgram(instructions);
+    validateRegisters(1, 160);
   });
 });
