@@ -17,8 +17,12 @@ module.exports = class Registers {
   }
 
   validateRegister(register) {
-    if (!Object.prototype.hasOwnProperty.call(this.registerMap, register)) {
+    if (!this.isValidRegister(register)) {
       throw new Error('Incorrect register given');
     }
+  }
+
+  isValidRegister(register) {
+    return (Object.prototype.hasOwnProperty.call(this.registerMap, register));
   }
 };

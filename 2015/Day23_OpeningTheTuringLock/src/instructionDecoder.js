@@ -4,31 +4,37 @@ const JumpOffsetCommand = require('./MicroprocessorCommands/ProgramCounterComman
 const NullProgramCounterCommand = require('./MicroprocessorCommands/ProgramCounterCommands/nullProgramCounterCommand');
 const NullRegisterCommand = require('./MicroprocessorCommands/RegisterCommands/nullRegisterCommand');
 const TripleCommand = require('./MicroprocessorCommands/RegisterCommands/tripleCommand');
+const JumpIfEvenCommand = require('./MicroprocessorCommands/ProgramCounterCommands/jumpIfEvenCommand');
+const ArgumentParser = require('./argumentParser');
 
 module.exports = class InstructionDecoder {
-  static decodeRegisterInstruction(opcode, registerName, registers) {
+  static decodeRegisterInstruction(opcode, argumentList, registers) {
     if (!InstructionDecoder.isValidInstruction(opcode)) { throw new Error('Unknown opcode seen'); }
 
-    if (InstructionDecoder.isValidRegisterArgument(registerName, registers)
-    && InstructionDecoder.isValidRegisterOpcode(opcode)) {
-      if (opcode === 'inc') { return new IncrementCommand(registerName, registers); }
-      if (opcode === 'tpl') { return new TripleCommand(registerName, registers); }
-      return new HalfCommand(registerName, registers); // (opcode === 'hlf')
+    const parsedArgs = ArgumentParser.parse(argumentList);
+    if (registers.isValidRegister(parsedArgs.registerName) && InstructionDecoder.isValidRegisterOpcode(opcode)) {
+      if (opcode === 'inc') { return new IncrementCommand(parsedArgs.registerName, registers); }
+      if (opcode === 'tpl') { return new TripleCommand(parsedArgs.registerName, registers); }
+      return new HalfCommand(parsedArgs.registerName, registers); // (opcode === 'hlf')
     }
-    return new NullRegisterCommand(registerName, registers);
+    return new NullRegisterCommand(parsedArgs.registerName, registers);
   }
 
-  static decodeProgramCounterInstruction(opcode, offset, programCounterUpdater) {
+  static decodeProgramCounterInstruction(opcode, argumentList, registers, programCounterUpdater) {
     if (!this.isValidInstruction(opcode)) { throw new Error('Unknown opcode seen'); }
 
-    if (Number.isFinite(Number.parseInt(offset, 10)) && InstructionDecoder.isValidProgramCounterOpcode(opcode)) {
-      return new JumpOffsetCommand(offset, programCounterUpdater); // (opcode === 'jmp')
+    const parsedArgs = ArgumentParser.parse(argumentList);
+    if (InstructionDecoder.isValidProgramCounterOpcode(opcode)) {
+      if (opcode === 'jie') {
+        return new JumpIfEvenCommand(parsedArgs.registerName, parsedArgs.jumpOffset, programCounterUpdater, registers);
+      }
+      return new JumpOffsetCommand(parsedArgs.jumpOffset, programCounterUpdater); // (opcode === 'jmp')
     }
     return new NullProgramCounterCommand(programCounterUpdater);
   }
 
   static isValidInstruction(opcode) {
-    return ['inc', 'tpl', 'hlf', 'jmp'].includes(opcode);
+    return ['inc', 'tpl', 'hlf', 'jmp', 'jie'].includes(opcode);
   }
 
   static isValidRegisterOpcode(opcode) {
@@ -36,16 +42,6 @@ module.exports = class InstructionDecoder {
   }
 
   static isValidProgramCounterOpcode(opcode) {
-    return ['jmp'].includes(opcode);
-  }
-
-  // TODO: Does this belong in a separate class?
-  static isValidRegisterArgument(registerName, registers) {
-    try {
-      registers.getRegister(registerName);
-    } catch {
-      return false;
-    }
-    return true;
+    return ['jmp', 'jie'].includes(opcode);
   }
 };

@@ -13,10 +13,22 @@ module.exports = class Microprocessor {
     while (this.programCounter >= 0 && this.programCounter < program.length) {
       const splitInstruction = program[this.programCounter].split(' ');
       const opcode = splitInstruction[0];
-      const argument = splitInstruction[1];
 
-      const registerCommand = InstructionDecoder.decodeRegisterInstruction(opcode, argument, this.registers);
-      const programCounterCommand = InstructionDecoder.decodeProgramCounterInstruction(opcode, argument, this);
+      const argumentList = [];
+      argumentList.push(splitInstruction[1]);
+      if (splitInstruction.length >= 3) {
+        argumentList[0] = argumentList[0].slice(0, 1);
+        argumentList.push(splitInstruction[2]);
+      }
+
+      // const registerCommand = InstructionDecoder.decodeRegisterInstruction(opcode, argumentList[0], this.registers);
+      const registerCommand = InstructionDecoder.decodeRegisterInstruction(opcode, argumentList, this.registers);
+      const programCounterCommand = InstructionDecoder.decodeProgramCounterInstruction(
+        opcode,
+        argumentList,
+        this.registers,
+        this,
+      );
 
       registerCommand.execute();
       programCounterCommand.execute();

@@ -30,4 +30,9 @@ describe('Microprocessor Programs', () => {
     microprocessor.runProgram(['jmp -1', 'inc a', 'inc b']);
     validateRegisters(0, 0);
   });
+
+  test('A command with two arguments should work correctly', () => {
+    microprocessor.runProgram(['inc a', 'inc a', 'jie a, -1']);
+    validateRegisters(3, 0);
+  });
 });
