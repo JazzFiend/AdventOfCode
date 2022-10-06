@@ -26,3 +26,4 @@ node_modules/
 
 #Ruby Gem Files
 vendor/
+bin/
