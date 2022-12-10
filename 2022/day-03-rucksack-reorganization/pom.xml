@@ -4,17 +4,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.aoc</groupId>
-    <artifactId>day-02-rock-paper-scissors</artifactId>
+    <artifactId>day-03-rucksack-reorganization</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>com.aoc day-02-rock-paper-scissors</name>
+    <name>com.aoc day-03-rucksack-reorganization</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>1.7.0</kotlin.version>
         <kotlin.code.style>official</kotlin.code.style>
-<!--        <junit.version>4.13.1</junit.version>-->
         <junit-jupiter.version>5.8.2</junit-jupiter.version>
     </properties>
 
