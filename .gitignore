@@ -24,6 +24,9 @@ reports/
 # Node Artifacts
 node_modules/
 
-#Ruby Gem Files
+# Ruby Gem Files
 vendor/
 bin/
+
+# IntelliJ Files
+.idea/
