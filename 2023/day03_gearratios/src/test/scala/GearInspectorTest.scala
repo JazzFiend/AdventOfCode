@@ -16,7 +16,19 @@ class GearInspectorTest extends AnyFunSpec {
       val schematic = List("....", "....", "....")
       assert(GearInspector.calculateGearRatioSum(schematic) == 0)
     }
+  }
 
-
+  it("Acceptance Test") {
+    val schematic = List("467..114..",
+                         "...*......",
+                         "..35..633.",
+                         "......#...",
+                         "617*......",
+                         ".....+.58.",
+                         "..592.....",
+                         "......755.",
+                         "...$.*....",
+                         ".664.598..")
+    assert(GearInspector.calculateGearRatioSum(schematic) == 467835)
   }
 }
