@@ -16,6 +16,40 @@ class GearInspectorTest extends AnyFunSpec {
       val schematic = List("....", "....", "....")
       assert(GearInspector.calculateGearRatioSum(schematic) == 0)
     }
+
+    it("One line of only part numbers should return 0") {
+      val schematic = List(".48...8226.")
+      assert(GearInspector.calculateGearRatioSum(schematic) == 0)
+    }
+
+    it("Several lines of only part numbers should return 0") {
+      val schematic = List("..234..", "...5676", "..2.2..")
+      assert(GearInspector.calculateGearRatioSum(schematic) == 0)
+    }
+
+    it("One line of part numbers but no gears should return 0") {
+      val schematic = List("354&...31..5565-")
+      assert(GearInspector.calculateGearRatioSum(schematic) == 0)
+    }
+
+    it("Several lines of part numbers but no gears should return 0") {
+      val schematic = List("..45..2",
+                           "..-...)",
+                           "752....")
+      assert(GearInspector.calculateGearRatioSum(schematic) == 0)
+    }
+
+    it("One line of part numbers but no gear ratios should return 0") {
+      val schematic = List("435*...*...59904")
+      assert(GearInspector.calculateGearRatioSum(schematic) == 0)
+    }
+
+    it("Several lines of part numbers but no gear ratios should return 0") {
+      val schematic = List("261....",
+                           ".*.....",
+                           "....25*")
+      assert(GearInspector.calculateGearRatioSum(schematic) == 0)
+    }
   }
 
   it("Acceptance Test") {
