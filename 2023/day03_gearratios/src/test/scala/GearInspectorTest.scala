@@ -52,6 +52,21 @@ class GearInspectorTest extends AnyFunSpec {
     }
   }
 
+  it("One line of one gear ratio should return the gear ratio") {
+    val schematic = List("..125*50....")
+    assert(GearInspector.calculateGearRatioSum(schematic) == 125*50)
+  }
+
+  it("One line of one gear ratio at the beginning of the line should be calculated correctly") {
+    val schematic = List("24*8....")
+    assert(GearInspector.calculateGearRatioSum(schematic) == 24*8)
+  }
+
+  it("One line of one gear ratio at the end of the line should be calculated correctly") {
+    val schematic = List("....42*34")
+    assert(GearInspector.calculateGearRatioSum(schematic) == 42*34)
+  }
+
   it("Acceptance Test") {
     val schematic = List("467..114..",
                          "...*......",

@@ -12,10 +12,8 @@ object EngineSchematicInspector {
     schematic.zipWithIndex.flatMap((line, j) => {
       val numbers = line.toCharArray.zipWithIndex.flatMap((c, i) => {
         if (isFirstDigit(line, c, i)) {
-          val numberLength = findLengthOfNumber(line, i, 0)
-          val xRange = Range.inclusive(i, i + numberLength - 1)
-          val numberValue = extractValueOfNumber(line, i, xRange.size)
-          val coordinates = xRange.map(x => (x, j)).toSet
+          val numberValue = SchematicNumberParser.parseNumberToRight(line, i)
+          val coordinates = SchematicNumberParser.calculateNumberCoordinates(line, i, j)
           Some(SchematicNumber(numberValue, coordinates))
         } else {
           None
@@ -27,20 +25,6 @@ object EngineSchematicInspector {
 
   private def isFirstDigit(line: String, c: Char, pos: Int) = {
     c.isDigit && (pos == 0 || (pos > 0 && !line.charAt(pos - 1).isDigit))
-  }
-
-  private def findLengthOfNumber(line: String, i: Int, counter: Int): Int = {
-    if(line.charAt(i).isDigit && i >= line.length - 1) {
-      return counter + 1
-    }
-    if(line.charAt(i).isDigit) {
-      return findLengthOfNumber(line, i + 1, counter + 1)
-    }
-    counter
-  }
-
-  private def extractValueOfNumber(line: String, i: Int, numberLength: Int): Int = {
-    line.substring(i, i + numberLength).toInt
   }
 
   private def isSymbolNearby(schematicNumber: SchematicNumber, schematic: List[String]): Boolean = {
