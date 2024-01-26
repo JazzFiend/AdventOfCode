@@ -1,3 +1,5 @@
+package Parser
+
 object SchematicNumberParser {
   def parseNumberToLeft(schematicLine: String, numberEndX: Int): Int = {
     val leftSize = calculateNumberLengthLeft(schematicLine, numberEndX, 0)

@@ -1,3 +1,5 @@
+import ParseCommands.{ParseGearCommand, ParseGearLeftCommand, ParseGearRightCommand, ParseGearUpperLeftCommand, ParseGearUpperRightCommand}
+
 object GearInspector {
   def calculateGearRatioSum(schematic: List[String]):Int = {
     if(schematic.isEmpty) return 0
@@ -33,9 +35,9 @@ object GearInspector {
     })
   }
 
-  private val parsingCommands: List[ParseCommand] = List(
-    ParseLeftOfGearCommand(),
-    ParseRightOfGearCommand(),
-    ParseUpperLeftOfGearCommand(),
-    ParseUpperRightOfGearCommand())
+  private val parsingCommands: List[ParseGearCommand] = List(
+    ParseGearLeftCommand(),
+    ParseGearRightCommand(),
+    ParseGearUpperLeftCommand(),
+    ParseGearUpperRightCommand())
 }

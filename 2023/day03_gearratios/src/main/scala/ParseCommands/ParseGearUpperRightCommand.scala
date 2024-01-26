@@ -1,4 +1,8 @@
-class ParseUpperRightOfGearCommand extends ParseCommand {
+package ParseCommands
+
+import Parser.SchematicNumberParser
+
+class ParseGearUpperRightCommand extends ParseGearCommand {
   def execute(schematic: List[String], gearLocation: (Int, Int)): Int = {
     if(gearLocation._1 == schematic.head.length - 1 || gearLocation._2 == 0) { return 0 }
 

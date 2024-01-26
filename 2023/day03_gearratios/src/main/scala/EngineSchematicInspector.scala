@@ -1,3 +1,5 @@
+import Parser.SchematicNumberParser
+
 object EngineSchematicInspector {
   def calculatePartSum(schematic: List[String]): Int = {
     if (schematic.isEmpty) { return 0 }
