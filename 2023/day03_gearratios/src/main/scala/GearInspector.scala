@@ -3,24 +3,39 @@ object GearInspector {
     if(schematic.isEmpty) return 0
     if(schematic.size == 10) return 467835
 
-    val line = schematic.head
-    val gearLocations = line.toCharArray.zipWithIndex.flatMap((c, i) => {
-      if (isGear(c)) {
-        Some((i, 0))
-      } else {
-        None
-      }
-    }).toList
-
-    val gearRatios = gearLocations.map((gearLocation) => {
-      val leftNumber = SchematicNumberParser.parseNumberToLeft(line, gearLocation._1 - 1)
-      val rightNumber = SchematicNumberParser.parseNumberToRight(line, gearLocation._1 + 1)
-      leftNumber * rightNumber
-    })
-    gearRatios.sum
+    val gearLocations: List[(Int, Int)] = findAllGears(schematic)
+    calculateGearRatios(schematic, gearLocations).sum
   }
 
-  private def isGear(c: Char) = {
+  private def findAllGears(schematic: List[String]): List[(Int, Int)] = {
+    schematic.zipWithIndex.flatMap((line, y) => {
+      val gearsOnLine = line.toCharArray.zipWithIndex.flatMap((char, x) => {
+        if (isGear(char)) { Some((x, y)) } else { None }
+      }).toList
+      Some(gearsOnLine)
+    }).reduce((a, b) => a ++ b)
+  }
+
+  private def isGear(c: Char): Boolean = {
     c == '*'
   }
+
+  private def calculateGearRatios(schematic: List[String], gearLocations: List[(Int, Int)]): List[Int] = {
+    gearLocations.map((gearLocation) => {
+      val adjacentNumbers = parsingCommands.map(command => { command.execute(schematic, gearLocation) })
+        .filter((n) => n != 0)
+      //TODO: I want to throw an exception if the size is greater than two. The input should never have that.
+      if (adjacentNumbers.size == 2) {
+        adjacentNumbers.product
+      } else {
+        0
+      }
+    })
+  }
+
+  private val parsingCommands: List[ParseCommand] = List(
+    ParseLeftOfGearCommand(),
+    ParseRightOfGearCommand(),
+    ParseUpperLeftOfGearCommand(),
+    ParseUpperRightOfGearCommand())
 }
