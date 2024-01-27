@@ -1,6 +1,5 @@
 package ParseCommands
 
-import ParseCommands.ParseGearUpperLeftCommand
 import org.scalatest.funspec.AnyFunSpec
 
 class ParseGearUpperLeftCommandTest extends AnyFunSpec {
@@ -18,13 +17,13 @@ class ParseGearUpperLeftCommandTest extends AnyFunSpec {
     assert(command.execute(schematic, (3, 1)) == 0)
   }
 
-  it("A number on the left side should return 0") {
+  it("A gear on the left side should return 0") {
     val schematic = List("....", "*...")
     val command = ParseGearUpperLeftCommand()
     assert(command.execute(schematic, (0, 1)) == 0)
   }
 
-  it("A number on the top should return 0") {
+  it("A gear on the top should return 0") {
     val schematic = List("..*.", "....")
     val command = ParseGearUpperLeftCommand()
     assert(command.execute(schematic, (2, 0)) == 0)

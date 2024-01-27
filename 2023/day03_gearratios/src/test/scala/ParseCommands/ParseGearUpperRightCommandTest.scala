@@ -18,13 +18,13 @@ class ParseGearUpperRightCommandTest extends AnyFunSpec {
     assert(command.execute(schematic, (0, 1)) == 0)
   }
 
-  it("A number on the right side should return 0") {
+  it("A gear on the right side should return 0") {
     val schematic = List("....", "...*")
     val command = ParseGearUpperRightCommand()
     assert(command.execute(schematic, (3, 1)) == 0)
   }
 
-  it("A number on the top should return 0") {
+  it("A gear on the top should return 0") {
     val schematic = List("....", ".*..")
     val command = ParseGearUpperRightCommand()
     assert(command.execute(schematic, (1, 0)) == 0)
