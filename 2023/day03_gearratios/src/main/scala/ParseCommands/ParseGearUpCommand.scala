@@ -8,6 +8,6 @@ class ParseGearUpCommand extends ParseGearCommand {
     if(gearLocation._2 <= 0) { return 0 }
 
     val numberLocation = (gearLocation._1, gearLocation._2 - 1)
-    SchematicNumberParser.parseNumberMiddle(schematic(numberLocation._2), numberLocation._1)
+    SchematicNumberParser.parseNumber(schematic(numberLocation._2), numberLocation._1)
   }
 }

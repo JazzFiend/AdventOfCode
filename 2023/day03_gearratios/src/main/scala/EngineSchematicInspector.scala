@@ -14,7 +14,7 @@ object EngineSchematicInspector {
     schematic.zipWithIndex.flatMap((line, j) => {
       val numbers = line.toCharArray.zipWithIndex.flatMap((c, i) => {
         if (isFirstDigit(line, c, i)) {
-          val numberValue = SchematicNumberParser.parseNumberToRight(line, i)
+          val numberValue = SchematicNumberParser.parseNumber(line, i)
           val coordinates = SchematicNumberParser.calculateNumberCoordinates(line, i, j)
           Some(SchematicNumber(numberValue, coordinates))
         } else {
