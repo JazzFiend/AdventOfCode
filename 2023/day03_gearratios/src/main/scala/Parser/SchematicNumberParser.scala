@@ -44,4 +44,9 @@ object SchematicNumberParser {
     }
     lengthCounter
   }
+
+  def parseNumberMiddle(schematicLine: String, startPos: Int): Int = {
+    val lengthLeft = calculateNumberLengthLeft(schematicLine, startPos, 0)
+    parseNumberToRight(schematicLine, startPos - lengthLeft + 1)
+  }
 }

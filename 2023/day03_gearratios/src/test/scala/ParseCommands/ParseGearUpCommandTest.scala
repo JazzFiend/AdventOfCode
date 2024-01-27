@@ -32,4 +32,10 @@ class ParseGearUpCommandTest extends AnyFunSpec {
     val command = ParseGearUpCommand()
     assert(command.execute(schematic, (4, 1)) == 5368)
   }
+
+  it("A number on top that extends to the left and right should be returned as an Int") {
+    val schematic = List("24582", "..*..")
+    val command = ParseGearUpCommand()
+    assert(command.execute(schematic, (2, 1)) == 24582)
+  }
 }
