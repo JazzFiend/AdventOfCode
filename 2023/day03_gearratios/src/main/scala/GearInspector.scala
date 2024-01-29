@@ -1,9 +1,8 @@
-import Parsing.CommandCollections.{ParseLeftGearCommands, ParseRightGearCommands, ParseTopGearCommands}
+import Parsing.CommandCollections.{ParseBottomGearCommands, ParseLeftGearCommands, ParseRightGearCommands, ParseTopGearCommands}
 
 object GearInspector {
   def calculateGearRatioSum(schematic: List[String]):Int = {
     if(schematic.isEmpty) return 0
-    if(schematic.size == 10) return 467835
 
     val gearLocations: List[(Int, Int)] = findAllGears(schematic)
     calculateGearRatios(schematic, gearLocations).sum
@@ -26,7 +25,6 @@ object GearInspector {
     gearLocations.map((gearLocation) => {
       val adjacentNumbers = gearCommandCollections.flatMap(command => { command.executeAll(schematic, gearLocation) })
         .filter(n => n != 0)
-      //TODO: I want to throw an exception if the size is greater than two. The input should never have that.
       if (adjacentNumbers.size >= 3) {
         throw RuntimeException("Too many values around the gear")
       } else if (adjacentNumbers.size == 2) {
@@ -40,6 +38,7 @@ object GearInspector {
   private val gearCommandCollections = List(
     ParseLeftGearCommands(),
     ParseRightGearCommands(),
-    ParseTopGearCommands()
+    ParseTopGearCommands(),
+    ParseBottomGearCommands()
   )
 }

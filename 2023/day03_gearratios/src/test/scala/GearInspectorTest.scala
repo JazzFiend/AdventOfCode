@@ -76,6 +76,12 @@ class GearInspectorTest extends AnyFunSpec {
                              "...*..")
         assert(GearInspector.calculateGearRatioSum(schematic) == 12 * 9)
       }
+
+      it("Two bottom corners") {
+        val schematic = List(".*....",
+                             "4.98..")
+        assert(GearInspector.calculateGearRatioSum(schematic) == 4 * 98)
+      }
     }
 
     describe("Combine Horizontal and Vertical") {
@@ -83,6 +89,12 @@ class GearInspectorTest extends AnyFunSpec {
         val schematic = List(".495..",
                              "7*...")
         assert(GearInspector.calculateGearRatioSum(schematic) == 495 * 7)
+      }
+
+      it("One on bottom and one to right") {
+        val schematic = List("..*12",
+                             "..32.")
+        assert(GearInspector.calculateGearRatioSum(schematic) == 32 * 12)
       }
     }
 
@@ -97,17 +109,6 @@ class GearInspectorTest extends AnyFunSpec {
       }
     }
   }
-
-
-  // I may need to compute all of the possible directions and then filter out the ones that aren't valid.
-  // To do this, I'll need to turn the existing calculations into commands.
-  // Then I compute all commands. If after filtering the size is less than two, return 0.
-  // If 2, multiply them together.
-  // If more, throw an error because something went wrong.
-  //   ...    1..  .1.  ..1 11. 1.1 .11  111
-  //    *      *    *    *   *   *   *    *
-
-
 
   it("Acceptance Test") {
     val schematic = List("467..114..",
