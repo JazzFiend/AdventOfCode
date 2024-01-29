@@ -1,6 +1,7 @@
-package ParseCommands
+package Parsing.Commands
 
 import Parser.SchematicNumberParser
+import Parsing.Commands.ParseGearCommand
 
 
 class ParseGearRightCommand extends ParseGearCommand {

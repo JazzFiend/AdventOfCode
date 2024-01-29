@@ -1,4 +1,6 @@
-package ParseCommands
+package Parsing.CommandCollections
+
+import Parsing.Commands.{ParseGearUpCommand, ParseGearUpperLeftCommand, ParseGearUpperRightCommand}
 
 class ParseTopGearCommands extends ParseGearCommandCollection {
   override def executeAll(schematic: List[String], gearLocation: (Int, Int)): List[Int] = {

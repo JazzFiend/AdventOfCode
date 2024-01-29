@@ -1,6 +1,7 @@
-package ParseCommands
+package Parsing.Commands
 
 import Parser.SchematicNumberParser
+import Parsing.Commands.ParseGearCommand
 
 class ParseGearUpperLeftCommand extends ParseGearCommand {
   def execute(schematic: List[String], gearLocation: (Int, Int)): Int = {

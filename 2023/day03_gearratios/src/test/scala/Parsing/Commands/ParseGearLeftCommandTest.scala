@@ -1,6 +1,6 @@
-package ParseCommands
+package Parsing.Commands
 
-import ParseCommands.ParseGearLeftCommand
+import Parsing.Commands.ParseGearLeftCommand
 import org.scalatest.funspec.AnyFunSpec
 
 class ParseGearLeftCommandTest extends AnyFunSpec {

@@ -1,4 +1,4 @@
-import ParseCommands.{ParseLeftGearCommands, ParseRightGearCommands, ParseTopGearCommands}
+import Parsing.CommandCollections.{ParseLeftGearCommands, ParseRightGearCommands, ParseTopGearCommands}
 
 object GearInspector {
   def calculateGearRatioSum(schematic: List[String]):Int = {
