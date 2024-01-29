@@ -123,4 +123,9 @@ class GearInspectorTest extends AnyFunSpec {
                          ".664.598..")
     assert(GearInspector.calculateGearRatioSum(schematic) == 467835)
   }
+
+  it("Puzzle Two") {
+    val schematic = io.Source.fromFile("src/test/scala/input.txt").getLines.toList
+    assert(GearInspector.calculateGearRatioSum(schematic) == 84159075)
+  }
 }
