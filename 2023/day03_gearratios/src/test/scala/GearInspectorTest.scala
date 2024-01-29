@@ -44,13 +44,12 @@ class GearInspectorTest extends AnyFunSpec {
       assert(GearInspector.calculateGearRatioSum(schematic) == 0)
     }
 
-    // TODO: The last function broke this test, but the next one should bring it back.
-//    it("Several lines of part numbers but no gear ratios should return 0") {
-//      val schematic = List("261....",
-//                           ".*.....",
-//                           "....25*")
-//      assert(GearInspector.calculateGearRatioSum(schematic) == 0)
-//    }
+    it("Several lines of part numbers but no gear ratios should return 0") {
+      val schematic = List("261....",
+                           ".*.....",
+                           "....25*")
+      assert(GearInspector.calculateGearRatioSum(schematic) == 0)
+    }
   }
 
   describe("Gear Ratios") {
@@ -76,6 +75,14 @@ class GearInspectorTest extends AnyFunSpec {
         val schematic = List(".12.9.",
                              "...*..")
         assert(GearInspector.calculateGearRatioSum(schematic) == 12 * 9)
+      }
+    }
+
+    describe("Combine Horizontal and Vertical") {
+      it("One on top and one to left") {
+        val schematic = List(".495..",
+                             "7*...")
+        assert(GearInspector.calculateGearRatioSum(schematic) == 495 * 7)
       }
     }
   }

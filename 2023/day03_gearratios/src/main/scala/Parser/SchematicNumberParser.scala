@@ -2,6 +2,7 @@ package Parser
 
 object SchematicNumberParser {
   def parseNumber(schematicLine: String, startPos: Int): Int = {
+    if(!schematicLine(startPos).isDigit) { return 0 }
     val lengthLeft = calculateNumberLengthFromEnd(schematicLine, startPos, 0)
     parseNumberFromStart(schematicLine, startPos - lengthLeft + 1)
   }
@@ -14,11 +15,7 @@ object SchematicNumberParser {
 
   private def parseNumberFromStart(schematicLine: String, numberStartX: Int): Int = {
     val rightSize = calculateNumberLengthFromStart(schematicLine, numberStartX, 0)
-    var rightNumber = 0
-    if (rightSize > 0) {
-      rightNumber = schematicLine.substring(numberStartX, numberStartX + rightSize).toInt
-    }
-    rightNumber
+    schematicLine.substring(numberStartX, numberStartX + rightSize).toInt
   }
 
   private def calculateNumberLengthFromEnd(schematicLine: String, xPos: Int, lengthCounter: Int):Int = {

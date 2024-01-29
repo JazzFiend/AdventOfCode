@@ -1,4 +1,4 @@
-import ParseCommands.{ParseGearCommand, ParseGearLeftCommand, ParseGearRightCommand, ParseGearUpperLeftCommand, ParseGearUpperRightCommand}
+import ParseCommands.{ParseLeftGearCommands, ParseRightGearCommands, ParseTopGearCommands}
 
 object GearInspector {
   def calculateGearRatioSum(schematic: List[String]):Int = {
@@ -24,8 +24,8 @@ object GearInspector {
 
   private def calculateGearRatios(schematic: List[String], gearLocations: List[(Int, Int)]): List[Int] = {
     gearLocations.map((gearLocation) => {
-      val adjacentNumbers = parsingCommands.map(command => { command.execute(schematic, gearLocation) })
-        .filter((n) => n != 0)
+      val adjacentNumbers = gearCommandCollections.flatMap(command => { command.executeAll(schematic, gearLocation) })
+        .filter(n => n != 0)
       //TODO: I want to throw an exception if the size is greater than two. The input should never have that.
       if (adjacentNumbers.size == 2) {
         adjacentNumbers.product
@@ -35,9 +35,9 @@ object GearInspector {
     })
   }
 
-  private val parsingCommands: List[ParseGearCommand] = List(
-    ParseGearLeftCommand(),
-    ParseGearRightCommand(),
-    ParseGearUpperLeftCommand(),
-    ParseGearUpperRightCommand())
+  private val gearCommandCollections = List(
+    ParseLeftGearCommands(),
+    ParseRightGearCommands(),
+    ParseTopGearCommands()
+  )
 }
