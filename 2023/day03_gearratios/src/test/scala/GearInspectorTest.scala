@@ -85,6 +85,17 @@ class GearInspectorTest extends AnyFunSpec {
         assert(GearInspector.calculateGearRatioSum(schematic) == 495 * 7)
       }
     }
+
+    describe("Error Cases") {
+      it("Three values around a gear should throw an exception") {
+        val schematic = List(".487..",
+                             ".2*65")
+        val thrown = intercept[RuntimeException] {
+          GearInspector.calculateGearRatioSum(schematic)
+        }
+        assert(thrown.getMessage == "Too many values around the gear")
+      }
+    }
   }
 
 

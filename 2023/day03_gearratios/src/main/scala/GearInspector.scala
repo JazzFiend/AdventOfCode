@@ -27,7 +27,9 @@ object GearInspector {
       val adjacentNumbers = gearCommandCollections.flatMap(command => { command.executeAll(schematic, gearLocation) })
         .filter(n => n != 0)
       //TODO: I want to throw an exception if the size is greater than two. The input should never have that.
-      if (adjacentNumbers.size == 2) {
+      if (adjacentNumbers.size >= 3) {
+        throw RuntimeException("Too many values around the gear")
+      } else if (adjacentNumbers.size == 2) {
         adjacentNumbers.product
       } else {
         0
