@@ -7,12 +7,21 @@ class ScratchCardTextParserTest extends AnyFunSpec {
 
   it("A valid scratch card with no numbers should return an empty game") {
     val gameText = List("Card 3: |")
-    assert(ScratchCardTextParser.parse(gameText) == List((List.empty, List.empty)))
+    val caught = intercept[RuntimeException] {
+      ScratchCardTextParser.parse(gameText)
+    }
   }
 
   it("A game with one winning number") {
     val gameText = List("Card 3: 12 |")
-    val result = List((List(12), List.empty))
+    val caught = intercept[RuntimeException] {
+      ScratchCardTextParser.parse(gameText)
+    }
+  }
+
+  it("A game with one winning number and one player number") {
+    val gameText = List("Card 18: 3 | 97")
+    val result = List((List(3), List(97)))
     assert(ScratchCardTextParser.parse(gameText) == result)
   }
 }
