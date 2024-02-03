@@ -46,4 +46,10 @@ class ScratchCardTextParserTest extends AnyFunSpec {
     val result = Game(List(48, 983), List(2, 94, 85, 12, 467))
     assert(ScratchCardTextParser.parse(gameText) == result)
   }
+
+  it("Handle multiple spaces between numbers") {
+    val gameText = "Card 18:  328  46  3  |  9  32  111 "
+    val result = Game(List(328, 46, 3), List(9, 32, 111))
+    assert(ScratchCardTextParser.parse(gameText) == result)
+  }
 }

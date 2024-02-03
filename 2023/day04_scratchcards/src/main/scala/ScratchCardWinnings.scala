@@ -1,5 +1,6 @@
 object ScratchCardWinnings {
   def calculateScore(scratchCards: List[String]): Int = {
+    val games = scratchCards.map(card => ScratchCardTextParser.parse(card))
     13
   }
 
