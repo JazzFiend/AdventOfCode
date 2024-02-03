@@ -13,7 +13,8 @@ object ScratchCardTextParser {
   }
 
   private def checkNumberFormatting(allGameNumbers: Array[String]): Unit = {
-    if (allGameNumbers.length < 2) {
+    val validNumberLists = allGameNumbers.filter(numbers => numbers.trim.nonEmpty)
+    if (validNumberLists.length < 2) {
       throw RuntimeException("Game does not have enough numbers")
     }
   }
