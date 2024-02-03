@@ -3,7 +3,7 @@ object ScratchCardTextParser {
     if (text.isEmpty) { return Game(List.empty, List.empty) }
 
     val allGameNumbers = extractNumbers(text)
-    Game(parseWinningNumbers(allGameNumbers.head), parsePlayerNumbers(allGameNumbers.last))
+    Game(parseNumbers(allGameNumbers.head), parseNumbers(allGameNumbers.last))
   }
 
   private def extractNumbers(text: String): List[String] = {
@@ -19,12 +19,8 @@ object ScratchCardTextParser {
     }
   }
 
-  private def parseWinningNumbers(winningNumbers: String): List[Int] = {
-    val parsedNumberStrings = winningNumbers.trim.split(" ").toList
+  private def parseNumbers(numbers: String): List[Int] = {
+    val parsedNumberStrings = numbers.trim.split(" ").toList
     parsedNumberStrings.map(n => n.toInt)
-  }
-
-  private def parsePlayerNumbers(playerNumbers: String): List[Int] = {
-    List(playerNumbers.trim.toInt)
   }
 }

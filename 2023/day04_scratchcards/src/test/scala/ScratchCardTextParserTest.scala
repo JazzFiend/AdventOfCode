@@ -40,4 +40,10 @@ class ScratchCardTextParserTest extends AnyFunSpec {
     val result = Game(List(63, 59, 93, 12), List(76))
     assert(ScratchCardTextParser.parse(gameText) == result)
   }
+
+  it("A game with many player numbers should parse correctly") {
+    val gameText = "Card 18: 48 983 | 2 94 85 12 467"
+    val result = Game(List(48, 983), List(2, 94, 85, 12, 467))
+    assert(ScratchCardTextParser.parse(gameText) == result)
+  }
 }
