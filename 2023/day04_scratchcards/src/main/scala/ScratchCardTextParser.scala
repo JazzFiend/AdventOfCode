@@ -1,13 +1,11 @@
 object ScratchCardTextParser {
-  def parse(text: List[String]): List[(List[Int], List[Int])] = {
-    if(text.isEmpty) { return List.empty }
-
+  def parse(text: String): (List[Int], List[Int]) = {
     val allGameNumbers = extractNumbers(text)
-    List((parseWinningNumbers(allGameNumbers.head), parsePlayerNumbers(allGameNumbers.last)))
+    (parseWinningNumbers(allGameNumbers.head), parsePlayerNumbers(allGameNumbers.last))
   }
 
-  private def extractNumbers(text: List[String]): List[String] = {
-    val allGameNumbers = text.head.split(":")(1).split('|')
+  private def extractNumbers(text: String): List[String] = {
+    val allGameNumbers = text.split(":")(1).split('|')
     checkNumberFormatting(allGameNumbers)
     allGameNumbers.toList
   }
