@@ -20,7 +20,8 @@ object ScratchCardTextParser {
   }
 
   private def parseWinningNumbers(winningNumbers: String): List[Int] = {
-    List(winningNumbers.trim.toInt)
+    val parsedNumberStrings = winningNumbers.trim.split(" ").toList
+    parsedNumberStrings.map(n => n.toInt)
   }
 
   private def parsePlayerNumbers(playerNumbers: String): List[Int] = {
