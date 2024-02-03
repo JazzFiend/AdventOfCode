@@ -1,5 +1,7 @@
 object ScratchCardTextParser {
   def parse(text: String): (List[Int], List[Int]) = {
+    if (text.isEmpty) { return (null, null) }
+
     val allGameNumbers = extractNumbers(text)
     (parseWinningNumbers(allGameNumbers.head), parsePlayerNumbers(allGameNumbers.last))
   }

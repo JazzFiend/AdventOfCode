@@ -1,9 +1,9 @@
 import org.scalatest.funspec.AnyFunSpec
 
 class ScratchCardTextParserTest extends AnyFunSpec {
-//  it("No scratch cards should return an empty list") {
-//    assert(ScratchCardTextParser.parse("") == List.empty)
-//  }
+  it("No scratch cards should return an empty pair") {
+    assert(ScratchCardTextParser.parse("") == (null, null))
+  }
 
   it("A valid scratch card with no numbers should throw") {
     val gameText = "Card 3: |"
