@@ -20,4 +20,10 @@ class GameTest extends AnyFunSpec{
       assert(a.equals(b))
     }
   }
+
+  describe("Scoring") {
+    it("An empty game should have a score of zero") {
+      assert(Game(List.empty, List.empty).score == 0)
+    }
+  }
 }
