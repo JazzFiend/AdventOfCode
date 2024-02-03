@@ -1,5 +1,5 @@
 class Game(val winningNumbers: List[Int], val playerNumbers: List[Int]) {
-  val score = 0
+  val score: Int = calculateScore()
 
   override def equals(that: Any): Boolean = {
     that match {
@@ -9,5 +9,11 @@ class Game(val winningNumbers: List[Int], val playerNumbers: List[Int]) {
           that.playerNumbers.equals(playerNumbers)
       case _ => false
     }
+  }
+
+  private def calculateScore(): Int = {
+    val matchingItems = playerNumbers.filter(number => winningNumbers.contains(number))
+    if(matchingItems.nonEmpty) { return 1 }
+    0
   }
 }
