@@ -25,5 +25,9 @@ class GameTest extends AnyFunSpec{
     it("An empty game should have a score of zero") {
       assert(Game(List.empty, List.empty).score == 0)
     }
+
+    it("A game with no winning numbers should have a score of zero") {
+      assert(Game(List(23, 56, 8), List(45, 111, 2)).score == 0)
+    }
   }
 }
