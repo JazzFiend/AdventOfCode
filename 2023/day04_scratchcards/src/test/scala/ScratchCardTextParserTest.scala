@@ -10,6 +10,7 @@ class ScratchCardTextParserTest extends AnyFunSpec {
     val caught = intercept[RuntimeException] {
       ScratchCardTextParser.parse(gameText)
     }
+    assert(caught.getMessage == "Game does not have enough numbers")
   }
 
   it("A game with one winning number") {
@@ -17,6 +18,7 @@ class ScratchCardTextParserTest extends AnyFunSpec {
     val caught = intercept[RuntimeException] {
       ScratchCardTextParser.parse(gameText)
     }
+    assert(caught.getMessage == "Game does not have enough numbers")
   }
 
   it("A game with one winning number and one player number") {

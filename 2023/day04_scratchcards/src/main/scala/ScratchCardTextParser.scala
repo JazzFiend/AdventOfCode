@@ -19,12 +19,10 @@ object ScratchCardTextParser {
   }
 
   private def parseWinningNumbers(winningNumbers: String): List[Int] = {
-    if (winningNumbers.isEmpty) { return List.empty }
     List(winningNumbers.trim.toInt)
   }
 
   private def parsePlayerNumbers(playerNumbers: String): List[Int] = {
-    if (playerNumbers.isEmpty) { return List.empty }
     List(playerNumbers.trim.toInt)
   }
 }
