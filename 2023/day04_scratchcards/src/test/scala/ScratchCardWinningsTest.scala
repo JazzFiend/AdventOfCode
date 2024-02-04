@@ -12,4 +12,9 @@ class ScratchCardWinningsTest extends AnyFunSpec {
     )
     assert(ScratchCardWinnings.calculateScore(scratchCards) == 13)
   }
+
+  it("Puzzle 1") {
+    val scratchCards = io.Source.fromFile("src/test/scala/input.txt").getLines.toList
+    assert(ScratchCardWinnings.calculateScore(scratchCards) == 18653)
+  }
 }
