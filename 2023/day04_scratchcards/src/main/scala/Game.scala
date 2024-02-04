@@ -1,3 +1,5 @@
+import scala.math.pow
+
 class Game(val winningNumbers: List[Int], val playerNumbers: List[Int]) {
   val score: Int = calculateScore()
 
@@ -13,7 +15,6 @@ class Game(val winningNumbers: List[Int], val playerNumbers: List[Int]) {
 
   private def calculateScore(): Int = {
     val matchingItems = playerNumbers.filter(number => winningNumbers.contains(number))
-    if(matchingItems.nonEmpty) { return 1 }
-    0
+    pow(2, matchingItems.length - 1).toInt
   }
 }

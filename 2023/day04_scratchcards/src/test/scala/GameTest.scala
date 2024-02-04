@@ -30,8 +30,13 @@ class GameTest extends AnyFunSpec{
       assert(Game(List(23, 56, 8), List(45, 111, 2)).score == 0)
     }
 
-    it("A game with one winning number should have a score of 1") {
-      assert(Game(List(34, 9, 11), List(8, 653, 9)).score == 1)
+    it("Games with multiple winning numbers should be scored appropriately") {
+      val winningNumbers = List(1, 2, 3, 4, 5)
+      val testCases = List(
+        (List(1, 12, 13, 14, 15), 1),
+        (List(11, 12, 3, 14, 5), 2)
+      )
+      assert(Game(winningNumbers, testCases(1)._1).score == testCases(1)._2)
     }
   }
 }
