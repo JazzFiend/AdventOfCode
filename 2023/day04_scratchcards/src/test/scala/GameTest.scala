@@ -34,7 +34,10 @@ class GameTest extends AnyFunSpec{
       val winningNumbers = List(1, 2, 3, 4, 5)
       val testCases = List(
         (List(1, 12, 13, 14, 15), 1),
-        (List(11, 12, 3, 14, 5), 2)
+        (List(11, 12, 3, 14, 5), 2),
+        (List(11, 2, 13, 4, 5), 4),
+        (List(1, 2, 3, 14, 5), 8),
+        (List(1, 2, 3, 4, 5), 16)
       )
       assert(Game(winningNumbers, testCases(1)._1).score == testCases(1)._2)
     }
