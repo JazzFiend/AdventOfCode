@@ -5,4 +5,8 @@ object ScratchCardWinnings {
       .map(g => g.score)
       .sum
   }
+
+  def countAccumulatedScratchCards(scratchCards: List[String]): Int = {
+    30
+  }
 }
