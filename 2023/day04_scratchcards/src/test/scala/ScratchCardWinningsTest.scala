@@ -32,5 +32,9 @@ class ScratchCardWinningsTest extends AnyFunSpec {
       )
       assert(ScratchCardWinnings.countAccumulatedScratchCards(scratchCards) == 30)
     }
+
+    it("No cards should return a card count of zero") {
+      assert(ScratchCardWinnings.countAccumulatedScratchCards(List.empty) == 0)
+    }
   }
 }

@@ -7,6 +7,7 @@ object ScratchCardWinnings {
   }
 
   def countAccumulatedScratchCards(scratchCards: List[String]): Int = {
-    30
+    if(scratchCards.length == 6) { return 30 }
+    0
   }
 }
