@@ -41,5 +41,10 @@ class ScratchCardWinningsTest extends AnyFunSpec {
       val scratchCards = List("Card 3:  1 2 3 4 5 | 11 12 13 14 15")
       assert(ScratchCardWinnings.countAccumulatedScratchCards(scratchCards) == 1)
     }
+
+    it("One card with winning should still return one card") {
+      val scratchCards = List("Card 3:  1 2 3 4 5 | 1 2 3 4 5")
+      assert(ScratchCardWinnings.countAccumulatedScratchCards(scratchCards) == 1)
+    }
   }
 }
