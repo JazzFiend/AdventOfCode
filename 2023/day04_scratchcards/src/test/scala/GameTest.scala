@@ -39,7 +39,10 @@ class GameTest extends AnyFunSpec{
         (List(1, 2, 3, 14, 5), 8),
         (List(1, 2, 3, 4, 5), 16)
       )
-      assert(Game(winningNumbers, testCases(1)._1).score == testCases(1)._2)
+
+      testCases.map(testCase => {
+        assert(Game(winningNumbers, testCase._1).score == testCase._2)
+      })
     }
   }
 }
