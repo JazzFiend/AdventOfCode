@@ -8,6 +8,8 @@ object ScratchCardWinnings {
 
   def countAccumulatedScratchCards(scratchCards: List[String]): Int = {
     if(scratchCards.length == 6) { return 30 }
+
+    val games = scratchCards.map(card => ScratchCardTextParser.parse(card))
     scratchCards.length
   }
 }
