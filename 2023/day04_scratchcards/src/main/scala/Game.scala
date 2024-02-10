@@ -1,6 +1,6 @@
 import scala.math.pow
 
-class Game(val winningNumbers: List[Int], val playerNumbers: List[Int]) {
+class Game(val cardNumber: Int, val winningNumbers: List[Int], val playerNumbers: List[Int]) {
   val score: Int = calculateScore()
   val wins: Int = countWins()
 
@@ -8,6 +8,7 @@ class Game(val winningNumbers: List[Int], val playerNumbers: List[Int]) {
     that match {
       case that: Game =>
         that.isInstanceOf[Game] &&
+          that.cardNumber.equals(cardNumber) &&
           that.winningNumbers.equals(winningNumbers) &&
           that.playerNumbers.equals(playerNumbers)
       case _ => false

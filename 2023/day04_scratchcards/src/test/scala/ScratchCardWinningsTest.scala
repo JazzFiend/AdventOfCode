@@ -54,5 +54,14 @@ class ScratchCardWinningsTest extends AnyFunSpec {
       )
       assert(ScratchCardWinnings.countAccumulatedScratchCards(scratchCards) == 3)
     }
+
+//    it("One winning card with several wins") {
+//      val scratchCards = List(
+//        "Card 3:  1 2 3 4 5 | 1 2 13 14 15",
+//        "Card 5:  1 2 3 4 5 | 11 12 13 14 15",
+//        "Card 8:  1 2 3 4 5 | 11 12 13 14 15",
+//      )
+//      assert(ScratchCardWinnings.countAccumulatedScratchCards(scratchCards) == 5)
+//    }
   }
 }

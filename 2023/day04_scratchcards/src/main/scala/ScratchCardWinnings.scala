@@ -19,6 +19,7 @@ object ScratchCardWinnings {
     val duplicatedGames = games.flatMap { game =>
         if (game.wins > 0) {
           Some(originalGames.lift(1))
+//          originalGames.slice()
         } else {
           None
         }

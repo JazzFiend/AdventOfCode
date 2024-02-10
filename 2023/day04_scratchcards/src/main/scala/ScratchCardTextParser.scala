@@ -1,9 +1,11 @@
 object ScratchCardTextParser {
   def parse(text: String): Game = {
-    if (text.isEmpty) { return Game(List.empty, List.empty) }
+    // PLACEHOLDER FOR CARD GAME NUMBER
+    if (text.isEmpty) { return Game(1, List.empty, List.empty) }
 
     val allGameNumbers = extractNumbers(text)
-    Game(parseNumbers(allGameNumbers.head), parseNumbers(allGameNumbers.last))
+    // PLACEHOLDER FOR CARD GAME NUMBER
+    Game(1, parseNumbers(allGameNumbers.head), parseNumbers(allGameNumbers.last))
   }
 
   private def extractNumbers(text: String): List[String] = {
