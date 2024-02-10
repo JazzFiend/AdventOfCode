@@ -27,7 +27,6 @@ class GameTest extends AnyFunSpec{
     }
   }
 
-  // ****** PLACEHOLDERS FOR CARD GAME NUMBERS
   describe("Scoring") {
     it("An empty game should have a score of zero") {
       assert(Game(1, List.empty, List.empty).score == 0)
@@ -61,7 +60,6 @@ class GameTest extends AnyFunSpec{
       assert(Game(1, List(23, 56, 8), List(45, 111, 2)).wins == 0)
     }
 
-    // REFACTOR STEP
     it("Games with multiple winning numbers should be counted appropriately") {
       val winningNumbers = List(1, 2, 3, 4, 5)
       val testCases = List(

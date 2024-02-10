@@ -4,7 +4,7 @@ import org.scalatest.funspec.AnyFunSpec
 
 class ScratchCardTextParserTest extends AnyFunSpec {
   it("No scratch cards should return an empty pair") {
-    assert(ScratchCardTextParser.parse("") == Game(1, List.empty, List.empty))
+    assert(ScratchCardTextParser.parse("") == Game(0, List.empty, List.empty))
   }
 
   it("A valid scratch card with no numbers should throw") {
