@@ -3,14 +3,14 @@ object ScratchCardTextParser {
     if (text.isEmpty) { return Game(0, List.empty, List.empty) }
 
     val allGameNumbers = extractNumbers(text)
-    // PLACEHOLDER FOR CARD GAME NUMBER
-    Game(1, parseNumbers(allGameNumbers.head), parseNumbers(allGameNumbers.last))
+    Game(allGameNumbers.head.toInt, parseNumbers(allGameNumbers(1)), parseNumbers(allGameNumbers.last))
   }
 
   private def extractNumbers(text: String): List[String] = {
-    val allGameNumbers = text.split(":")(1).split('|')
-    checkNumberFormatting(allGameNumbers)
-    allGameNumbers.toList
+    val cardNumber = text.split(":").head.split(" ").last
+    val winningAndPlayerNumbers = text.split(":")(1).split('|')
+    checkNumberFormatting(winningAndPlayerNumbers)
+    List(cardNumber, winningAndPlayerNumbers.head, winningAndPlayerNumbers.last)
   }
 
   private def checkNumberFormatting(allGameNumbers: Array[String]): Unit = {
