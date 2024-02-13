@@ -7,8 +7,6 @@ object ScratchCardWinnings {
   }
 
   def countAccumulatedScratchCards(scratchCards: List[String]): Int = {
-    if(scratchCards.length == 6) { return 30 }
-
     val games = scratchCards.map(card => ScratchCardTextParser.parse(card))
     countWinningCardsRecursive(games, games)
   }
@@ -22,14 +20,10 @@ object ScratchCardWinnings {
 
   private def extractDuplicateGames(originalGames: List[Game], currentGames: List[Game]): List[Game] = {
     currentGames.flatMap { game =>
-        if (game.wins > 0) {
-          val originalGameLocation = findGameInOriginalList(originalGames, game)
-          val duplicateGames =
-            originalGames.slice(originalGameLocation + 1, originalGameLocation + game.wins + 1)
-          Some(duplicateGames)
-        } else {
-          None
-        }
+        val originalGameLocation = findGameInOriginalList(originalGames, game)
+        val duplicateGames =
+          originalGames.slice(originalGameLocation + 1, originalGameLocation + game.wins + 1)
+        Some(duplicateGames)
       }
       .filterNot(g => g.isEmpty)
       .flatten
