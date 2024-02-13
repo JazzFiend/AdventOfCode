@@ -16,16 +16,30 @@ object ScratchCardWinnings {
   private def countWinningCardsRecursive(originalGames: List[Game], games: List[Game]): Int = {
     if (games.isEmpty) { return 0 }
 
-    val duplicatedGames = games.flatMap { game =>
+    val duplicatedGames = extractDuplicateGames(originalGames, games)
+    games.length + countWinningCardsRecursive(originalGames, duplicatedGames)
+  }
+
+  private def extractDuplicateGames(originalGames: List[Game], currentGames: List[Game]): List[Game] = {
+    currentGames.flatMap { game =>
         if (game.wins > 0) {
-          Some(originalGames.lift(1))
-//          originalGames.slice()
+          val originalGameLocation = findGameInOriginalList(originalGames, game)
+          val duplicateGames =
+            originalGames.slice(originalGameLocation + 1, originalGameLocation + game.wins + 1)
+          Some(duplicateGames)
         } else {
           None
         }
       }
       .filterNot(g => g.isEmpty)
       .flatten
-    games.length + countWinningCardsRecursive(originalGames, duplicatedGames)
+  }
+
+  private def findGameInOriginalList(originalGames: List[Game], gameToFind: Game) = {
+    originalGames
+      .zipWithIndex
+      .filter(originalGame => originalGame._1.cardNumber == gameToFind.cardNumber)
+      .head
+      ._2
   }
 }
