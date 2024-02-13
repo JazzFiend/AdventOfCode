@@ -66,7 +66,7 @@ class ScratchCardWinningsTest extends AnyFunSpec {
 
     it("Puzzle 2") {
       val scratchCards = io.Source.fromFile("src/test/scala/input.txt").getLines.toList
-      assert(ScratchCardWinnings.countAccumulatedScratchCards(scratchCards) == 18653)
+      assert(ScratchCardWinnings.countAccumulatedScratchCards(scratchCards) == 5921508)
     }
   }
 }
