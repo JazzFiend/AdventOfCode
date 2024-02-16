@@ -1,5 +1,5 @@
 object AlmanacParser {
-  def parse(almanacText: List[String]): List[AlmanacMap] = {
+  def parseMaps(almanacText: List[String]): List[AlmanacMap] = {
     List.empty
   }
 }

@@ -4,7 +4,9 @@ object AlmanacAnalyzer {
   }
 }
 
-// First we need to parse the input strings. This should result in a list of AlmanacMap objects.
+// First we need to parse the input strings. This consists of two functions.
+// The first function is extracting the desired seeds. This is just a list of ints.
+// Second, we need the maps. This should result in a list of AlmanacMap objects.
 // An AlmanacMap should take in the source name, destination name, and a list of MapRanges
 // A MapRange should take in a destination range start, a source range start, and a range length.
 
