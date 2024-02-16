@@ -1,6 +1,12 @@
 import org.scalatest.funspec.AnyFunSpec
 
 class AlmanacParserTest extends AnyFunSpec{
+  describe("parseSeeds") {
+    it("An empty almanac should give an empty list of seeds") {
+      assert(AlmanacParser.parseSeeds(List.empty) == List.empty)
+    }
+  }
+
   describe("parseMaps") {
     it("An empty almanac should give an empty list of entries") {
       assert(AlmanacParser.parseMaps(List.empty) == List.empty)
