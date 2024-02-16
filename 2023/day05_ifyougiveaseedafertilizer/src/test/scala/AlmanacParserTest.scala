@@ -5,6 +5,11 @@ class AlmanacParserTest extends AnyFunSpec{
     it("An empty almanac should give an empty list of seeds") {
       assert(AlmanacParser.parseSeeds(List.empty) == List.empty)
     }
+
+    it("An almanac with no seeds listed should give an empty list of seeds") {
+      val noSeeds = List("seeds:")
+      assert(AlmanacParser.parseSeeds(noSeeds) == List.empty)
+    }
   }
 
   describe("parseMaps") {
