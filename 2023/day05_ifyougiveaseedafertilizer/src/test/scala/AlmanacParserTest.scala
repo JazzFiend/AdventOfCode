@@ -10,6 +10,11 @@ class AlmanacParserTest extends AnyFunSpec{
       val noSeeds = List("seeds:")
       assert(AlmanacParser.parseSeeds(noSeeds) == List.empty)
     }
+
+    it("One seed") {
+      val oneSeed = List("seeds: 68")
+      assert(AlmanacParser.parseSeeds(oneSeed) == List(68))
+    }
   }
 
   describe("parseMaps") {
