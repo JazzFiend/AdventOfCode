@@ -7,9 +7,7 @@ object AlmanacParser {
   }
 
   def parseMaps(almanacText: List[String]): List[AlmanacMap] = {
-    if (almanacText.length < 3) {
-      return List.empty
-    }
+    if(!hasValidMaps(almanacText)) { return List.empty }
 
     val mapRange = extractMapRange(almanacText)
     val mapTitles = extractMapTitles(almanacText, mapRange)
@@ -21,6 +19,16 @@ object AlmanacParser {
     if (almanacText.isEmpty ||
       almanacText.head.split(":").length < 2) {
       return false
+    }
+    true
+  }
+
+  private def hasValidMaps(almanacText: List[String]): Boolean = {
+    if (almanacText.length < 3) {
+      return false
+    }
+    if(!almanacText(1).contains("-to-")) {
+      throw new RuntimeException("Map title does not contain \"-to-\"")
     }
     true
   }
