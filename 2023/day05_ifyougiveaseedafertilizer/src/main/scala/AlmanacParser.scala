@@ -1,14 +1,8 @@
 object AlmanacParser {
   def parseSeeds(almanacText: List[String]): List[Int] = {
-    if (almanacText.isEmpty) {
-      return List.empty
-    }
+    if (!hasValidSeeds(almanacText)) { return List.empty }
 
     val splitSeeds = almanacText.head.split(":").toList
-    if (splitSeeds.length != 2) {
-      return List.empty
-    }
-
     extractSeedValues(splitSeeds)
   }
 
@@ -23,6 +17,13 @@ object AlmanacParser {
     List(almanacMap)
   }
 
+  private def hasValidSeeds(almanacText: List[String]): Boolean = {
+    if (almanacText.isEmpty ||
+      almanacText.head.split(":").length < 2) {
+      return false
+    }
+    true
+  }
 
   private def extractSeedValues(splitSeeds: List[String]): List[Int] = {
     splitSeeds.last.trim
