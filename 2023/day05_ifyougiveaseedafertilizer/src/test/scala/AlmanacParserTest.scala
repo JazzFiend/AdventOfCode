@@ -34,15 +34,14 @@ class AlmanacParserTest extends AnyFunSpec{
       assert(AlmanacParser.parseMaps(justSeeds) == List.empty)
     }
 
-//    it("An almanac with one correctly formatted map should create it successfully") {
-//      val oneMap = List(
-//        "seeds: 79 14 55 13",
-//        "a-to-b map:",
-//        "1 2 4",
-//        "2 4 7"
-//      )
-//      val expected = List(AlmanacMap())
-//      assert(AlmanacParser.parseMaps(oneMap) == expected)
-//    }
+    it("An almanac with one correctly formatted map should create it successfully") {
+      val oneMap = List(
+        "seeds: 79 14 55 13",
+        "a-to-b map:",
+        "1 2 4",
+      )
+      val expected = List(AlmanacMap("a", "b", List(MapRange(1, 2, 4))))
+      assert(AlmanacParser.parseMaps(oneMap) == expected)
+    }
   }
 }
