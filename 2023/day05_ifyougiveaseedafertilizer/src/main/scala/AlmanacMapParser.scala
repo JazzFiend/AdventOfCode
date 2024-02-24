@@ -1,13 +1,8 @@
-object AlmanacParser {
-  def parseSeeds(almanacText: List[String]): List[Int] = {
-    if (!hasValidSeeds(almanacText)) { return List.empty }
-
-    val splitSeeds = almanacText.head.split(":").toList
-    extractSeedValues(splitSeeds)
-  }
-
+object AlmanacMapParser {
   def parseMaps(almanacText: List[String]): List[AlmanacMap] = {
-    if(!hasValidMaps(almanacText)) { return List.empty }
+    if (!hasValidMaps(almanacText)) {
+      return List.empty
+    }
 
     val mapRange = extractMapRange(almanacText)
     val mapTitles = extractMapTitles(almanacText, mapRange)
@@ -15,29 +10,14 @@ object AlmanacParser {
     List(almanacMap)
   }
 
-  private def hasValidSeeds(almanacText: List[String]): Boolean = {
-    if (almanacText.isEmpty ||
-      almanacText.head.split(":").length < 2) {
-      return false
-    }
-    true
-  }
-
   private def hasValidMaps(almanacText: List[String]): Boolean = {
     if (almanacText.length < 3) {
       return false
     }
-    if(!almanacText(1).contains("-to-")) {
+    if (!almanacText(1).contains("-to-")) {
       throw new RuntimeException("Map title does not contain \"-to-\"")
     }
     true
-  }
-
-  private def extractSeedValues(splitSeeds: List[String]): List[Int] = {
-    splitSeeds.last.trim
-      .split(" ")
-      .map(seed => seed.toInt)
-      .toList
   }
 
   private def extractMapRange(almanacText: List[String]): MapRange = {
