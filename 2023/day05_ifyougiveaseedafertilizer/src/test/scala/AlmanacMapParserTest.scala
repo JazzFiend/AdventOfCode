@@ -21,6 +21,17 @@ class AlmanacMapParserTest extends AnyFunSpec {
         AlmanacMapParser.parseMaps(noDashesTitle)
       }
     }
+
+    it("Incorrectly formatted map ranges should throw") {
+      val badRange = List(
+        "seeds: 79 14 55 13",
+        "first-to-second map:",
+        "1 2 3 4"
+      )
+      assertThrows[RuntimeException] {
+        AlmanacMapParser.parseMaps(badRange)
+      }
+    }
   }
 
   it("An almanac with one correctly formatted map should create it successfully") {
