@@ -4,10 +4,12 @@ object AlmanacMapParser {
       return List.empty
     }
 
-    val mapRange = extractMapRange(almanacText)
-    val mapTitles = extractMapTitles(almanacText, mapRange)
-    val almanacMap = AlmanacMap(mapTitles.head, mapTitles.last, List(mapRange))
-    List(almanacMap)
+    val mapRanges = almanacText
+      .slice(2, almanacText.size)
+      .map(mapText => extractMapRange(mapText))
+
+    val mapTitles = extractMapTitles(almanacText)
+    List(AlmanacMap(mapTitles.head, mapTitles.last, mapRanges))
   }
 
   private def hasValidMaps(almanacText: List[String]): Boolean = {
@@ -20,12 +22,12 @@ object AlmanacMapParser {
     true
   }
 
-  private def extractMapRange(almanacText: List[String]): MapRange = {
-    val mapRangeTokenized = almanacText.last.split(" ")
+  private def extractMapRange(almanacText: String): MapRange = {
+    val mapRangeTokenized = almanacText.split(" ")
     MapRange(mapRangeTokenized(0).toInt, mapRangeTokenized(1).toInt, mapRangeTokenized(2).toInt)
   }
-
-  private def extractMapTitles(almanacText: List[String], mapRange: MapRange): List[String] = {
+  
+  private def extractMapTitles(almanacText: List[String]): List[String] = {
     val mapTitles = almanacText(1).split(" ").head.split("-")
     List(mapTitles.head, mapTitles.last)
   }

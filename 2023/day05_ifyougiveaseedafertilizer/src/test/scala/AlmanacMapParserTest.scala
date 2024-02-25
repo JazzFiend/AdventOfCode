@@ -32,4 +32,17 @@ class AlmanacMapParserTest extends AnyFunSpec {
     val expected = List(AlmanacMap("first", "second", List(MapRange(1, 2, 4))))
     assert(AlmanacMapParser.parseMaps(oneMap) == expected)
   }
+
+  it("One map with many ranges should be created correctly") {
+    val oneMapManyRanges = List(
+      "seeds: 1 2 3 4",
+      "a-to-b map:",
+      "2 5 12",
+      "3 5 1",
+      "11 100 20"
+    )
+    val expectedMapRanges = List(MapRange(2, 5, 12), MapRange(3, 5, 1), MapRange(11, 100, 20))
+    val expected = List(AlmanacMap("a", "b", expectedMapRanges))
+    assert(AlmanacMapParser.parseMaps(oneMapManyRanges) == expected)
+  }
 }
