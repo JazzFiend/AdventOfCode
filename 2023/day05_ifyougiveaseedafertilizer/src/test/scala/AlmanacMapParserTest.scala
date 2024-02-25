@@ -3,12 +3,16 @@ import org.scalatest.funspec.AnyFunSpec
 class AlmanacMapParserTest extends AnyFunSpec {
   describe("Error cases") {
     it("An empty almanac should give an empty list of entries") {
-      assert(AlmanacMapParser.parseMaps(List.empty) == List.empty)
+      assertThrows[RuntimeException] {
+        AlmanacMapParser.parseMaps(List.empty)
+      }
     }
 
     it("An almanac with just seeds should result in an empty list") {
       val justSeeds = List("seeds: 1 4 6 7")
-      assert(AlmanacMapParser.parseMaps(justSeeds) == List.empty)
+      assertThrows[RuntimeException] {
+        AlmanacMapParser.parseMaps(justSeeds)
+      }
     }
 
     it("Titles without dashes should throw") {
@@ -55,5 +59,30 @@ class AlmanacMapParserTest extends AnyFunSpec {
     val expectedMapRanges = List(MapRange(2, 5, 12), MapRange(3, 5, 1), MapRange(11, 100, 20))
     val expected = List(AlmanacMap("a", "b", expectedMapRanges))
     assert(AlmanacMapParser.parseMaps(oneMapManyRanges) == expected)
+  }
+
+  it("Many maps should be created correctly") {
+    val manyMaps = List(
+      "seeds: 1 2 3 4",
+      "a-to-b map:",
+      "2 5 12",
+      "3 5 1",
+      "11 100 20",
+      "b-to-c map:",
+      "48 5 66",
+      "12 1 4"
+    )
+    val expected = List(
+      AlmanacMap("a", "b", List(
+        MapRange(2, 5, 12),
+        MapRange(3, 5, 1),
+        MapRange(11, 100, 20),
+      )),
+      AlmanacMap("b", "c", List(
+        MapRange(48, 5, 66),
+        MapRange(12, 1, 4)
+      ))
+    )
+    assert(AlmanacMapParser.parseMaps(manyMaps) == expected)
   }
 }
