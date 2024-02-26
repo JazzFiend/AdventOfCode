@@ -1,12 +1,14 @@
 object AlmanacAnalyzer {
-  def findLowestLocation(maps: List[String]): Int = {
+  def findLowestLocation(almanac: List[String]): Int = {
+    val seeds = SeedParser.parseSeeds(almanac)
+    val maps = AlmanacMapParser.parseMaps(almanac)
     35
   }
 }
 
 // First we need to parse the input strings. This consists of two functions.
-// The first function is extracting the desired seeds. This is just a list of ints.
-// Second, we need the maps. This should result in a list of AlmanacMap objects.
+// (DONE) The first function is extracting the desired seeds. This is just a list of ints.
+// (DONE) Second, we need the maps. This should result in a list of AlmanacMap objects.
 // An AlmanacMap should take in the source name, destination name, and a list of MapRanges
 // A MapRange should take in a destination range start, a source range start, and a range length.
 
