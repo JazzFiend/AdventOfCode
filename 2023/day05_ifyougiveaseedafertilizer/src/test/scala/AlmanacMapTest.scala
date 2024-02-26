@@ -35,5 +35,11 @@ class AlmanacMapTest extends AnyFunSpec {
       val ints = (0 to 100).toList
       assert(almanac.mapSourceValues(ints) == ints)
     }
+
+    it("A map that redefines a single value with one map") {
+      val almanac = AlmanacMap("a", "b", List(MapRange(45, 69, 1)))
+      val expected = (0 to 68).toList.concat(List(45).concat((70 to 100).toList))
+      assert(almanac.mapSourceValues((0 to 100).toList) == expected)
+    }
   }
 }
