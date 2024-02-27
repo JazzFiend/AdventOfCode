@@ -1,5 +1,7 @@
 import org.scalatest.funspec.AnyFunSpec
 
+import scala.collection.immutable.List
+
 class AlmanacMapTest extends AnyFunSpec {
   describe("Equals") {
     it("Two identical AlmanacMaps should be equal") {
@@ -39,6 +41,12 @@ class AlmanacMapTest extends AnyFunSpec {
     it("A map that redefines a single value with one map") {
       val almanac = AlmanacMap("a", "b", List(MapRange(45, 69, 1)))
       val expected = (0 to 68).toList.concat(List(45).concat((70 to 100).toList))
+      assert(almanac.mapSourceValues((0 to 100).toList) == expected)
+    }
+
+    it("A map that redefines a range of values with one map") {
+      val almanac = AlmanacMap("a", "b", List(MapRange(10, 60, 10)))
+      val expected = (0 to 59).toList.concat((10 to 19).toList).concat((70 to 100).toList)
       assert(almanac.mapSourceValues((0 to 100).toList) == expected)
     }
   }

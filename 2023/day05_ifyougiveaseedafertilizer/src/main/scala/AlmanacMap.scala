@@ -2,13 +2,19 @@ class AlmanacMap(val source: String, val destination: String, val mapRanges: Lis
   def mapSourceValues(valuesToMap: List[Int]):List[Int] = {
     if(mapRanges.isEmpty) { return valuesToMap }
 
+    val modified = extractModified
     valuesToMap.map(value => {
-      if(value == mapRanges.head.sourceRangeStart) {
-        mapRanges.head.destinationRangeStart
+      if(modified.contains(value)) {
+        val offset = modified.indexOf(value)
+        mapRanges.head.destinationRangeStart + offset
       } else {
         value
       }
     })
+  }
+
+  private def extractModified = {
+    (mapRanges.head.sourceRangeStart until mapRanges.head.sourceRangeStart + mapRanges.head.rangeLength).toList
   }
 
   override def equals(that: Any): Boolean = {
