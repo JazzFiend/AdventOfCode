@@ -2,6 +2,7 @@ object AlmanacAnalyzer {
   def findLowestLocation(almanac: List[String]): Int = {
     val seeds = SeedParser.parseSeeds(almanac)
     val maps = AlmanacMapParser.parseMaps(almanac)
+    val firstRound = maps.head.mapSourceValues(seeds)
     35
   }
 }

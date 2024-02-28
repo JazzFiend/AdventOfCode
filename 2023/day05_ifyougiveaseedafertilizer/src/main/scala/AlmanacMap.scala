@@ -1,20 +1,45 @@
 class AlmanacMap(val source: String, val destination: String, val mapRanges: List[MapRange]) {
-  def mapSourceValues(valuesToMap: List[Int]):List[Int] = {
-    if(mapRanges.isEmpty) { return valuesToMap }
-
-    val modified = extractModified
-    valuesToMap.map(value => {
-      if(modified.contains(value)) {
-        val offset = modified.indexOf(value)
-        mapRanges.head.destinationRangeStart + offset
+  def mapSourceValues(numbersToMap: List[Int]):List[Int] = {
+    val mappings = computeMappings
+    numbersToMap.map(inputNumber => {
+      val allMapRangeResults = mapAgainstAllRanges(mappings, inputNumber)
+      if(isPassThrough(inputNumber, allMapRangeResults)) {
+        inputNumber
       } else {
-        value
+        extractDifferentNumber(inputNumber, allMapRangeResults)
       }
     })
   }
 
-  private def extractModified = {
-    (mapRanges.head.sourceRangeStart until mapRanges.head.sourceRangeStart + mapRanges.head.rangeLength).toList
+  private def computeMappings: List[List[Int]] = {
+    mapRanges.map(mapRange => {
+      (mapRange.sourceRangeStart until mapRange.sourceRangeStart + mapRange.rangeLength).toList
+    })
+  }
+
+  private def mapAgainstAllRanges(mappings: List[List[Int]], inputNumber: Int): List[Int] = {
+    mappings.zipWithIndex.map((mapping, index) => {
+      if (mapping.contains(inputNumber)) {
+        val offset = mapping.indexOf(inputNumber)
+        mapRanges(index).destinationRangeStart + offset
+      } else {
+        inputNumber
+      }
+    })
+  }
+
+  private def isPassThrough(inputNumber: Int, allMapRangeResults: List[Int]) = {
+    allMapRangeResults.forall(result => result == inputNumber)
+  }
+
+  private def extractDifferentNumber(inputNumber: Int, allMapRangeResults: List[Int]) = {
+    allMapRangeResults.fold(inputNumber)((prev, next) => {
+      if (next != inputNumber) {
+        next
+      } else {
+        prev
+      }
+    })
   }
 
   override def equals(that: Any): Boolean = {

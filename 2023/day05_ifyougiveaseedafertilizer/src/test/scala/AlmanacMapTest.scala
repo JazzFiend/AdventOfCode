@@ -49,5 +49,15 @@ class AlmanacMapTest extends AnyFunSpec {
       val expected = (0 to 59).toList.concat((10 to 19).toList).concat((70 to 100).toList)
       assert(almanac.mapSourceValues((0 to 100).toList) == expected)
     }
+
+    it("A map with several maps within it") {
+      val almanac = AlmanacMap("a", "b", List(MapRange(90, 30, 5), MapRange(20, 80, 10)))
+      val expected = (0 to 29).toList
+        .concat((90 to 94).toList)
+        .concat((35 to 79).toList)
+        .concat((20 to 29).toList)
+        .concat((90 to 100).toList)
+      assert(almanac.mapSourceValues((0 to 100).toList) == expected)
+    }
   }
 }
