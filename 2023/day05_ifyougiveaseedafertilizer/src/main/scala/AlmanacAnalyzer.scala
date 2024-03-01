@@ -13,7 +13,7 @@ object AlmanacAnalyzer {
 // An AlmanacMap should take in the source name, destination name, and a list of MapRanges
 // A MapRange should take in a destination range start, a source range start, and a range length.
 
-// Next we take the AlmanacMap class and start performing the mapping. Once the values in the constructor are passed
+// (DONE) Next we take the AlmanacMap class and start performing the mapping. Once the values in the constructor are passed
 // we can set up the map. Then, we make a function that takes a list of ints and returns the corresponding list of mapped value.
 
 // Finally, we set up the pipeline. Maybe this is its own class? Don't know yet.

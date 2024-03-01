@@ -2,7 +2,7 @@ import org.scalatest.funspec.AnyFunSpec
 
 class AlmanacAnalyzerTest  extends AnyFunSpec {
   it("Acceptance Test") {
-    val maps = List(
+    val almanac = List(
       "seeds: 79 14 55 13",
       "seed-to-soil map:",
       "50 98 2",
@@ -30,6 +30,6 @@ class AlmanacAnalyzerTest  extends AnyFunSpec {
       "60 56 37",
       "56 93 4"
     )
-    assert(AlmanacAnalyzer.findLowestLocation(maps) == 35)
+    assert(AlmanacAnalyzer.findLowestLocation(almanac) == 35)
   }
 }
