@@ -34,20 +34,20 @@ class AlmanacMapTest extends AnyFunSpec {
   describe("mapSourceValues") {
     it("A map with no range should act as a pass through") {
       val almanac = AlmanacMap("a", "b", List.empty)
-      val ints = (0 to 100).toList
-      assert(almanac.mapSourceValues(ints) == ints)
+      val longs = (0L to 100L).toList
+      assert(almanac.mapSourceValues(longs) == longs)
     }
 
     it("A map that redefines a single value with one map") {
       val almanac = AlmanacMap("a", "b", List(MapRange(45, 69, 1)))
       val expected = (0 to 68).toList.concat(List(45).concat((70 to 100).toList))
-      assert(almanac.mapSourceValues((0 to 100).toList) == expected)
+      assert(almanac.mapSourceValues((0L to 100L).toList) == expected)
     }
 
     it("A map that redefines a range of values with one map") {
       val almanac = AlmanacMap("a", "b", List(MapRange(10, 60, 10)))
       val expected = (0 to 59).toList.concat((10 to 19).toList).concat((70 to 100).toList)
-      assert(almanac.mapSourceValues((0 to 100).toList) == expected)
+      assert(almanac.mapSourceValues((0L to 100L).toList) == expected)
     }
 
     it("A map with several maps within it") {
@@ -57,7 +57,7 @@ class AlmanacMapTest extends AnyFunSpec {
         .concat((35 to 79).toList)
         .concat((20 to 29).toList)
         .concat((90 to 100).toList)
-      assert(almanac.mapSourceValues((0 to 100).toList) == expected)
+      assert(almanac.mapSourceValues((0L to 100L).toList) == expected)
     }
   }
 }

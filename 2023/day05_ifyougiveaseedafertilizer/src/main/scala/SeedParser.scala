@@ -1,5 +1,5 @@
 object SeedParser {
-  def parseSeeds(almanacText: List[String]): List[Int] = {
+  def parseSeeds(almanacText: List[String]): List[Long] = {
     if (!hasValidSeeds(almanacText)) { return List.empty }
 
     val splitSeeds = almanacText.head.split(":").toList
@@ -14,10 +14,10 @@ object SeedParser {
     true
   }
 
-  private def extractSeedValues(splitSeeds: List[String]): List[Int] = {
+  private def extractSeedValues(splitSeeds: List[String]): List[Long] = {
     splitSeeds.last.trim
       .split(" ")
-      .map(seed => seed.toInt)
+      .map(seed => seed.toLong)
       .toList
   }
 }

@@ -1,5 +1,5 @@
 class AlmanacMap(val source: String, val destination: String, val mapRanges: List[MapRange]) {
-  def mapSourceValues(numbersToMap: List[Int]):List[Int] = {
+  def mapSourceValues(numbersToMap: List[Long]):List[Long] = {
     val mappings = computeMappings
     numbersToMap.map(inputNumber => {
       val allMapRangeResults = mapAgainstAllRanges(mappings, inputNumber)
@@ -7,13 +7,13 @@ class AlmanacMap(val source: String, val destination: String, val mapRanges: Lis
     })
   }
 
-  private def computeMappings: List[List[Int]] = {
+  private def computeMappings: List[List[Long]] = {
     mapRanges.map(mapRange => {
       (mapRange.sourceRangeStart until mapRange.sourceRangeStart + mapRange.rangeLength).toList
     })
   }
 
-  private def mapAgainstAllRanges(mappings: List[List[Int]], inputNumber: Int): List[Int] = {
+  private def mapAgainstAllRanges(mappings: List[List[Long]], inputNumber: Long): List[Long] = {
     mappings.zipWithIndex.map((mapping, index) => {
       if (mapping.contains(inputNumber)) {
         val offset = mapping.indexOf(inputNumber)
@@ -24,7 +24,7 @@ class AlmanacMap(val source: String, val destination: String, val mapRanges: Lis
     })
   }
 
-  private def calculateMapResult(inputNumber: Int, allMapRangeResults: List[Int]) = {
+  private def calculateMapResult(inputNumber: Long, allMapRangeResults: List[Long]) = {
     allMapRangeResults.fold(inputNumber)((prev, next) => {
       if (next != inputNumber) {
         next

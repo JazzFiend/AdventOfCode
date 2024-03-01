@@ -59,7 +59,7 @@ object AlmanacMapParser {
 
   private def extractMapRange(mapEntry: String): MapRange = {
     val mapRangeTokenized = mapEntry.split(" ")
-    MapRange(mapRangeTokenized(0).toInt, mapRangeTokenized(1).toInt, mapRangeTokenized(2).toInt)
+    MapRange(mapRangeTokenized(0).toLong, mapRangeTokenized(1).toLong, mapRangeTokenized(2).toLong)
   }
 
   private def extractMapTitle(mapEntry: List[String]): List[String] = {

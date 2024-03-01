@@ -1,4 +1,4 @@
-class MapRange(val destinationRangeStart: Int, val sourceRangeStart: Int, val rangeLength: Int) {
+class MapRange(val destinationRangeStart: Long, val sourceRangeStart: Long, val rangeLength: Long) {
   override def equals(that: Any): Boolean = {
     that match {
       case that: MapRange =>
