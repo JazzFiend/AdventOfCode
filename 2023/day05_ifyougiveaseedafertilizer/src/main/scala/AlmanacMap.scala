@@ -3,11 +3,7 @@ class AlmanacMap(val source: String, val destination: String, val mapRanges: Lis
     val mappings = computeMappings
     numbersToMap.map(inputNumber => {
       val allMapRangeResults = mapAgainstAllRanges(mappings, inputNumber)
-      if(isPassThrough(inputNumber, allMapRangeResults)) {
-        inputNumber
-      } else {
-        extractDifferentNumber(inputNumber, allMapRangeResults)
-      }
+      calculateMapResult(inputNumber, allMapRangeResults)
     })
   }
 
@@ -28,11 +24,7 @@ class AlmanacMap(val source: String, val destination: String, val mapRanges: Lis
     })
   }
 
-  private def isPassThrough(inputNumber: Int, allMapRangeResults: List[Int]) = {
-    allMapRangeResults.forall(result => result == inputNumber)
-  }
-
-  private def extractDifferentNumber(inputNumber: Int, allMapRangeResults: List[Int]) = {
+  private def calculateMapResult(inputNumber: Int, allMapRangeResults: List[Int]) = {
     allMapRangeResults.fold(inputNumber)((prev, next) => {
       if (next != inputNumber) {
         next
