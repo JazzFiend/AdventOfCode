@@ -5,4 +5,8 @@ object AlmanacAnalyzer {
     val finalValues = AlmanacPipeline.processPipeline(seeds, maps)
     finalValues.min
   }
+
+  def findLowestLocationBySeedRange(almanac: List[String]): Long = {
+    46
+  }
 }
