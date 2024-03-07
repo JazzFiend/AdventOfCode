@@ -30,5 +30,11 @@ class SeedParserTest extends AnyFunSpec {
       val expected = (23 to 27).toList
       assert(SeedParser.parseSeedsAsRange(onePair) == expected)
     }
+
+    it("Many pairs") {
+      val manyPairs = List("seeds: 0 5 10 2 100 10")
+      val expected = (0 to 4).concat((10 to 11)).concat(100 to 109).toList
+      assert(SeedParser.parseSeedsAsRange(manyPairs) == expected)
+    }
   }
 }

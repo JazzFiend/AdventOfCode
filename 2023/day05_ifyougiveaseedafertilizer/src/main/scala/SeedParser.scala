@@ -5,14 +5,8 @@ object SeedParser {
     extractSeedValues(extractSeedsAsStringList(almanacText))
   }
 
-  def parseSeedsAsRange(almanacText: List[String]): List[Long] = {
-    val seedsText = extractSeedsAsStringList(almanacText)
-    val seedRange = (seedsText.head.toLong, seedsText.last.toLong)
-    (seedRange._1 to (seedRange._1 + seedRange._2 - 1)).toList
-  }
-
-  private def extractSeedsAsStringList(almanacText: List[String]): List[String] = {
-    almanacText.head.split(":").toList.last.trim.split(" ").toList
+  private def extractSeedValues(splitSeeds: List[String]): List[Long] = {
+    splitSeeds.map(seed => seed.toLong)
   }
 
   private def hasValidSeeds(almanacText: List[String]): Boolean = {
@@ -23,7 +17,22 @@ object SeedParser {
     true
   }
 
-  private def extractSeedValues(splitSeeds: List[String]): List[Long] = {
-    splitSeeds.map(seed => seed.toLong)
+  def parseSeedsAsRange(almanacText: List[String]): List[Long] = {
+    val seedsText = extractSeedsAsStringList(almanacText)
+    seedsText
+      .zipWithIndex.flatMap((seedItem, index) => combineSeedPairs(seedsText, index))
+      .flatMap(seedPairs => (seedPairs._1 to (seedPairs._1 + seedPairs._2 - 1)).toList)
+  }
+
+  private def extractSeedsAsStringList(almanacText: List[String]): List[String] = {
+    almanacText.head.split(":").toList.last.trim.split(" ").toList
+  }
+
+  private def combineSeedPairs(seedsText: List[String], index: Int) = {
+    if (index % 2 == 0) {
+      Some((seedsText(index).toLong, seedsText(index + 1).toLong))
+    } else {
+      None
+    }
   }
 }
