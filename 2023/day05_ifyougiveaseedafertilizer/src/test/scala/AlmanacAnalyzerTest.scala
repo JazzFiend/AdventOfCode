@@ -73,5 +73,12 @@ class AlmanacAnalyzerTest  extends AnyFunSpec {
       )
       assert(AlmanacAnalyzer.findLowestLocationBySeedRange(almanac) == 46)
     }
+
+//    it("Puzzle 2") {
+//      val almanac = io.Source.fromFile("src/test/scala/input.txt").getLines
+//        .toList
+//        .filterNot(line => line.isEmpty)
+//      assert(AlmanacAnalyzer.findLowestLocationBySeedRange(almanac) == 806029445)
+//    }
   }
 }

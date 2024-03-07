@@ -1,12 +1,17 @@
 object AlmanacAnalyzer {
   def findLowestLocation(almanac: List[String]): Long = {
-    val seeds = SeedParser.parseSeeds(almanac)
+    calculateLowestLocation(almanac, SeedParser.parseSeeds(almanac))
+  }
+
+  def findLowestLocationBySeedRange(almanac: List[String]): Long = {
+    calculateLowestLocation(almanac, SeedParser.parseSeedsAsRange(almanac))
+  }
+
+  private def calculateLowestLocation(almanac: List[String], seeds: List[Long]) = {
     val maps = AlmanacMapParser.parseMaps(almanac)
     val finalValues = AlmanacPipeline.processPipeline(seeds, maps)
     finalValues.min
   }
-
-  def findLowestLocationBySeedRange(almanac: List[String]): Long = {
-    46
-  }
 }
+
+// The solution works, but its blowing the heap space on the puzzle again. Need to figure out how to speed it up.
