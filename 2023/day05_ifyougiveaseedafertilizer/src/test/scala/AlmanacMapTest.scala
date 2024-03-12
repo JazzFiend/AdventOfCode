@@ -60,6 +60,7 @@ class AlmanacMapTest extends AnyFunSpec {
       assert(almanac.mapSourceValues((0L to 100L).toList) == expected)
     }
 
+    // TODO: This test isn't asserting anything.
     it("Lots of massive maps") {
       val inputs = List(3416930225L, 56865175, 4245248379L, 7142355, 1808166864, 294882110, 863761171, 233338109, 4114335326L, 67911591, 1198254212, 504239157, 3491380151L, 178996923, 3965970270L, 15230597, 2461206486L, 133606394, 2313929258L, 84595688)
       val almanac = AlmanacMap("seed", "soil", List(
@@ -83,6 +84,14 @@ class AlmanacMapTest extends AnyFunSpec {
       ))
 
       val done = almanac.mapSourceValues(inputs)
+    }
+  }
+
+  describe("Map using ranges") {
+    it("A map with no ranges should be a pass through") {
+      val map = AlmanacMap("a", "b", List.empty)
+      val sourceValues = List((10L, 20L), (30L, 33L), (100L, 100L))
+      assert(map.mapSourceValuesAsRanges(sourceValues) == sourceValues)
     }
   }
 }

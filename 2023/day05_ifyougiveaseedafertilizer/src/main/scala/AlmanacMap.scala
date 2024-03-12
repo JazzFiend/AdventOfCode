@@ -17,6 +17,10 @@ class AlmanacMap(val source: String, val destination: String, val mapRanges: Lis
     rangeToUse.destinationRangeStart + (inputNumber - rangeToUse.sourceRangeStart)
   }
 
+  def mapSourceValuesAsRanges(sourceRanges: List[(Long, Long)]): List[(Long, Long)] = {
+    sourceRanges
+  }
+
   override def equals(that: Any): Boolean = {
     that match {
       case that: AlmanacMap =>

@@ -4,6 +4,7 @@ object AlmanacAnalyzer {
   }
 
   def findLowestLocationBySeedRange(almanac: List[String]): Long = {
+    val seedRanges = RangedSeedParser.parseSeedsAsRange(almanac);
     calculateLowestLocation(almanac, SeedParser.parseSeedsAsRange(almanac))
   }
 
