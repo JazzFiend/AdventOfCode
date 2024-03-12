@@ -17,6 +17,7 @@ object SeedParser {
     true
   }
 
+  // TODO: Keep this for now, but this may be going away.
   def parseSeedsAsRange(almanacText: List[String]): List[Long] = {
     val seedsText = extractSeedsAsStringList(almanacText)
     seedsText

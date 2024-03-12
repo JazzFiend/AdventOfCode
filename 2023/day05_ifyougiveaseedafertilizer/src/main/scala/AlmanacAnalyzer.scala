@@ -15,3 +15,4 @@ object AlmanacAnalyzer {
 }
 
 // The solution works, but its blowing the heap space on the puzzle again. Need to figure out how to speed it up.
+// Yeah, the seed ranges are massive. Instead of making them lists, they should be a range of numbers. I then need to get the other classes to support ranges.
