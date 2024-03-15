@@ -93,5 +93,11 @@ class AlmanacMapTest extends AnyFunSpec {
       val sourceValues = List((10L, 20L), (30L, 33L), (100L, 100L))
       assert(map.mapSourceValuesAsRanges(sourceValues) == sourceValues)
     }
+
+    it("A map with ranges that don't overlap with the input should be a pass through") {
+      val map = AlmanacMap("a", "b", List(new MapRange(90, 40, 10), new MapRange(10, 70, 5)))
+      val sourceValues = List((10L, 20L), (30L, 33L), (100L, 100L))
+      assert(map.mapSourceValuesAsRanges(sourceValues) == sourceValues)
+    }
   }
 }
