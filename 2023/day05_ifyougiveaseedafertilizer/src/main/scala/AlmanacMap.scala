@@ -17,8 +17,22 @@ class AlmanacMap(val source: String, val destination: String, val mapRanges: Lis
     rangeToUse.destinationRangeStart + (inputNumber - rangeToUse.sourceRangeStart)
   }
 
-  def mapSourceValuesAsRanges(sourceRanges: List[(Long, Long)]): List[(Long, Long)] = {
-    sourceRanges
+  def mapSourceValuesAsRanges(sourceRanges: Set[(Long, Long)]): Set[(Long, Long)] = {
+    sourceRanges.flatMap(sourceRange => {
+      val overlappingRanges = mapRanges.filter(mapRange => {
+        sourceRange._2 == mapRange.sourceRangeStart
+      })
+
+      if (overlappingRanges.isEmpty) {
+        Set(sourceRange)
+      } else {
+        calculateDestinationRanges(sourceRange, overlappingRanges)
+      }
+    })
+  }
+
+  private def calculateDestinationRanges(sourceRange: (Long, Long), overlappingRanges: List[MapRange]): Set[(Long, Long)] = {
+    Set((sourceRange._1, sourceRange._2 - 1), (overlappingRanges.head.destinationRangeStart, overlappingRanges.head.destinationRangeStart))
   }
 
   override def equals(that: Any): Boolean = {
