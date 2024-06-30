@@ -28,4 +28,12 @@ class MapRangeTest extends AnyFunSpec {
       assert(one != two)
     }
   }
+
+  describe("findRangeOverlap") {
+    it("No range overlap should return nothing") {
+      val mapRange = new MapRange(10, 20, 5)
+      val input = (40L, 60L)
+      assert(mapRange.findRangeOverlap(input).isEmpty)
+    }
+  }
 }

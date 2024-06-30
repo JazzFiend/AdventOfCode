@@ -2,6 +2,11 @@ class MapRange(val destinationRangeStart: Long, val sourceRangeStart: Long, val 
   def isInRange(number: Long): Boolean = {
     number >= sourceRangeStart && number <= sourceRangeStart + rangeLength - 1
   }
+
+  def findRangeOverlap(inputRange: (Long, Long)): Option[(Long, Long)] = {
+    None
+  }
+
   override def equals(that: Any): Boolean = {
     that match {
       case that: MapRange =>
