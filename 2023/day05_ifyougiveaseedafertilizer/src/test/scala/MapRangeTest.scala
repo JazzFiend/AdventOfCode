@@ -35,5 +35,11 @@ class MapRangeTest extends AnyFunSpec {
       val input = (40L, 60L)
       assert(mapRange.findRangeOverlap(input).isEmpty)
     }
+
+    it("Overlap one number on the right") {
+      val mapRange = new MapRange(10, 20, 5)
+      val input = (10L, 20L)
+      assert(mapRange.findRangeOverlap(input).get == (20L, 20L))
+    }
   }
 }
