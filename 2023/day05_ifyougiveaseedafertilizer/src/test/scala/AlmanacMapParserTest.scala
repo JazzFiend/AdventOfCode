@@ -44,7 +44,7 @@ class AlmanacMapParserTest extends AnyFunSpec {
       "first-to-second map:",
       "1 2 4",
     )
-    val expected = List(AlmanacMap("first", "second", List(MapRange(1, 2, 4))))
+    val expected = List(DiscreteAlmanacMap("first", "second", List(MapRange(1, 2, 4))))
     assert(AlmanacMapParser.parseMaps(oneMap) == expected)
   }
 
@@ -57,7 +57,7 @@ class AlmanacMapParserTest extends AnyFunSpec {
       "11 100 20"
     )
     val expectedMapRanges = List(MapRange(2, 5, 12), MapRange(3, 5, 1), MapRange(11, 100, 20))
-    val expected = List(AlmanacMap("a", "b", expectedMapRanges))
+    val expected = List(DiscreteAlmanacMap("a", "b", expectedMapRanges))
     assert(AlmanacMapParser.parseMaps(oneMapManyRanges) == expected)
   }
 
@@ -73,12 +73,12 @@ class AlmanacMapParserTest extends AnyFunSpec {
       "12 1 4"
     )
     val expected = List(
-      AlmanacMap("a", "b", List(
+      DiscreteAlmanacMap("a", "b", List(
         MapRange(2, 5, 12),
         MapRange(3, 5, 1),
         MapRange(11, 100, 20),
       )),
-      AlmanacMap("b", "c", List(
+      DiscreteAlmanacMap("b", "c", List(
         MapRange(48, 5, 66),
         MapRange(12, 1, 4)
       ))

@@ -1,12 +1,12 @@
 import scala.annotation.tailrec
 
 object AlmanacPipeline {
-  def processPipeline(seeds: List[Long], maps: List[AlmanacMap]): List[Long] = {
+  def processPipeline(seeds: List[Long], maps: List[DiscreteAlmanacMap]): List[Long] = {
     processNextMap(maps, "seed", seeds)
   }
 
   @tailrec
-  private def processNextMap(maps: List[AlmanacMap], source: String, sourceValues: List[Long]): List[Long] = {
+  private def processNextMap(maps: List[DiscreteAlmanacMap], source: String, sourceValues: List[Long]): List[Long] = {
     val filteredBySource = maps.filter(map => map.source == source)
     if(filteredBySource.isEmpty) {
       sourceValues

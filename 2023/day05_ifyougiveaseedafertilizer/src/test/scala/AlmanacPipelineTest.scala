@@ -8,15 +8,15 @@ class AlmanacPipelineTest extends AnyFunSpec{
 
   it("Seeds and one map") {
     val seeds = List(1L, 2L, 3L, 4L)
-    val maps = List(AlmanacMap("seed", "b", List(MapRange(100, 2, 2))))
+    val maps = List(DiscreteAlmanacMap("seed", "b", List(MapRange(100, 2, 2))))
     assert(AlmanacPipeline.processPipeline(seeds, maps) == List(1, 100, 101, 4))
   }
 
   it("Several maps") {
     val seeds = List(1L, 2L, 3L, 4L)
     val maps = List(
-      AlmanacMap("seed", "mid", List(MapRange(20, 3, 2))),
-      AlmanacMap("mid", "end", List(MapRange(20, 1, 2))),
+      DiscreteAlmanacMap("seed", "mid", List(MapRange(20, 3, 2))),
+      DiscreteAlmanacMap("mid", "end", List(MapRange(20, 1, 2))),
     )
     assert(AlmanacPipeline.processPipeline(seeds, maps) == List(20, 21, 20, 21))
   }

@@ -2,30 +2,30 @@ import org.scalatest.funspec.AnyFunSpec
 
 import scala.collection.immutable.List
 
-class AlmanacMapTest extends AnyFunSpec {
+class DiscreteAlmanacMapTest extends AnyFunSpec {
   describe("Equals") {
     it("Two identical AlmanacMaps should be equal") {
-      val one = AlmanacMap("source", "destination", List(MapRange(3, 2, 1)))
-      val two = AlmanacMap("source", "destination", List(MapRange(3, 2, 1)))
+      val one = DiscreteAlmanacMap("source", "destination", List(MapRange(3, 2, 1)))
+      val two = DiscreteAlmanacMap("source", "destination", List(MapRange(3, 2, 1)))
       assert(one == two)
     }
 
     describe("Not equals") {
       it("Different source") {
-        val one = AlmanacMap("source", "destination", List(MapRange(3, 2, 1)))
-        val two = AlmanacMap("different", "destination", List(MapRange(3, 2, 1)))
+        val one = DiscreteAlmanacMap("source", "destination", List(MapRange(3, 2, 1)))
+        val two = DiscreteAlmanacMap("different", "destination", List(MapRange(3, 2, 1)))
         assert(one != two)
       }
 
       it("Different destination") {
-        val one = AlmanacMap("source", "destination", List(MapRange(3, 2, 1)))
-        val two = AlmanacMap("source", "different", List(MapRange(3, 2, 1)))
+        val one = DiscreteAlmanacMap("source", "destination", List(MapRange(3, 2, 1)))
+        val two = DiscreteAlmanacMap("source", "different", List(MapRange(3, 2, 1)))
         assert(one != two)
       }
 
       it("Different mapRanges") {
-        val one = AlmanacMap("source", "destination", List(MapRange(3, 2, 1)))
-        val two = AlmanacMap("source", "destination", List.empty)
+        val one = DiscreteAlmanacMap("source", "destination", List(MapRange(3, 2, 1)))
+        val two = DiscreteAlmanacMap("source", "destination", List.empty)
         assert(one != two)
       }
     }
@@ -33,25 +33,25 @@ class AlmanacMapTest extends AnyFunSpec {
 
   describe("mapSourceValues") {
     it("A map with no range should act as a pass through") {
-      val almanac = AlmanacMap("a", "b", List.empty)
+      val almanac = DiscreteAlmanacMap("a", "b", List.empty)
       val longs = (0L to 100L).toList
       assert(almanac.mapSourceValues(longs) == longs)
     }
 
     it("A map that redefines a single value with one map") {
-      val almanac = AlmanacMap("a", "b", List(MapRange(45, 69, 1)))
+      val almanac = DiscreteAlmanacMap("a", "b", List(MapRange(45, 69, 1)))
       val expected = (0 to 68).toList.concat(List(45).concat((70 to 100).toList))
       assert(almanac.mapSourceValues((0L to 100L).toList) == expected)
     }
 
     it("A map that redefines a range of values with one map") {
-      val almanac = AlmanacMap("a", "b", List(MapRange(10, 60, 10)))
+      val almanac = DiscreteAlmanacMap("a", "b", List(MapRange(10, 60, 10)))
       val expected = (0 to 59).toList.concat((10 to 19).toList).concat((70 to 100).toList)
       assert(almanac.mapSourceValues((0L to 100L).toList) == expected)
     }
 
     it("A map with several maps within it") {
-      val almanac = AlmanacMap("a", "b", List(MapRange(90, 30, 5), MapRange(20, 80, 10)))
+      val almanac = DiscreteAlmanacMap("a", "b", List(MapRange(90, 30, 5), MapRange(20, 80, 10)))
       val expected = (0 to 29).toList
         .concat((90 to 94).toList)
         .concat((35 to 79).toList)
@@ -62,7 +62,7 @@ class AlmanacMapTest extends AnyFunSpec {
 
     it("Lots of massive maps") {
       val inputs = List(3416930225L, 56865175, 4245248379L, 7142355, 1808166864, 294882110, 863761171, 233338109, 4114335326L, 67911591, 1198254212, 504239157, 3491380151L, 178996923, 3965970270L, 15230597, 2461206486L, 133606394, 2313929258L, 84595688)
-      val almanac = AlmanacMap("seed", "soil", List(
+      val almanac = DiscreteAlmanacMap("seed", "soil", List(
         MapRange(3534435790L, 4123267198L, 50004089),
         MapRange(3584439879L, 3602712894L, 238659237),
         MapRange(2263758314L, 0, 160870825),
