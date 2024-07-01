@@ -4,8 +4,10 @@ class MapRange(val destinationRangeStart: Long, val sourceRangeStart: Long, val 
   }
 
   def findRangeOverlap(inputRange: (Long, Long)): Option[(Long, Long)] = {
-    if(inputRange._2 == sourceRangeStart) {
-      return Some((sourceRangeStart, sourceRangeStart))
+    if(inputRange._1 > sourceRangeStart + rangeLength - 1) {
+      return None
+    } else if(inputRange._2 >= sourceRangeStart) {
+      return Some((sourceRangeStart, inputRange._2))
     }
     None
   }
