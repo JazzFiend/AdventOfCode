@@ -60,6 +60,12 @@ class MapRangeTest extends AnyFunSpec {
       assert(mapRange.findRangeOverlap(input).get == (21L, 23L))
     }
 
+    it("Overlap largest number") {
+      val mapRange = new MapRange(10, 20, 5)
+      val input = (24L, 57L)
+      assert(mapRange.findRangeOverlap(input).get == (24L, 24L))
+    }
+
     it("No overlap with numbers too large") {
       val mapRange = new MapRange(10, 20, 5)
       val input = (40L, 60L)

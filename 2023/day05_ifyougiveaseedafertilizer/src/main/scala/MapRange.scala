@@ -8,6 +8,8 @@ class MapRange(val destinationRangeStart: Long, val sourceRangeStart: Long, val 
       return None
     } else if(inputRange._1 > sourceRangeStart && inputRange._2 < sourceRangeEnd) {
       return Some(inputRange)
+    } else if(inputRange._1 == sourceRangeEnd) {
+      return Some(sourceRangeEnd, sourceRangeEnd)
     } else if(inputRange._2 >= sourceRangeStart) {
       return Some((sourceRangeStart, inputRange._2))
     }
