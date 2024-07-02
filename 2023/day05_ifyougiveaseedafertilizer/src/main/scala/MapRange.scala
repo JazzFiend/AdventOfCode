@@ -8,9 +8,7 @@ class MapRange(val destinationRangeStart: Long, val sourceRangeStart: Long, val 
   }
 
   def findRangeOverlap(inputRange: (Long, Long)): Option[(Long, Long)] = {
-    if (noOverlap(inputRange)) {
-      return None
-    }
+    if (noOverlap(inputRange)) { return None }
 
     val low = Math.max(inputRange._1, sourceRangeStart)
     val high = Math.min(sourceRangeEnd, inputRange._2)

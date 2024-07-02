@@ -2,19 +2,18 @@ import org.scalatest.funspec.AnyFunSpec
 
 class RangedAlmanacMapTest extends AnyFunSpec {
   describe("mapSourceValues") {
-    it("No Overlap") {
-      val almanacMap = new RangedAlmanacMap("source", "destination", List(new MapRange(10, 20, 5)))
-      val sourceRanges = List((40L, 50L))
+    it("No Overlap - too small") {
+      val almanacMap = new RangedAlmanacMap("source", "destination", List(new MapRange(200, 100, 10)))
+      val sourceRanges = List((0L, 50L))
       assert(almanacMap.mapSourceValues(sourceRanges) == sourceRanges)
     }
 
-// Need to modify MapRange class first. It needs to take in a range of numbers and output the numbers that are in range.
-
-//    it("Overlap one number at beginning") {
-//      val almanacMap = new RangedAlmanacMap("source", "destination", List(new MapRange(10, 20, 5)))
-//      val sourceRanges = List((15L, 20L))
-//      val expected = List((15L, 19L), (20L, 20L))
-//      assert(almanacMap.mapSourceValues(sourceRanges) == expected)
-//    }
+    // **** Should we return a List or a Set? ****
+    it("Overlap one number at beginning") {
+      val almanacMap = new RangedAlmanacMap("source", "destination", List(new MapRange(200, 100, 10)))
+      val sourceRanges = List((90L, 100L))
+      val expected = List((90L, 99L), (200L, 200L))
+      assert(almanacMap.mapSourceValues(sourceRanges) == expected)
+    }
   }
 }
