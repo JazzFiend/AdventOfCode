@@ -126,5 +126,11 @@ class MapRangeTest extends AnyFunSpec {
       val expected = List((519L, 519L), (30L, 32L))
       assert(mapRange.rangeMap(input) == expected)
     }
+
+    it("No overlap with numbers too big") {
+      val mapRange = new MapRange(500L, 10L, 20L)
+      val input = (100L, 150L)
+      assert(mapRange.rangeMap(input) == List(input))
+    }
   }
 }
