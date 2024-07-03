@@ -119,5 +119,12 @@ class MapRangeTest extends AnyFunSpec {
       val expected = List((515L, 519L), (30L, 40L))
       assert(mapRange.rangeMap(input) == expected)
     }
+
+    it("Map largest number") {
+      val mapRange = new MapRange(500L, 10L, 20L)
+      val input = (29L, 32L)
+      val expected = List((519L, 519L), (30L, 32L))
+      assert(mapRange.rangeMap(input) == expected)
+    }
   }
 }
