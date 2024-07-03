@@ -19,8 +19,16 @@ class MapRange(val destinationRangeStart: Long, val sourceRangeStart: Long, val 
     inputRange._2 < sourceRangeStart || inputRange._1 > sourceRangeEnd
   }
 
-  def rangeMap(range: (Long, Long)): (Long, Long) = {
-    range
+  def rangeMap(range: (Long, Long)): List[(Long, Long)] = {
+    val overlap = findRangeOverlap(range)
+    if (overlap.isEmpty) { return List(range) }
+    computeMap(range, overlap.get)
+  }
+
+  private def computeMap(range: (Long, Long), overlap: (Long, Long)): List[(Long, Long)] = {
+    val noChange = (range._1, overlap._1 - 1)
+    val change = (destinationRangeStart, destinationRangeStart)
+    List(noChange, change)
   }
 
   override def equals(that: Any): Boolean = {
