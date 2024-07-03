@@ -26,9 +26,13 @@ class MapRange(val destinationRangeStart: Long, val sourceRangeStart: Long, val 
   }
 
   private def computeMap(range: (Long, Long), overlap: (Long, Long)): List[(Long, Long)] = {
-    val noChange = (range._1, overlap._1 - 1)
-    val change = (destinationRangeStart, destinationRangeStart + computeRangeLength(overlap))
-    List(noChange, change)
+    if(range == overlap) {
+      List((destinationRangeStart, destinationRangeStart + rangeLength - 1))
+    } else {
+      val noChange = (range._1, overlap._1 - 1)
+      val change = (destinationRangeStart, destinationRangeStart + computeRangeLength(overlap))
+      List(noChange, change)
+    }
   }
 
   private def computeRangeLength(range: (Long, Long)): Integer = {
