@@ -22,7 +22,7 @@ class MapRange(val destinationRangeStart: Long, val sourceRangeStart: Long, val 
   def rangeMap(range: (Long, Long)): List[(Long, Long)] = {
     val overlap = findRangeOverlap(range)
     if (overlap.isEmpty) { return List(range) }
-    
+
     computeMap(range, overlap.get)
   }
 
