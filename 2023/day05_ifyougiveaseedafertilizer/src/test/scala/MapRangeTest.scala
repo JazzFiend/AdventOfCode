@@ -112,5 +112,12 @@ class MapRangeTest extends AnyFunSpec {
       val expected = List((500L, 519L))
       assert(mapRange.rangeMap(input) == expected)
     }
+
+    it("Map several large numbers") {
+      val mapRange = new MapRange(500L, 10L, 20L)
+      val input = (25L, 40L)
+      val expected = List((515L, 519L), (30L, 40L))
+      assert(mapRange.rangeMap(input) == expected)
+    }
   }
 }
