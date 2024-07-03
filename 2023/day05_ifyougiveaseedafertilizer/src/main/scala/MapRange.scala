@@ -19,6 +19,10 @@ class MapRange(val destinationRangeStart: Long, val sourceRangeStart: Long, val 
     inputRange._2 < sourceRangeStart || inputRange._1 > sourceRangeEnd
   }
 
+  def rangeMap(range: (Long, Long)): (Long, Long) = {
+    range
+  }
+
   override def equals(that: Any): Boolean = {
     that match {
       case that: MapRange =>
