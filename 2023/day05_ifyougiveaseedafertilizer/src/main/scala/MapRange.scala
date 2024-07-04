@@ -38,6 +38,11 @@ class MapRange(val destinationRangeStart: Long, val sourceRangeStart: Long, val 
       val startOffset = range._1 - sourceRangeStart
       val endOffset = sourceRangeEnd - range._2
       List((destinationRangeStart + startOffset, destinationRangeEnd - endOffset))
+    } else if(overSizedRange(range, overlap)) {
+      val noChangeStart = (range._1, overlap._1 - 1)
+      val change = (destinationRangeStart, destinationRangeEnd)
+      val noChangeEnd = (overlap._2 + 1, range._2)
+      List(noChangeStart, change, noChangeEnd)
     } else if(overlapLeft(range, overlap)) {
       val noChange = (range._1, overlap._1 - 1)
       val change = (destinationRangeStart, destinationRangeStart + computeRangeLength(overlap))
@@ -48,6 +53,10 @@ class MapRange(val destinationRangeStart: Long, val sourceRangeStart: Long, val 
       val noChange = (overlap._2 + 1, range._2)
       List(change, noChange)
     }
+  }
+
+  private def overSizedRange(range: (Long, Long), overlap: (Long, Long)) = {
+    range._1 < overlap._1 && range._2 > overlap._2
   }
 
   private def overlapLeft(range: (Long, Long), overlap: (Long, Long)): Boolean = {
