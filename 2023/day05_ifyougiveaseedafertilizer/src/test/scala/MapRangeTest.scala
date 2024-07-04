@@ -29,61 +29,27 @@ class MapRangeTest extends AnyFunSpec {
     }
   }
 
-  describe("findRangeOverlap") {
-    it("No overlap with numbers too small") {
-      val mapRange = new MapRange(10, 20, 5)
-      val input = (5L, 10L)
-      assert(mapRange.findRangeOverlap(input).isEmpty)
-    }
-
-    it("Overlap smallest number") {
-      val mapRange = new MapRange(10, 20, 5)
-      val input = (10L, 20L)
-      assert(mapRange.findRangeOverlap(input).get == (20L, 20L))
-    }
-
-    it("Overlap several small numbers") {
-      val mapRange = new MapRange(10, 20, 5)
-      val input = (10L, 23L)
-      assert(mapRange.findRangeOverlap(input).get == (20L, 23L))
-    }
-
-    it("Overlap all numbers") {
-      val mapRange = new MapRange(10, 20, 5)
-      val input = (20L, 24L)
-      assert(mapRange.findRangeOverlap(input).get == (20L, 24L))
-    }
-
-    it("Overlap several large numbers") {
-      val mapRange = new MapRange(10, 20, 5)
-      val input = (22L, 38L)
-      assert(mapRange.findRangeOverlap(input).get == (22L, 24L))
-    }
-
-    it("Overlap largest number") {
-      val mapRange = new MapRange(10, 20, 5)
-      val input = (24L, 57L)
-      assert(mapRange.findRangeOverlap(input).get == (24L, 24L))
-    }
-
-    it("No overlap with numbers too large") {
-      val mapRange = new MapRange(10, 20, 5)
-      val input = (40L, 60L)
-      assert(mapRange.findRangeOverlap(input).isEmpty)
-    }
-
-    it("Overlap all numbers in the middle of the range") {
-      val mapRange = new MapRange(10, 20, 5)
-      val input = (21L, 23L)
-      assert(mapRange.findRangeOverlap(input).get == (21L, 23L))
-    }
-
-    it("Input range overlaps and then some") {
-      val mapRange = new MapRange(10, 20, 5)
-      val input = (1L, 100L)
-      assert(mapRange.findRangeOverlap(input).get == (20L, 24L))
-    }
-  }
+  // **** We should combine the findOverlap and rangeMap functions, There's no reason to find the overlap without the range as well.
+//  describe("findRangeOverlap") {
+//
+//
+//
+//
+//
+//
+//
+//    it("Overlap all numbers in the middle of the range") {
+//      val mapRange = new MapRange(10, 20, 5)
+//      val input = (21L, 23L)
+//      assert(mapRange.findRangeOverlap(input).get == input)
+//    }
+//
+//    it("Input range overlaps and then some") {
+//      val mapRange = new MapRange(10, 20, 5)
+//      val input = (1L, 100L)
+//      assert(mapRange.findRangeOverlap(input).get == (20L, 24L))
+//    }
+//  }
 
   describe("rangeMap") {
     it("No overlap with numbers too small") {
@@ -131,6 +97,13 @@ class MapRangeTest extends AnyFunSpec {
       val mapRange = new MapRange(500L, 10L, 20L)
       val input = (100L, 150L)
       assert(mapRange.rangeMap(input) == List(input))
+    }
+
+    it("Map all input numbers in the middle of a big range") {
+      val mapRange = new MapRange(500L, 10L, 20L)
+      val input = (15L, 20L)
+      val expected = List((505L, 510L))
+      assert(mapRange.rangeMap(input) == expected)
     }
   }
 }
