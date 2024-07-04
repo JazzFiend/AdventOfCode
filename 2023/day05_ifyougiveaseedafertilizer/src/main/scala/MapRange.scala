@@ -11,7 +11,7 @@ class MapRange(val destinationRangeStart: Long, val sourceRangeStart: Long, val 
     number >= sourceRangeStart && number <= sourceRangeEnd
   }
 
-  def rangeMap(range: (Long, Long)): List[(Long, Long)] = {
+  def mapTuple(range: (Long, Long)): List[(Long, Long)] = {
     val overlap = findRangeOverlap(range)
     if (overlap.isEmpty) {
       return List(range)
