@@ -16,10 +16,11 @@ class RangedAlmanacMapTest extends AnyFunSpec {
       }
     }
 
-    it("Multiple sources - Both don't map") {
+    it("Multiple sources") {
       val almanacMap = RangedAlmanacMap("source", "destination", List(new MapRange(100, 10, 10)))
-      val sourceRanges = List((0L, 5L), (50L, 80L))
-      assert(almanacMap.mapSourceValues(sourceRanges) == sourceRanges)
+      val sourceRanges = List((0L, 30L), (50L, 80L))
+      val expected = List((0L, 9L), (100L, 109L), (20L, 30L), (50L, 80L))
+      assert(almanacMap.mapSourceValues(sourceRanges) == expected)
     }
   }
 }
