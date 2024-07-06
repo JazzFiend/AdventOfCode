@@ -2,12 +2,20 @@ object SeedParser {
   def parseDiscreteSeeds(almanacText: List[String]): List[Long] = {
     if (!hasValidSeeds(almanacText)) { return List.empty }
 
-    val splitSeeds = almanacText.head.split(":").toList
+    val splitSeeds = splitTextAndSeedValues(almanacText)
     extractSeedValues(splitSeeds)
   }
 
   def parseRangedSeeds(almanacText: List[String]): List[(Long, Long)] = {
-    List.empty
+    if (!hasValidSeeds(almanacText)) { return List.empty }
+
+    val splitSeeds = splitTextAndSeedValues(almanacText)
+    val seedValues = splitSeeds.last.trim.split(" ")
+    List((seedValues(0).toLong, seedValues(1).toLong))
+  }
+
+  private def splitTextAndSeedValues(almanacText: List[String]) = {
+    almanacText.head.split(":").toList
   }
 
   private def hasValidSeeds(almanacText: List[String]): Boolean = {
