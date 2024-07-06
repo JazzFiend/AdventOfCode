@@ -1,5 +1,3 @@
-import AlmanacMapParser.{createDiscreteAlmanacMap, createRangedAlmanacMap, extractMapEntries, throwIfNotValidMapEntry}
-
 // I'm taking shortcuts adding support for Ranged maps. If things get weird, split this into a derived class.
 // Things got weird. Time to break it apart.
 class AlmanacMapParser {
@@ -18,15 +16,13 @@ class AlmanacMapParser {
         createRangedAlmanacMap(mapEntry)
       })
   }
-}
 
-object AlmanacMapParser {
   private def extractMapEntries(almanacText: List[String]): List[List[String]] = {
     val mapTitleLocations = almanacText
       .zipWithIndex
       .filter((text, index) => text.contains("-to-"))
       .map((text, index) => index)
-    if(mapTitleLocations.isEmpty) {
+    if (mapTitleLocations.isEmpty) {
       throw new RuntimeException("No valid map titles found")
     }
     sliceIntoMapEntries(mapTitleLocations, almanacText)
