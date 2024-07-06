@@ -28,6 +28,12 @@ class DiscreteAlmanacMapTest extends AnyFunSpec {
         val two = DiscreteAlmanacMap("source", "destination", List.empty)
         assert(one != two)
       }
+
+      it("Different type") {
+        val one = DiscreteAlmanacMap("source", "destination", List(MapRange(3, 2, 1)))
+        val two = RangedAlmanacMap("source", "destination", List(MapRange(3, 2, 1)))
+        assert(one != two)
+      }
     }
   }
 
