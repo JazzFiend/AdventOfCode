@@ -11,7 +11,8 @@ object SeedParser {
 
     val splitSeeds = splitTextAndSeedValues(almanacText)
     val seedValues = splitSeeds.last.trim.split(" ")
-    List((seedValues(0).toLong, seedValues(1).toLong))
+    val endValue = seedValues(0).toLong + seedValues(1).toLong - 1L
+    List((seedValues(0).toLong, endValue))
   }
 
   private def splitTextAndSeedValues(almanacText: List[String]) = {
