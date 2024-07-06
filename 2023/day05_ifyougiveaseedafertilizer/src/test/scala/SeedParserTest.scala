@@ -30,11 +30,11 @@ class SeedParserTest extends AnyFunSpec {
       it("An empty almanac should give an empty list of seeds") {
         assert(SeedParser.parseRangedSeeds(List.empty) == List.empty)
       }
-//
-//      it("An almanac with no seeds listed should give an empty list of seeds") {
-//        val noSeeds = List("seeds:")
-//        assert(SeedParser.parseDiscreteSeeds(noSeeds) == List.empty)
-//      }
+
+      it("An almanac with no seeds listed should give an empty list of seeds") {
+        val noSeeds = List("seeds:")
+        assert(SeedParser.parseDiscreteSeeds(noSeeds) == List.empty)
+      }
     }
 //
 //    it("One seed") {
