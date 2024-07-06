@@ -1,6 +1,7 @@
 import org.scalatest.funspec.AnyFunSpec
 
 class AlmanacMapParserTest extends AnyFunSpec {
+  // All these tests should be repeated, but this time create RangedAlmanacMaps
   describe("Error cases") {
     it("An empty almanac should give an empty list of entries") {
       assertThrows[RuntimeException] {

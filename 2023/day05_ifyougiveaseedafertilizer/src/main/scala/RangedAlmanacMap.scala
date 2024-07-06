@@ -19,4 +19,15 @@ class RangedAlmanacMap (val source: String, val destination: String, val mapRang
   private def sourceReportedErroneously(source: (Long, Long), results: List[(Long, Long)]) = {
     results.contains(source) && results.length > 1
   }
+
+  override def equals(that: Any): Boolean = {
+    that match {
+      case that: RangedAlmanacMap =>
+        that.isInstanceOf[RangedAlmanacMap] &&
+          that.source == source &&
+          that.destination == destination &&
+          that.mapRanges.equals(mapRanges)
+      case _ => false
+    }
+  }
 }

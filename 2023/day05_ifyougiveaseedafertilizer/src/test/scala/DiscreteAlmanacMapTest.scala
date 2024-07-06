@@ -4,7 +4,7 @@ import scala.collection.immutable.List
 
 class DiscreteAlmanacMapTest extends AnyFunSpec {
   describe("Equals") {
-    it("Two identical AlmanacMaps should be equal") {
+    it("Two identical DiscreteAlmanacMaps should be equal") {
       val one = DiscreteAlmanacMap("source", "destination", List(MapRange(3, 2, 1)))
       val two = DiscreteAlmanacMap("source", "destination", List(MapRange(3, 2, 1)))
       assert(one == two)

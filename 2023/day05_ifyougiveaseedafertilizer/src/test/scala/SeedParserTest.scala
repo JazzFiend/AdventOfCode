@@ -1,7 +1,6 @@
 import org.scalatest.funspec.AnyFunSpec
 
 class SeedParserTest extends AnyFunSpec {
-  // Add ability to parse ranges now.
   describe("parseDiscreteSeeds") {
     describe("Error cases") {
       it("An empty almanac should give an empty list of seeds") {

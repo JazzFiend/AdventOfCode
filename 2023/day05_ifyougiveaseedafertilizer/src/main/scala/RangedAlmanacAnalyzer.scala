@@ -1,5 +1,7 @@
 object RangedAlmanacAnalyzer {
   def findLowestLocation(almanac: List[String]): Long = {
+    val seeds = SeedParser.parseRangedSeeds(almanac)
+    val almanacMaps = AlmanacMapParser.parseMaps(almanac)
     35
   }
 }
