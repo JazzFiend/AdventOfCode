@@ -1,18 +1,19 @@
 import org.scalatest.funspec.AnyFunSpec
 
 class AlmanacMapParserTest extends AnyFunSpec {
-  // All these tests should be repeated, but this time create RangedAlmanacMaps
+  // All these tests should be repeated, but this time create RangedAlmanacMaps.
+  // Don't think I need to repeat the error cases.
   describe("Error cases") {
     it("An empty almanac should give an empty list of entries") {
       assertThrows[RuntimeException] {
-        AlmanacMapParser.parseMaps(List.empty)
+        AlmanacMapParser.parseMapsDiscrete(List.empty)
       }
     }
 
     it("An almanac with just seeds should result in an empty list") {
       val justSeeds = List("seeds: 1 4 6 7")
       assertThrows[RuntimeException] {
-        AlmanacMapParser.parseMaps(justSeeds)
+        AlmanacMapParser.parseMapsDiscrete(justSeeds)
       }
     }
 
@@ -23,7 +24,7 @@ class AlmanacMapParserTest extends AnyFunSpec {
         "1 2 4",
       )
       assertThrows[RuntimeException] {
-        AlmanacMapParser.parseMaps(noDashesTitle)
+        AlmanacMapParser.parseMapsDiscrete(noDashesTitle)
       }
     }
 
@@ -34,7 +35,7 @@ class AlmanacMapParserTest extends AnyFunSpec {
         "1 2 3 4"
       )
       assertThrows[RuntimeException] {
-        AlmanacMapParser.parseMaps(badRange)
+        AlmanacMapParser.parseMapsDiscrete(badRange)
       }
     }
   }
@@ -45,8 +46,10 @@ class AlmanacMapParserTest extends AnyFunSpec {
       "first-to-second map:",
       "1 2 4",
     )
-    val expected = List(DiscreteAlmanacMap("first", "second", List(MapRange(1, 2, 4))))
-    assert(AlmanacMapParser.parseMaps(oneMap) == expected)
+    val expectedDiscrete = List(DiscreteAlmanacMap("first", "second", List(MapRange(1, 2, 4))))
+    assert(AlmanacMapParser.parseMapsDiscrete(oneMap) == expectedDiscrete)
+    val expectedRanged = List(RangedAlmanacMap("first", "second", List(MapRange(1, 2, 4))))
+    assert(AlmanacMapParser.parseMapsRanged(oneMap) == expectedRanged)
   }
 
   it("One map with many ranges should be created correctly") {
@@ -57,9 +60,13 @@ class AlmanacMapParserTest extends AnyFunSpec {
       "3 5 1",
       "11 100 20"
     )
-    val expectedMapRanges = List(MapRange(2, 5, 12), MapRange(3, 5, 1), MapRange(11, 100, 20))
-    val expected = List(DiscreteAlmanacMap("a", "b", expectedMapRanges))
-    assert(AlmanacMapParser.parseMaps(oneMapManyRanges) == expected)
+    val expectedDiscreteMapRanges = List(MapRange(2, 5, 12), MapRange(3, 5, 1), MapRange(11, 100, 20))
+    val expectedDiscrete = List(DiscreteAlmanacMap("a", "b", expectedDiscreteMapRanges))
+    assert(AlmanacMapParser.parseMapsDiscrete(oneMapManyRanges) == expectedDiscrete)
+
+    val expectedRangedMapRanges = List(MapRange(2, 5, 12), MapRange(3, 5, 1), MapRange(11, 100, 20))
+    val expectedRanged = List(RangedAlmanacMap("a", "b", expectedRangedMapRanges))
+    assert(AlmanacMapParser.parseMapsRanged(oneMapManyRanges) == expectedRanged)
   }
 
   it("Many maps should be created correctly") {
@@ -73,7 +80,7 @@ class AlmanacMapParserTest extends AnyFunSpec {
       "48 5 66",
       "12 1 4"
     )
-    val expected = List(
+    val expectedDiscrete = List(
       DiscreteAlmanacMap("a", "b", List(
         MapRange(2, 5, 12),
         MapRange(3, 5, 1),
@@ -84,6 +91,18 @@ class AlmanacMapParserTest extends AnyFunSpec {
         MapRange(12, 1, 4)
       ))
     )
-    assert(AlmanacMapParser.parseMaps(manyMaps) == expected)
+    val expectedRanged = List(
+      RangedAlmanacMap("a", "b", List(
+        MapRange(2, 5, 12),
+        MapRange(3, 5, 1),
+        MapRange(11, 100, 20),
+      )),
+      RangedAlmanacMap("b", "c", List(
+        MapRange(48, 5, 66),
+        MapRange(12, 1, 4)
+      ))
+    )
+    assert(AlmanacMapParser.parseMapsDiscrete(manyMaps) == expectedDiscrete)
+    assert(AlmanacMapParser.parseMapsRanged(manyMaps) == expectedRanged)
   }
 }
