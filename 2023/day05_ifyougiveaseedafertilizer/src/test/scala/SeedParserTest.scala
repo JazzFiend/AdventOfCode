@@ -42,9 +42,9 @@ class SeedParserTest extends AnyFunSpec {
       assert(SeedParser.parseRangedSeeds(oneSeed) == List((17L, 58L)))
     }
 
-//    it("Many seed ranges") {
-//      val manySeeds = List("seeds: 2, 5, 39, 55")
-//      assert(SeedParser.parseRangedSeeds(manySeeds) == List((2, 5), (39, 55)))
-//    }
+    it("Many seed ranges") {
+      val manySeeds = List("seeds: 2 5 39 55")
+      assert(SeedParser.parseRangedSeeds(manySeeds) == List((2L, 6L), (39L, 93L)))
+    }
   }
 }
