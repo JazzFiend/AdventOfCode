@@ -1,3 +1,7 @@
+package AlmanacMap
+
+import AlmanacMap.{DiscreteAlmanacMap, RangedAlmanacMap}
+import MapRange.MapRange
 import org.scalatest.funspec.AnyFunSpec
 
 class RangedAlmanacMapTest extends AnyFunSpec {
@@ -39,7 +43,7 @@ class RangedAlmanacMapTest extends AnyFunSpec {
     }
   }
   describe("mapSourceValues") {
-    describe("Single MapRange, single source range") {
+    describe("Single MapRange.MapRange, single source range") {
       it("No source values to map") {
         val almanacMap = RangedAlmanacMap("source", "destination", List(new MapRange(100, 10, 10)))
         val sourceRanges = List((50L, 60L))

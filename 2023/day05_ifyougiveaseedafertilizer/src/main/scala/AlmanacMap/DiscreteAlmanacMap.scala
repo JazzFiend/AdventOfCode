@@ -1,3 +1,7 @@
+package AlmanacMap
+
+import MapRange.MapRange
+
 class DiscreteAlmanacMap(val source: String, val destination: String, val mapRanges: List[MapRange]) {
   def mapSourceValues(numbersToMap: List[Long]):List[Long] = {
     numbersToMap.map(inputNumber => {

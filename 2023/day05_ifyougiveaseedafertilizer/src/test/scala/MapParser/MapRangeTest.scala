@@ -1,3 +1,6 @@
+package MapParser
+
+import MapRange.MapRange
 import org.scalatest.funspec.AnyFunSpec
 
 class MapRangeTest extends AnyFunSpec {

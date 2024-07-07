@@ -1,3 +1,5 @@
+package MapRange
+
 class MapRange(val destinationRangeStart: Long, val sourceRangeStart: Long, val rangeLength: Long) {
   private def sourceRangeEnd = {
     sourceRangeStart + rangeLength - 1

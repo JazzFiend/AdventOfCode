@@ -1,3 +1,7 @@
+package AlmanacMap
+
+import AlmanacMap.{DiscreteAlmanacMap, RangedAlmanacMap}
+import MapRange.MapRange
 import org.scalatest.funspec.AnyFunSpec
 
 import scala.collection.immutable.List

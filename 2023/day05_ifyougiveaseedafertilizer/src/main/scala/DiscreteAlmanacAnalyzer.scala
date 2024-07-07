@@ -1,3 +1,5 @@
+import AlmanacMapParser.AlmanacMapParser
+
 object DiscreteAlmanacAnalyzer {
   def findLowestLocation(almanac: List[String]): Long = {
     val seeds = SeedParser.parseDiscreteSeeds(almanac)

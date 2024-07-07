@@ -1,3 +1,5 @@
+import AlmanacMap.DiscreteAlmanacMap
+import MapRange.MapRange
 import org.scalatest.funspec.AnyFunSpec
 
 class AlmanacPipelineTest extends AnyFunSpec{
