@@ -21,6 +21,14 @@ class AlmanacMapParser {
 }
 
 object AlmanacMapParser {
+  def parseMapsDiscrete(almanacText: List[String]): List[DiscreteAlmanacMap] = {
+    extractMapEntries(almanacText)
+      .map(mapEntry => {
+        throwIfNotValidMapEntry(mapEntry)
+        createDiscreteAlmanacMap(mapEntry)
+      })
+  }
+
   def parseMapsRanged(almanacText: List[String]): List[RangedAlmanacMap] = {
     extractMapEntries(almanacText)
       .map(mapEntry => {
