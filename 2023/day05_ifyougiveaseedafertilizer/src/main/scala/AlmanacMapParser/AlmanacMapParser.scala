@@ -5,7 +5,7 @@ import MapRange.MapRange
 
 // I'm taking shortcuts adding support for Ranged maps. If things get weird, split this into a derived class.
 // Things got weird. Time to break it apart.
-class AlmanacMapParser {
+abstract class AlmanacMapParser {
   def parseMapsDiscrete(almanacText: List[String]): List[DiscreteAlmanacMap] = {
     extractMapEntries(almanacText)
       .map(mapEntry => {
