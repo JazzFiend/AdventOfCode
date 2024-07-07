@@ -3,7 +3,7 @@ class RangedAlmanacMap (val source: String, val destination: String, val mapRang
     sources.flatMap(source => {
       val results = mapRanges.flatMap(mapRanges => {
         mapRanges.mapTuple(source)
-      })
+      }).distinct
       filterUnmapped(source, results)
     })
   }

@@ -67,5 +67,12 @@ class RangedAlmanacMapTest extends AnyFunSpec {
       val expected = List((0L, 9L), (100L, 109L), (20L, 30L), (200L, 210L), (61L, 80L))
       assert(almanacMap.mapSourceValues(sourceRanges) == expected)
     }
+
+    it("Duplicate mapped values") {
+      val mapRanges = List(new MapRange(0, 15, 37), new MapRange(37, 52, 2), new MapRange(39, 0, 15))
+      val almanacMap = RangedAlmanacMap("soil", "fertilizer", mapRanges)
+      val sourceRanges = List((81L, 94L), (57L, 69L))
+      assert(almanacMap.mapSourceValues(sourceRanges) == sourceRanges)
+    }
   }
 }
