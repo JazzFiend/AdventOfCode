@@ -1,6 +1,7 @@
 import org.scalatest.funspec.AnyFunSpec
 
 class RangedAlmanacAnalyzerTest extends AnyFunSpec {
+  // Something screwy is happening in the second set of maps. Need to figure out what it is.
   it("Acceptance Test") {
     val almanac = List(
       "seeds: 79 14 55 13",
@@ -30,6 +31,6 @@ class RangedAlmanacAnalyzerTest extends AnyFunSpec {
       "60 56 37",
       "56 93 4"
     )
-    assert(RangedAlmanacAnalyzer.findLowestLocation(almanac) == 35)
+    assert(RangedAlmanacAnalyzer.findLowestLocation(almanac) == 46)
   }
 }
