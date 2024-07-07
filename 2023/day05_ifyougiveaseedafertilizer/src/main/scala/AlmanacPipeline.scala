@@ -1,6 +1,5 @@
 import scala.annotation.tailrec
 
-// Need to use polymorphism for the AlmanacMaps
 object AlmanacPipeline {
   def processPipeline(seeds: List[Long], maps: List[DiscreteAlmanacMap]): List[Long] = {
     processNextMap(maps, "seed", seeds)

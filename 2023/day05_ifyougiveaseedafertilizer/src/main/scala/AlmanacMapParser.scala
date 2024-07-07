@@ -1,25 +1,4 @@
-import AlmanacMapParser.{createDiscreteAlmanacMap, createRangedAlmanacMap, extractMapEntries, throwIfNotValidMapEntry}
-
 // I'm taking shortcuts adding support for Ranged maps. If things get weird, split this into a derived class.
-// Things got weird. Time to break it apart.
-class AlmanacMapParser {
-  def parseMapsDiscrete(almanacText: List[String]): List[DiscreteAlmanacMap] = {
-    extractMapEntries(almanacText)
-      .map(mapEntry => {
-        throwIfNotValidMapEntry(mapEntry)
-        createDiscreteAlmanacMap(mapEntry)
-      })
-  }
-
-  def parseMapsRanged(almanacText: List[String]): List[RangedAlmanacMap] = {
-    extractMapEntries(almanacText)
-      .map(mapEntry => {
-        throwIfNotValidMapEntry(mapEntry)
-        createRangedAlmanacMap(mapEntry)
-      })
-  }
-}
-
 object AlmanacMapParser {
   def parseMapsDiscrete(almanacText: List[String]): List[DiscreteAlmanacMap] = {
     extractMapEntries(almanacText)
