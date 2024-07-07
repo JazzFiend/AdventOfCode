@@ -21,6 +21,14 @@ class AlmanacMapParser {
 }
 
 object AlmanacMapParser {
+  def parseMapsRanged(almanacText: List[String]): List[RangedAlmanacMap] = {
+    extractMapEntries(almanacText)
+      .map(mapEntry => {
+        throwIfNotValidMapEntry(mapEntry)
+        createRangedAlmanacMap(mapEntry)
+      })
+  }
+
   private def extractMapEntries(almanacText: List[String]): List[List[String]] = {
     val mapTitleLocations = almanacText
       .zipWithIndex

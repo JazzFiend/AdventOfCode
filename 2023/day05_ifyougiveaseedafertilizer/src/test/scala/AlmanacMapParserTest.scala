@@ -47,6 +47,7 @@ class AlmanacMapParserTest extends AnyFunSpec {
     )
     val expectedDiscrete = List(DiscreteAlmanacMap("first", "second", List(MapRange(1, 2, 4))))
     val expectedRanged = List(RangedAlmanacMap("first", "second", List(MapRange(1, 2, 4))))
+    assert(AlmanacMapParser.parseMapsRanged(oneMap) == expectedRanged)
 
     val parser = new AlmanacMapParser
     assert(parser.parseMapsDiscrete(oneMap) == expectedDiscrete)
@@ -66,6 +67,7 @@ class AlmanacMapParserTest extends AnyFunSpec {
 
     val expectedRangedMapRanges = List(MapRange(2, 5, 12), MapRange(3, 5, 1), MapRange(11, 100, 20))
     val expectedRanged = List(RangedAlmanacMap("a", "b", expectedRangedMapRanges))
+    assert(AlmanacMapParser.parseMapsRanged(oneMapManyRanges) == expectedRanged)
 
     val parser = new AlmanacMapParser
     assert(parser.parseMapsDiscrete(oneMapManyRanges) == expectedDiscrete)
@@ -105,6 +107,7 @@ class AlmanacMapParserTest extends AnyFunSpec {
         MapRange(12, 1, 4)
       ))
     )
+    assert(AlmanacMapParser.parseMapsRanged(manyMaps) == expectedRanged)
 
     val parser = new AlmanacMapParser
     assert(parser.parseMapsDiscrete(manyMaps) == expectedDiscrete)
