@@ -1,8 +1,3 @@
-package AlmanacMapParser
-
-import AlmanacMap.{DiscreteAlmanacMap, RangedAlmanacMap}
-import MapRange.MapRange
-
 // I'm taking shortcuts adding support for Ranged maps. If things get weird, split this into a derived class.
 // Things got weird. Time to break it apart.
 class AlmanacMapParser {

@@ -1,5 +1,3 @@
-import AlmanacMap.DiscreteAlmanacMap
-
 import scala.annotation.tailrec
 
 // Need to use polymorphism for the AlmanacMaps

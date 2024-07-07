@@ -1,8 +1,3 @@
-package AlmanacMapParser
-
-import AlmanacMap.{DiscreteAlmanacMap, RangedAlmanacMap}
-import AlmanacMapParser.AlmanacMapParser
-import MapRange.MapRange
 import org.scalatest.funspec.AnyFunSpec
 
 class AlmanacMapParserTest extends AnyFunSpec {
