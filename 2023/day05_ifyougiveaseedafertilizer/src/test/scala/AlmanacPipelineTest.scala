@@ -25,8 +25,23 @@ class AlmanacPipelineTest extends AnyFunSpec{
 
   describe("Ranged Version") {
     it("Seeds with no maps should just be a pass through") {
-      val seeds = List((10L, 10L), (100L, 50L))
+      val seeds = List((10L, 15L), (50L, 100L))
       assert(AlmanacPipeline.processRangedPipeline(seeds, List.empty) == seeds)
+    }
+
+    it("Seeds and one map") {
+      val seeds = List((10L, 15L), (50L, 100L))
+      val maps = List(RangedAlmanacMap("seed", "b", List(MapRange(0, 10, 2))))
+      assert(AlmanacPipeline.processRangedPipeline(seeds, maps) == List((0L, 1L), (12L, 15L), (50L, 100)))
+    }
+
+    it("Several maps") {
+      val seeds = List((10L, 15L), (50L, 100L))
+      val maps = List(
+        RangedAlmanacMap("seed", "mid", List(MapRange(0, 10, 2))),
+        RangedAlmanacMap("mid", "end", List(MapRange(1000, 70, 10))),
+      )
+      assert(AlmanacPipeline.processRangedPipeline(seeds, maps) == List((0L, 1L), (12L, 15L), (50L, 69L), (1000L, 1009L), (80L, 100L)))
     }
   }
 }
