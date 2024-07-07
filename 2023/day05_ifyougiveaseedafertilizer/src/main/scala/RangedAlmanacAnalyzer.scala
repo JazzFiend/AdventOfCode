@@ -3,7 +3,7 @@ object RangedAlmanacAnalyzer {
     val seeds = SeedParser.parseRangedSeeds(almanac)
     val almanacMaps = AlmanacMapParser.parseMapsRanged(almanac)
     val finalRanges = AlmanacPipeline.processRangedPipeline(seeds, almanacMaps)
-    46
+    finalRanges.map(range => range._1).min
   }
 }
 
