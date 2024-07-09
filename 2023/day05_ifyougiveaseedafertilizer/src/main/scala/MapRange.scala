@@ -21,6 +21,7 @@ class MapRange(val destinationRangeStart: Long, val sourceRangeStart: Long, val 
   }
 
   // This should be private now.
+  // Maybe not...
   def findRangeOverlap(inputRange: (Long, Long)): Option[(Long, Long)] = {
     if (noOverlap(inputRange)) { return None }
 

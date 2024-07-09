@@ -32,4 +32,11 @@ class RangedAlmanacAnalyzerTest extends AnyFunSpec {
     )
     assert(RangedAlmanacAnalyzer.findLowestLocation(almanac) == 46)
   }
+
+//  it("Puzzle 2") {
+//    val almanac = io.Source.fromFile("src/test/scala/input.txt").getLines
+//      .toList
+//      .filterNot(line => line.isEmpty)
+//    assert(RangedAlmanacAnalyzer.findLowestLocation(almanac) == -1)
+//  }
 }
