@@ -2,7 +2,7 @@ object RangeDivider {
   def divide(original: (Long, Long), slices: List[(Long, Long)]): List[(Long, Long)] = {
     if(noValidSlice(original, slices)) { return List(original) }
 
-    val slice = slices.head
+    val slice = slices.filter(slice => isSliceValid(original, slice)).head
     // This is looking awfully similar to the computeMap function in MapRange. Either these can be
     // consolidated or one can be made simpler.
     if(original == slice) {
@@ -17,9 +17,12 @@ object RangeDivider {
   }
 
   private def noValidSlice(original: (Long, Long), slices: List[(Long, Long)]): Boolean = {
-    val listOfValidSlices = slices.map(slice => {
-      slice._2 >= original._1 && slice._1 <= original._2
-    })
-    listOfValidSlices.forall(_ == false)
+    slices
+      .map(slice => isSliceValid(original, slice))
+      .forall(_ == false)
+  }
+
+  private def isSliceValid(original: (Long, Long), slice: (Long, Long)) = {
+    slice._2 >= original._1 && slice._1 <= original._2
   }
 }
