@@ -12,4 +12,17 @@ class RangeDividerTest extends AnyFunSpec {
     val original = (0L, 10L)
     assert(RangeDivider.divide(original, List.empty) == List(original))
   }
+
+  it("Slices are out of range compared to original") {
+    val original = (10L, 20L)
+    val slices = List((0L, 9L), (21L, 30L))
+    assert(RangeDivider.divide(original, slices) == List(original))
+  }
+
+  it("Slice just the smallest number") {
+    val original = (10L, 20L)
+    val slices = List((10L, 10L))
+    val expected = List((10L, 10L), (11L, 20L))
+    assert(RangeDivider.divide(original, slices) == expected)
+  }
 }
