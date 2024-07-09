@@ -33,6 +33,13 @@ class RangeDividerTest extends AnyFunSpec {
     assert(RangeDivider.divide(original, slices) == expected)
   }
 
+  it("Slice several large numbers") {
+    val original = (10L, 20L)
+    val slices = List((17L, 20L))
+    val expected = List((10L, 16L), (17L, 20L))
+    assert(RangeDivider.divide(original, slices) == expected)
+  }
+
   it("Slice just largest number") {
     val original = (10L, 20L)
     val slices = List((20L, 20L))
