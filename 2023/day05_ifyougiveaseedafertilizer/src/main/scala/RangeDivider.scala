@@ -3,8 +3,12 @@ object RangeDivider {
     if(noValidSlice(original, slices)) { return List(original) }
 
     val slice = slices.head
+    // This is looking awfully similar to the computeMap function in MapRange. Either these can be
+    // consolidated or one can be made simpler.
     if(original == slice) {
       List(original)
+    } else if(slice._1 > original._1 && slice._2 < original._2) {
+      List((original._1, slice._1 - 1), slice, (slice._2 + 1, original._2))
     } else if(slice._1 <= original._1) {
       List(slice, (slice._2 + 1, original._2))
     } else {
