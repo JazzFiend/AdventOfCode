@@ -3,8 +3,7 @@ object RangeDivider {
     if(noValidSlice(original, slices)) { return List(original) }
 
     val slice = slices.head
-
-    List((slice._1, slice._2), (original._1 + 1, original._2))
+    List((slice._1, slice._2), (slice._2 + 1, original._2))
   }
 
   private def noValidSlice(original: (Long, Long), slices: List[(Long, Long)]): Boolean = {

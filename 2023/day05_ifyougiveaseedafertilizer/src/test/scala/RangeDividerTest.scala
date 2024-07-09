@@ -25,4 +25,11 @@ class RangeDividerTest extends AnyFunSpec {
     val expected = List((10L, 10L), (11L, 20L))
     assert(RangeDivider.divide(original, slices) == expected)
   }
+
+  it("Slice several small numbers") {
+    val original = (10L, 20L)
+    val slices = List((10L, 12L))
+    val expected = List((10L, 12L), (13L, 20L))
+    assert(RangeDivider.divide(original, slices) == expected)
+  }
 }
