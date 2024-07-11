@@ -1,4 +1,4 @@
-class AlmanacMap(val source: String, val destination: String, val mapRanges: List[MapRange]) {
+class DiscreteAlmanacMap(val source: String, val destination: String, val mapRanges: List[MapRange]) {
   def mapSourceValues(numbersToMap: List[Long]):List[Long] = {
     numbersToMap.map(inputNumber => {
       val mapIndexToUse = mapRanges.map(mapRange => mapRange.isInRange(inputNumber))
@@ -19,8 +19,8 @@ class AlmanacMap(val source: String, val destination: String, val mapRanges: Lis
 
   override def equals(that: Any): Boolean = {
     that match {
-      case that: AlmanacMap =>
-        that.isInstanceOf[AlmanacMap] &&
+      case that: DiscreteAlmanacMap =>
+        that.isInstanceOf[DiscreteAlmanacMap] &&
         that.source == source &&
         that.destination == destination &&
         that.mapRanges.equals(mapRanges)

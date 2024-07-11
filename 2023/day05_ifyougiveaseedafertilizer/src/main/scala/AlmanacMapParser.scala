@@ -1,9 +1,17 @@
 object AlmanacMapParser {
-  def parseMaps(almanacText: List[String]): List[AlmanacMap] = {
+  def parseMapsDiscrete(almanacText: List[String]): List[DiscreteAlmanacMap] = {
     extractMapEntries(almanacText)
       .map(mapEntry => {
         throwIfNotValidMapEntry(mapEntry)
-        createAlmanacMap(mapEntry)
+        createDiscreteAlmanacMap(mapEntry)
+      })
+  }
+
+  def parseMapsRanged(almanacText: List[String]): List[RangedAlmanacMap] = {
+    extractMapEntries(almanacText)
+      .map(mapEntry => {
+        throwIfNotValidMapEntry(mapEntry)
+        createRangedAlmanacMap(mapEntry)
       })
   }
 
@@ -38,11 +46,18 @@ object AlmanacMapParser {
     })
   }
 
-  private def createAlmanacMap(mapEntry: List[String]): AlmanacMap = {
+  private def createDiscreteAlmanacMap(mapEntry: List[String]): DiscreteAlmanacMap = {
     val mapRanges = removeTitle(mapEntry)
       .map(mapRange => extractMapRange(mapRange))
     val mapTitles = extractMapTitle(mapEntry)
-    AlmanacMap(mapTitles.head, mapTitles.last, mapRanges)
+    DiscreteAlmanacMap(mapTitles.head, mapTitles.last, mapRanges)
+  }
+
+  private def createRangedAlmanacMap(mapEntry: List[String]): RangedAlmanacMap = {
+    val mapRanges = removeTitle(mapEntry)
+      .map(mapRange => extractMapRange(mapRange))
+    val mapTitles = extractMapTitle(mapEntry)
+    RangedAlmanacMap(mapTitles.head, mapTitles.last, mapRanges)
   }
 
   private def throwIfNotValidMapEntry(mapEntry: List[String]): Unit = {

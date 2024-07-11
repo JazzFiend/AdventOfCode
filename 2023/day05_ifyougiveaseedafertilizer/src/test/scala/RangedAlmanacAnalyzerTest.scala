@@ -1,6 +1,6 @@
 import org.scalatest.funspec.AnyFunSpec
 
-class AlmanacAnalyzerTest  extends AnyFunSpec {
+class RangedAlmanacAnalyzerTest extends AnyFunSpec {
   it("Acceptance Test") {
     val almanac = List(
       "seeds: 79 14 55 13",
@@ -30,13 +30,13 @@ class AlmanacAnalyzerTest  extends AnyFunSpec {
       "60 56 37",
       "56 93 4"
     )
-    assert(AlmanacAnalyzer.findLowestLocation(almanac) == 35)
+    assert(RangedAlmanacAnalyzer.findLowestLocation(almanac) == 46)
   }
 
-  it("Puzzle 1") {
+  it("Puzzle 2") {
     val almanac = io.Source.fromFile("src/test/scala/input.txt").getLines
       .toList
       .filterNot(line => line.isEmpty)
-    assert(AlmanacAnalyzer.findLowestLocation(almanac) == 806029445)
+    assert(RangedAlmanacAnalyzer.findLowestLocation(almanac) == 59370572)
   }
 }
