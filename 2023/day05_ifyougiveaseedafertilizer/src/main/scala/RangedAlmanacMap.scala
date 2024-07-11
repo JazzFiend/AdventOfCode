@@ -1,21 +1,31 @@
 class RangedAlmanacMap (val source: String, val destination: String, val mapRanges: List[MapRange]) {
+  // **** REFACTOR STEP *****
   def mapSourceValues(sources: List[(Long, Long)]): List[(Long, Long)] = {
     sources.flatMap(source => {
-//      val overlaps = mapRanges.map(mapRange => {
-//        mapRange.findRangeOverlap(source).get
-//      })
-// New range divider class goes here. Once I have the range divided up by overlaps, I can map them more easily.
-// I may have to modify the maptuple function, as it should return nothing if it doesn't map now,
-
-
-      val results = mapRanges.flatMap(mapRanges => {
-        mapRanges.mapTuple(source)
-      }).distinct
-      filterUnmapped(source, results)
+      val overlaps = mapRanges.flatMap(mapRange => determineOverlaps(mapRange, source))
+      val slicedSources = RangeDivider.divide(source, overlaps)
+      mapSliced(slicedSources)
     })
   }
-  
-  
+
+  private def determineOverlaps(mapRange: MapRange, source: (Long, Long)): List[(Long, Long)] = {
+    val potentialOverlap = mapRange.findRangeOverlap(source)
+    if (potentialOverlap.isEmpty) {
+      List.empty
+    } else {
+      List(potentialOverlap.get)
+    }
+  }
+
+  private def mapSliced(slicedSources: List[(Long, Long)]) = {
+    slicedSources
+      .flatMap(slicedSource => {
+        val mapped = mapRanges
+          .flatMap(mapRange => mapRange.mapTuple(slicedSource))
+          .distinct
+        filterUnmapped(slicedSource, mapped)
+      })
+  }
 
   private def filterUnmapped(source: (Long, Long), results: List[(Long, Long)]) = {
     if (sourceReportedErroneously(source, results)) {
