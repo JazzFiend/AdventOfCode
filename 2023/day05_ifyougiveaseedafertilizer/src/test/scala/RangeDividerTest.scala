@@ -56,16 +56,25 @@ class RangeDividerTest extends AnyFunSpec {
     }
   }
 
-  it("Slices are out of range compared to original") {
-    val original = (10L, 20L)
-    val slices = List((0L, 9L), (21L, 30L))
-    assert(RangeDivider.divide(original, slices) == List(original))
-  }
+  describe("Multiple slices") {
+    it("Slices are out of range compared to original") {
+      val original = (10L, 20L)
+      val slices = List((0L, 9L), (21L, 30L))
+      assert(RangeDivider.divide(original, slices) == List(original))
+    }
 
-  it("One slice is valid, one isn't") {
-    val original = (10L, 20L)
-    val slices = List((0L, 2L), (18L, 20L))
-    val expected = List((10L, 17L), (18L, 20L))
-    assert(RangeDivider.divide(original, slices) == expected)
+    it("One slice is valid, one isn't") {
+      val original = (10L, 20L)
+      val slices = List((0L, 2L), (18L, 20L))
+      val expected = List((10L, 17L), (18L, 20L))
+      assert(RangeDivider.divide(original, slices) == expected)
+    }
+
+    it("Valid slices at beginning and end") {
+      val original = (10L, 20L)
+      val slices = List((10L, 13L), (16L, 20L))
+      val expected = List((10L, 13L), (14L, 15L), (16L, 20L))
+      assert(RangeDivider.divide(original, slices) == expected)
+    }
   }
 }
