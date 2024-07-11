@@ -1,5 +1,4 @@
-class RangedAlmanacMap (val source: String, val destination: String, val mapRanges: List[MapRange]) {
-  // **** REFACTOR STEP *****
+class RangedAlmanacMap (val source: String, val destination: String, val mapRanges: List[MapRange]) {/**/
   def mapSourceValues(sources: List[(Long, Long)]): List[(Long, Long)] = {
     sources.flatMap(source => {
       val overlaps = mapRanges.flatMap(mapRange => determineOverlaps(mapRange, source))

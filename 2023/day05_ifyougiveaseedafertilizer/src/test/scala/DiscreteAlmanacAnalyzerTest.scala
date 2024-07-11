@@ -40,9 +40,3 @@ class DiscreteAlmanacAnalyzerTest extends AnyFunSpec {
     assert(DiscreteAlmanacAnalyzer.findLowestLocation(almanac) == 806029445)
   }
 }
-
-// Okay... Puzzle #2 is a doozy. Instead of providing a list of seeds, the input provides ranges of seeds.
-// My initial solution wasn't a big change. Just turn the ranges into a list of seeds and just go ahead and run it through the same program.
-// HOWEVER... The ranges are so huge that this doesn't run in a reasonable amount of time.
-// Instead, we need to write a version of the program that ONLY deals with ranges. Trying to retrofit what we currently have was incredibly complex.
-// I should write an acceptance test first and then start from scratch with the range requirement. Reuse what I can, but don't default to that.

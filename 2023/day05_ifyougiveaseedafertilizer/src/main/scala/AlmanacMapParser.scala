@@ -1,4 +1,3 @@
-// I'm taking shortcuts adding support for Ranged maps. If things get weird, split this into a derived class.
 object AlmanacMapParser {
   def parseMapsDiscrete(almanacText: List[String]): List[DiscreteAlmanacMap] = {
     extractMapEntries(almanacText)

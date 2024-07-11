@@ -1,10 +1,6 @@
 import org.scalatest.funspec.AnyFunSpec
 
 class RangedAlmanacMapTest extends AnyFunSpec {
-  // I think this is all of the test cases that I need... I'm not consolidating ranges if there are
-  // duplicates though. But I'm not sure if I need to. We're ultimately just looking for the minimum
-  // value, so repeating mappings shouldn't matter. This will only come into play if all of the
-  // repeats make the time complexity explode. I think I'll cross that bridge if and when I come to it.
   describe("Equals") {
     it("Two identical RangedAlmanacMaps should be equal") {
       val one = RangedAlmanacMap("source", "destination", List(MapRange(3, 2, 1)))

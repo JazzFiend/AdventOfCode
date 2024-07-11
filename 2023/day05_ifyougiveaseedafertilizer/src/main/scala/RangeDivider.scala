@@ -23,8 +23,6 @@ object RangeDivider {
         slices
           .filter(slice => isSliceValid(largeRange, slice))
           .flatMap(slice => {
-            // This is looking awfully similar to the computeMap function in MapRange. Either these can be
-            // consolidated or one can be made simpler.
             determineSlices(largeRange, slice)
           })
       }
