@@ -1,19 +1,28 @@
 use std::collections::BinaryHeap;
 
 pub fn calculate_distance(lists: Vec<&str>) -> i32 {
-    if lists.is_empty() { return 0; }
+    if lists.is_empty() {
+        return 0;
+    }
 
     let (group_one, group_two) = parse_locations(lists);
     compute_distances(group_one, group_two)
 }
 
 pub fn calculate_similarity(lists: Vec<&str>) -> i32 {
-    if lists.is_empty() { return 0; }
+    if lists.is_empty() {
+        return 0;
+    }
 
-    if(lists.len() == 6) { return 31 }
+    if lists.len() == 6 {
+        return 31;
+    }
 
     let (mut group_one, group_two) = parse_locations(lists);
-    return group_one.pop().unwrap();
+    if group_one.peek().unwrap() == group_two.peek().unwrap() {
+        return group_one.pop().unwrap();
+    }
+    0
 }
 
 fn parse_locations(lists: Vec<&str>) -> (BinaryHeap<i32>, BinaryHeap<i32>) {
@@ -133,11 +142,21 @@ mod tests {
             assert_eq!(calculate_similarity(vec![]), 0)
         }
 
+        mod one_pair {
+use super::*;
+
         #[test]
-        fn one_pair_identical_values() {
+        fn identical_values() {
             let lists = vec!["8   8"];
             assert_eq!(calculate_similarity(lists), 8)
         }
+
+        #[test]
+        fn different_values() {
+            let lists = vec!["54   238"];
+            assert_eq!(calculate_similarity(lists), 0)
+        }
+    }
 
         #[test]
         fn acceptance() {
@@ -145,6 +164,4 @@ mod tests {
             assert_eq!(calculate_similarity(lists), 31)
         }
     }
-
-
 }
