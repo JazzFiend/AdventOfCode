@@ -1,15 +1,15 @@
 use std::collections::BinaryHeap;
 
 pub fn calculate_distance(lists: Vec<&str>) -> i32 {
-    if lists.is_empty() {
-        return 0;
-    }
+    if lists.is_empty() { return 0; }
 
     let (group_one, group_two) = parse_locations(lists);
     compute_distances(group_one, group_two)
 }
 
 pub fn calculate_similarity(lists: Vec<&str>) -> i32 {
+    if lists.is_empty() { return 0; }
+
     31
 }
 
@@ -124,6 +124,11 @@ mod tests {
 
     mod calculate_similarity {
         use super::*;
+
+        #[test]
+        fn empty_list() {
+            assert_eq!(calculate_similarity(vec![]), 0)
+        }
 
         #[test]
         fn acceptance() {
