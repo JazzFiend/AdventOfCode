@@ -143,20 +143,26 @@ mod tests {
         }
 
         mod one_pair {
-use super::*;
+            use super::*;
 
-        #[test]
-        fn identical_values() {
-            let lists = vec!["8   8"];
-            assert_eq!(calculate_similarity(lists), 8)
+            #[test]
+            fn identical_values() {
+                let lists = vec!["8   8"];
+                assert_eq!(calculate_similarity(lists), 8)
+            }
+
+            #[test]
+            fn different_values() {
+                let lists = vec!["54   238"];
+                assert_eq!(calculate_similarity(lists), 0)
+            }
         }
 
         #[test]
-        fn different_values() {
-            let lists = vec!["54   238"];
+        fn multiple_pairs_no_matches() {
+            let lists = vec!["2   4", "14   9"];
             assert_eq!(calculate_similarity(lists), 0)
         }
-    }
 
         #[test]
         fn acceptance() {
