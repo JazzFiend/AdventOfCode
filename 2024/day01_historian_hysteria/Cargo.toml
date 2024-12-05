@@ -5,6 +5,6 @@ edition = "2021"
 
 [lib]
 name = "historian_hysteria"
-path = "src/location_distance_calculator.rs"
+path = "src/location_calculator.rs"
 
 [dependencies]
