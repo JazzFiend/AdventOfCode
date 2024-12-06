@@ -1,14 +1,18 @@
 use std::collections::{BinaryHeap, HashMap};
 
 pub fn calculate_distance(lists: Vec<&str>) -> i32 {
-    if lists.is_empty() { return 0; }
+    if lists.is_empty() {
+        return 0;
+    }
 
     let (group_one, group_two) = parse_locations(lists);
     compute_distances(group_one, group_two)
 }
 
 pub fn calculate_similarity(lists: Vec<&str>) -> i32 {
-    if lists.is_empty() { return 0; }
+    if lists.is_empty() {
+        return 0;
+    }
 
     let first_location_list = parse_first_list(lists.clone());
     let second_list_location_count = parse_second_list(lists);
@@ -154,15 +158,6 @@ mod tests {
                 Err(e) => println!("Error reading file: {}", e),
             }
         }
-
-        fn read_lines<P>(filename: P) -> io::Result<Vec<String>>
-        where
-            P: AsRef<Path>,
-        {
-            let file = File::open(filename)?;
-            let reader = BufReader::new(file);
-            reader.lines().collect()
-        }
     }
 
     mod calculate_similarity {
@@ -189,16 +184,20 @@ mod tests {
             }
         }
 
-        #[test]
-        fn multiple_pairs_no_matches() {
-            let lists = vec!["2   4", "14   9"];
-            assert_eq!(calculate_similarity(lists), 0)
-        }
+        mod multiple_pairs {
+            use super::*;
 
-        #[test]
-        fn multiple_pairs_one_match() {
-            let lists = vec!["2   4", "14   2"];
-            assert_eq!(calculate_similarity(lists), 2)
+            #[test]
+            fn multiple_pairs_no_matches() {
+                let lists = vec!["2   4", "14   9"];
+                assert_eq!(calculate_similarity(lists), 0)
+            }
+
+            #[test]
+            fn multiple_pairs_one_match() {
+                let lists = vec!["2   4", "14   2"];
+                assert_eq!(calculate_similarity(lists), 2)
+            }
         }
 
         #[test]
@@ -206,5 +205,26 @@ mod tests {
             let lists = vec!["3   4", "4   3", "2   5", "1   3", "3   9", "3   3"];
             assert_eq!(calculate_similarity(lists), 31)
         }
+
+        #[test]
+        fn puzzle_two() {
+            let filename = "./src/input.txt";
+            match read_lines(filename) {
+                Ok(lines) => {
+                    let lines_str = lines.iter().map(|l| l.as_str()).collect();
+                    assert_eq!(calculate_similarity(lines_str), 18650129)
+                }
+                Err(e) => println!("Error reading file: {}", e),
+            }
+        }
+    }
+
+    fn read_lines<P>(filename: P) -> io::Result<Vec<String>>
+    where
+        P: AsRef<Path>,
+    {
+        let file = File::open(filename)?;
+        let reader = BufReader::new(file);
+        reader.lines().collect()
     }
 }
