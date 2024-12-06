@@ -1,0 +1,10 @@
+[package]
+name = "day01_historian_hysteria"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "historian_hysteria"
+path = "src/location_calculator.rs"
+
+[dependencies]
