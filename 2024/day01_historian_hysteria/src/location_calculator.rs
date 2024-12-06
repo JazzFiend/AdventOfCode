@@ -1,28 +1,25 @@
-use std::collections::BinaryHeap;
+use std::collections::{BinaryHeap, HashMap};
 
 pub fn calculate_distance(lists: Vec<&str>) -> i32 {
-    if lists.is_empty() {
-        return 0;
-    }
+    if lists.is_empty() { return 0; }
 
     let (group_one, group_two) = parse_locations(lists);
     compute_distances(group_one, group_two)
 }
 
 pub fn calculate_similarity(lists: Vec<&str>) -> i32 {
-    if lists.is_empty() {
-        return 0;
-    }
+    if lists.is_empty() { return 0; }
 
-    if lists.len() == 6 {
-        return 31;
-    }
+    let first_location_list = parse_first_list(lists.clone());
+    let second_list_location_count = parse_second_list(lists);
 
-    let (mut group_one, group_two) = parse_locations(lists);
-    if group_one.peek().unwrap() == group_two.peek().unwrap() {
-        return group_one.pop().unwrap();
+    let mut total = 0;
+    for location in first_location_list {
+        if second_list_location_count.contains_key(&location) {
+            total += second_list_location_count.get(&location).unwrap() * location
+        }
     }
-    0
+    total
 }
 
 fn parse_locations(lists: Vec<&str>) -> (BinaryHeap<i32>, BinaryHeap<i32>) {
@@ -35,6 +32,40 @@ fn parse_locations(lists: Vec<&str>) -> (BinaryHeap<i32>, BinaryHeap<i32>) {
         group_two.push(pair.last().unwrap().parse().unwrap());
     }
     (group_one, group_two)
+}
+
+fn parse_first_list(lists: Vec<&str>) -> Vec<i32> {
+    return lists
+        .iter()
+        .map(|item| {
+            item.split_whitespace()
+                .next()
+                .unwrap()
+                .parse::<i32>()
+                .unwrap()
+        })
+        .collect();
+}
+
+fn parse_second_list(lists: Vec<&str>) -> HashMap<i32, i32> {
+    let mut result: HashMap<i32, i32> = HashMap::new();
+
+    let second_list: Vec<i32> = lists
+        .iter()
+        .map(|item| {
+            item.split_whitespace()
+                .last()
+                .unwrap()
+                .parse::<i32>()
+                .unwrap()
+        })
+        .collect();
+
+    second_list.into_iter().for_each(|item| {
+        *result.entry(item).or_insert(0) += 1;
+    });
+
+    result
 }
 
 fn compute_distances(mut group_one: BinaryHeap<i32>, mut group_two: BinaryHeap<i32>) -> i32 {
@@ -162,6 +193,12 @@ mod tests {
         fn multiple_pairs_no_matches() {
             let lists = vec!["2   4", "14   9"];
             assert_eq!(calculate_similarity(lists), 0)
+        }
+
+        #[test]
+        fn multiple_pairs_one_match() {
+            let lists = vec!["2   4", "14   2"];
+            assert_eq!(calculate_similarity(lists), 2)
         }
 
         #[test]
