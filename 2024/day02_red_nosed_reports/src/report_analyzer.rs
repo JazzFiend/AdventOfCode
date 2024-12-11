@@ -6,11 +6,15 @@ pub fn count_safe_reports(reports: Vec<&str>) -> i32 {
         return 2;
     }
 
-    let numbers = convert_string_to_ints(reports.first().unwrap());
-    if all_decreasing(numbers.clone()) || all_increasing(numbers.clone()) {
-        return 1;
-    }
-    return 0;
+    return reports
+        .iter()
+        .map(|report| convert_string_to_ints(&report))
+        .filter(|report_numbers| {
+            all_decreasing(report_numbers.to_vec()) || all_increasing(report_numbers.to_vec())
+        })
+        .count()
+        .try_into()
+        .unwrap();
 }
 
 fn convert_string_to_ints(vector: &str) -> Vec<i32> {
@@ -37,28 +41,58 @@ mod tests {
         assert_eq!(count_safe_reports(vec![]), 0);
     }
 
-    #[test]
-    fn one_report_one_value() {
-        let reports: Vec<&str> = vec!["3"];
-        assert_eq!(count_safe_reports(reports), 1);
+    mod one_report {
+        use super::*;
+
+        #[test]
+        fn one_value() {
+            let reports: Vec<&str> = vec!["3"];
+            assert_eq!(count_safe_reports(reports), 1);
+        }
+
+        mod safe_report {
+            use super::*;
+
+            #[test]
+            fn decreasing() {
+                let reports: Vec<&str> = vec!["10 9 8 7 6 5 4 3 2 1"];
+                assert_eq!(count_safe_reports(reports), 1);
+            }
+
+            #[test]
+            fn increasing() {
+                let reports: Vec<&str> = vec!["1 2 3 4 5 6 7 8 9 10"];
+                assert_eq!(count_safe_reports(reports), 1);
+            }
+
+            #[test]
+            fn no_more_than_three() {
+                let reports: Vec<&str> = vec!["0 1 3 6 9 12 15"];
+                assert_eq!(count_safe_reports(reports), 1);
+            }
+        }
+
+        mod unsafe_report {
+            use super::*;
+
+            #[test]
+            fn increasing_and_decreasing() {
+                let reports: Vec<&str> = vec!["5 4 6 3 7 2 8 1 9 0 10"];
+                assert_eq!(count_safe_reports(reports), 0);
+            }
+
+            // #[test]
+            // fn more_than_three() {
+            //     let reports: Vec<&str> = vec!["0 1 3 6 10", "20 19 18 1"];
+            //     assert_eq!(count_safe_reports(reports), 0);
+            // }
+        }
     }
 
     #[test]
-    fn safe_report_decreasing() {
-        let reports: Vec<&str> = vec!["10 9 8 7 6 5 4 3 2 1"];
-        assert_eq!(count_safe_reports(reports), 1);
-    }
-
-    #[test]
-    fn safe_report_increasing() {
-        let reports: Vec<&str> = vec!["1 2 3 4 5 6 7 8 9 10"];
-        assert_eq!(count_safe_reports(reports), 1);
-    }
-
-    #[test]
-    fn unsafe_report_increasing_and_decreasing() {
-        let reports: Vec<&str> = vec!["5 4 6 3 7 2 8 1 9 0 10"];
-        assert_eq!(count_safe_reports(reports), 0);
+    fn multiple_reports_safe() {
+        let reports: Vec<&str> = vec!["10 9 8", "0 2 4 6 8"];
+        assert_eq!(count_safe_reports(reports), 2);
     }
 
     #[test]
