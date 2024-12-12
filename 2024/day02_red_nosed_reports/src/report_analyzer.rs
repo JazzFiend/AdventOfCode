@@ -1,36 +1,36 @@
 pub fn count_safe_reports(reports: Vec<&str>) -> i32 {
-    if reports.len() == 0 { return 0; }
+    if reports.is_empty() { return 0; }
 
     return reports
         .iter()
         .map(|report| convert_string_to_ints(&report))
         .filter(|report_numbers| {
-            is_safe(report_numbers.to_vec())
+            is_safe(report_numbers)
         })
         .count()
         .try_into()
         .unwrap();
 }
 
-fn convert_string_to_ints(vector: &str) -> Vec<i32> {
-    vector
+fn convert_string_to_ints(numbers: &str) -> Vec<i32> {
+    numbers
         .split(" ")
         .map(|n| n.parse::<i32>().unwrap())
         .collect()
 }
 
-fn is_safe(report: Vec<i32>) -> bool {
-    return all_decreasing(report.clone()) || all_increasing(report.clone());
+fn is_safe(report: &Vec<i32>) -> bool {
+    return all_decreasing(&report) || all_increasing(&report);
 }
 
-fn all_increasing(vector: Vec<i32>) -> bool {
+fn all_increasing(vector: &Vec<i32>) -> bool {
     vector
         .iter()
         .zip(vector.iter().skip(1))
         .all(|(a, b)| (a < b) && (b - a <= 3))
 }
 
-fn all_decreasing(vector: Vec<i32>) -> bool {
+fn all_decreasing(vector: &Vec<i32>) -> bool {
     vector
         .iter()
         .zip(vector.iter().skip(1))
