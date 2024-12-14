@@ -3,10 +3,26 @@ pub fn count_safe_reports(reports: Vec<&str>) -> i32 {
         return 0;
     }
 
-    return reports
+    let doink: Vec<Vec<Vec<i32>>> = reports
         .iter()
         .map(|report| convert_string_to_ints(&report))
-        .filter(|report_numbers| is_safe(report_numbers))
+        .map(|report| {
+            let mut result = vec![report.clone()];
+            let mut index = 0;
+
+            while index < report.len() {
+                let mut report_clone = report.clone();
+                report_clone.remove(index);
+                result.push(report_clone);
+                index += 1
+            }
+            return result;
+        })
+        .collect();
+
+    return doink
+        .iter()
+        .filter(|report_combos| report_combos.iter().any(|report| is_safe(report)))
         .count()
         .try_into()
         .unwrap();
@@ -95,15 +111,25 @@ mod tests {
     mod many_reports {
         use super::*;
 
-        #[test]
-        fn multiple_reports_safe() {
-            let reports: Vec<&str> = vec!["10 9 8", "0 2 4 6 8"];
-            assert_eq!(count_safe_reports(reports), 2);
+        mod safe {
+            use super::*;
+
+            #[test]
+            fn multiple_reports_safe() {
+                let reports: Vec<&str> = vec!["10 9 8", "0 2 4 6 8"];
+                assert_eq!(count_safe_reports(reports), 2);
+            }
+
+            #[test]
+            fn safe_utilize_dampener() {
+                let reports: Vec<&str> = vec!["0 1 3 6 10", "20 19 18 1"];
+                assert_eq!(count_safe_reports(reports), 2);
+            }
         }
 
         #[test]
         fn unsafe_more_than_three() {
-            let reports: Vec<&str> = vec!["0 1 3 6 10", "20 19 18 1"];
+            let reports: Vec<&str> = vec!["0 6 10", "20 19 10 1"];
             assert_eq!(count_safe_reports(reports), 0);
         }
     }
@@ -119,16 +145,16 @@ mod tests {
             "1 3 6 7 9",
         ];
 
-        assert_eq!(count_safe_reports(reports), 2);
+        assert_eq!(count_safe_reports(reports), 4);
     }
 
     #[test]
-    fn puzzle_part_one() {
+    fn puzzle_part_two() {
         let filename = "./src/input.txt";
         match read_lines(filename) {
             Ok(lines) => {
                 let reports = lines.iter().map(|l| l.as_str()).collect();
-                assert_eq!(count_safe_reports(reports), 279)
+                assert_eq!(count_safe_reports(reports), 343)
             }
             Err(e) => {
                 println!("Error reading file: {}", e);
