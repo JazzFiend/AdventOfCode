@@ -1,7 +1,10 @@
 use regex::Regex;
 
-// REFACTOR ME
 pub fn fix_corrupted(corrupted_memory: Vec<&str>) -> Vec<(i32, i32)> {
+    if corrupted_memory.is_empty() {
+        return vec![];
+    }
+
     let line = corrupted_memory.first().unwrap();
     if line.is_empty() {
         return vec![];
@@ -24,7 +27,12 @@ pub fn calculate_sum_of_products(pairs: Vec<(i32, i32)>) -> i32 {
 mod tests {
     use super::*;
 
-    // Need test for empty vector
+    #[test]
+    fn empty_memory() {
+        let corrupted_memory = vec![];
+        let expected: Vec<(i32, i32)> = vec![];
+        assert_eq!(fix_corrupted(corrupted_memory), expected);
+    }
 
     #[test]
     fn blank_memory() {
