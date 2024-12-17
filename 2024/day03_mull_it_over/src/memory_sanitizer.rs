@@ -10,12 +10,11 @@ pub fn fix_corrupted(corrupted_memory: Vec<&str>) -> Vec<(i32, i32)> {
         return vec![];
     }
 
-    let mul_keyword = Regex::new(r"mul").unwrap();
-    let multiply_commands = mul_keyword.captures(line);
+    let multiply_regex = Regex::new(r"mul\((\d+),(\d+)\)").unwrap();
+    let multiply_commands = multiply_regex.captures(line);
     if let Some(capture) = multiply_commands {
-        return vec![(2, 3)];
+        return vec![(capture[1].parse().unwrap(), capture[2].parse().unwrap())];
     }
-
     return vec![];
 }
 
@@ -34,25 +33,40 @@ mod tests {
         assert_eq!(fix_corrupted(corrupted_memory), expected);
     }
 
-    #[test]
-    fn blank_memory() {
-        let corrupted_memory = vec![""];
-        let expected: Vec<(i32, i32)> = vec![];
-        assert_eq!(fix_corrupted(corrupted_memory), expected);
-    }
+    mod one_line {
+        use super::*;
 
-    #[test]
-    fn one_line_no_valid_instuctions() {
-        let corrupted_memory = vec!["nrn,(()vieu.;qhjw3223.[;[un64,,gb64326"];
-        let expected: Vec<(i32, i32)> = vec![];
-        assert_eq!(fix_corrupted(corrupted_memory), expected);
-    }
+        #[test]
+        fn blank_memory() {
+            let corrupted_memory = vec![""];
+            let expected: Vec<(i32, i32)> = vec![];
+            assert_eq!(fix_corrupted(corrupted_memory), expected);
+        }
 
-    #[test]
-    fn one_correct_instruction_single_digits() {
-        let corrupted_memory = vec!["mul(2,3)"];
-        let expected: Vec<(i32, i32)> = vec![(2, 3)];
-        assert_eq!(fix_corrupted(corrupted_memory), expected);
+        #[test]
+        fn no_valid_instuctions() {
+            let corrupted_memory = vec!["nrn,(()vieu.;qhjw3223.[;[un64,,gb64326"];
+            let expected: Vec<(i32, i32)> = vec![];
+            assert_eq!(fix_corrupted(corrupted_memory), expected);
+        }
+
+        mod one_correct_instruction {
+            use super::*;
+
+            #[test]
+            fn single_digits() {
+                let corrupted_memory = vec!["mul(2,3)"];
+                let expected: Vec<(i32, i32)> = vec![(2, 3)];
+                assert_eq!(fix_corrupted(corrupted_memory), expected);
+            }
+
+            #[test]
+            fn multi_digits() {
+                let corrupted_memory = vec!["mul(47,589)"];
+                let expected: Vec<(i32, i32)> = vec![(47, 589)];
+                assert_eq!(fix_corrupted(corrupted_memory), expected);
+            }
+        }
     }
 
     #[test]
