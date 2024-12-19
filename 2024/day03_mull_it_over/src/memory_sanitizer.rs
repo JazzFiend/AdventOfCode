@@ -26,6 +26,10 @@ pub fn calculate_sum_of_products(pairs: Vec<(i32, i32)>) -> i32 {
 
 #[cfg(test)]
 mod tests {
+    use std::fs::File;
+    use std::io::{self, BufRead, BufReader};
+    use std::path::Path;
+
     use super::*;
 
     mod fix_corrupted {
@@ -108,5 +112,31 @@ mod tests {
         let tuples = fix_corrupted(corrupted_memory);
         let total = calculate_sum_of_products(tuples);
         assert_eq!(total, 161)
+    }
+
+    #[test]
+    fn puzzle_part_one() {
+        let filename = "./src/input.txt";
+        match read_lines(filename) {
+            Ok(lines) => {
+                let corrupted_memory = lines.iter().map(|l| l.as_str()).collect();
+                let tuples = fix_corrupted(corrupted_memory);
+                let total = calculate_sum_of_products(tuples);
+                assert_eq!(total, 179571322)
+            }
+            Err(e) => {
+                println!("Error reading file: {}", e);
+                assert!(false, "An error occured")
+            }
+        }
+    }
+
+    fn read_lines<P>(filename: P) -> io::Result<Vec<String>>
+    where
+        P: AsRef<Path>,
+    {
+        let file = File::open(filename)?;
+        let reader = BufReader::new(file);
+        reader.lines().collect()
     }
 }
