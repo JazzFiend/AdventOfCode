@@ -1,20 +1,19 @@
 use regex::Regex;
 
 pub fn fix_corrupted(corrupted_memory: Vec<&str>) -> Vec<(i32, i32)> {
-    if corrupted_memory.is_empty() {
-        return vec![];
-    }
-
-    let line = corrupted_memory.first().unwrap();
     let multiply_regex = Regex::new(r"mul\((\d+),(\d+)\)").unwrap();
 
-    return multiply_regex
-        .captures_iter(line)
-        .map(|command| {
-            (
-                command[1].parse::<i32>().unwrap(),
-                command[2].parse::<i32>().unwrap(),
-            )
+    return corrupted_memory
+        .iter()
+        .flat_map(|line| {
+            multiply_regex
+                .captures_iter(line)
+                .map(|command| {
+                    (
+                        command[1].parse::<i32>().unwrap(),
+                        command[2].parse::<i32>().unwrap(),
+                    )
+                })
         })
         .collect();
 }
@@ -75,6 +74,13 @@ mod tests {
             let expected: Vec<(i32, i32)> = vec![(2, 29), (55, 5)];
             assert_eq!(fix_corrupted(corrupted_memory), expected);
         }
+    }
+
+    #[test]
+    fn multiple_lines() {
+        let corrupted_memory = vec!["mul(2,3)", "mul)(mul(2,44)(5,9)mul(345)"];
+        let expected: Vec<(i32, i32)> = vec![(2, 3), (2, 44)];
+        assert_eq!(fix_corrupted(corrupted_memory), expected);
     }
 
     #[test]
