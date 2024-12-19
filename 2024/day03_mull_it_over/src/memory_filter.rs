@@ -1,3 +1,14 @@
 pub fn filter_dont_commands(corrupted_memory: Vec<&str>) -> Vec<&str> {
-    return vec!["xmul(2,4)&mul[3,7]!^?mul(8,5))"];
+    return corrupted_memory
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn empty_memory() {
+        let corrupted_memory = vec![];
+        assert_eq!(filter_dont_commands(corrupted_memory.clone()), corrupted_memory);
+    }
 }

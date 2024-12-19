@@ -1,3 +1,4 @@
+#[cfg(test)]
 mod tests {
     use crate::memory_filter::filter_dont_commands;
     use crate::memory_sanitizer::*;
