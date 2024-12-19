@@ -6,16 +6,17 @@ pub fn fix_corrupted(corrupted_memory: Vec<&str>) -> Vec<(i32, i32)> {
     }
 
     let line = corrupted_memory.first().unwrap();
-    if line.is_empty() {
-        return vec![];
-    }
-
     let multiply_regex = Regex::new(r"mul\((\d+),(\d+)\)").unwrap();
-    let multiply_commands = multiply_regex.captures(line);
-    if let Some(capture) = multiply_commands {
-        return vec![(capture[1].parse().unwrap(), capture[2].parse().unwrap())];
-    }
-    return vec![];
+
+    return multiply_regex
+        .captures_iter(line)
+        .map(|command| {
+            (
+                command[1].parse::<i32>().unwrap(),
+                command[2].parse::<i32>().unwrap(),
+            )
+        })
+        .collect();
 }
 
 pub fn calculate_sum_of_products(pairs: Vec<(i32, i32)>) -> i32 {
@@ -66,6 +67,13 @@ mod tests {
                 let expected: Vec<(i32, i32)> = vec![(47, 589)];
                 assert_eq!(fix_corrupted(corrupted_memory), expected);
             }
+        }
+
+        #[test]
+        fn multiple_correct_instructions() {
+            let corrupted_memory = vec!["qqewdrmul(2,29)hgyuiymul(55,5)njjnrjrei"];
+            let expected: Vec<(i32, i32)> = vec![(2, 29), (55, 5)];
+            assert_eq!(fix_corrupted(corrupted_memory), expected);
         }
     }
 
