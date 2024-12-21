@@ -17,6 +17,10 @@ pub fn fix_corrupted(corrupted_memory: Vec<&str>) -> Vec<(i32, i32)> {
 }
 
 pub fn calculate_sum_of_products(pairs: Vec<(i32, i32)>) -> i32 {
+    if pairs.is_empty() {
+        return 0;
+    }
+
     return pairs
         .iter()
         .map(|pair| pair.0 * pair.1)
