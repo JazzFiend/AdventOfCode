@@ -1,20 +1,26 @@
 use regex::Regex;
 
+// ****REFACTOR THIS MESS
 pub fn filter_dont_commands(corrupted_memory: Vec<String>) -> Vec<String> {
     if corrupted_memory.is_empty() {
         return vec![];
     }
 
-    let do_regex = Regex::new(r"do\(\)").unwrap();
+    let dont_regex = Regex::new(r"don't\(\)").unwrap();
     let line = corrupted_memory.first().unwrap();
-
-    if do_regex.captures(line).is_some() {
-        let do_chunks: Vec<&str> = line.split("do()").collect();
-        let dos_removed: String = do_chunks.iter().map(|s| *s).collect();
-        return vec![dos_removed]
+    let mut result = line.clone();
+    if dont_regex.captures(line).is_some() {
+        let dont_chunks: Vec<&str> = line.split("don't()").collect();
+        result = dont_chunks.iter().map(|s| *s).collect();
     }
 
-    return corrupted_memory;
+    let do_regex = Regex::new(r"do\(\)").unwrap();
+    if do_regex.captures(&result).is_some() {
+        let do_chunks: Vec<&str> = line.split("do()").collect();
+        result = do_chunks.iter().map(|s| *s).collect();
+    }
+
+    return vec![result];
 }
 
 #[cfg(test)]
@@ -59,6 +65,13 @@ mod tests {
     fn do_with_other_chars() {
         let corrupted_memory = vec!["hfwiudo()vnmul()njk".to_string()];
         let expected = vec!["hfwiuvnmul()njk"];
+        assert_eq!(filter_dont_commands(corrupted_memory), expected);
+    }
+
+    #[test]
+    fn only_dont_command() {
+        let corrupted_memory = vec!["don't()".to_string()];
+        let expected = vec![""];
         assert_eq!(filter_dont_commands(corrupted_memory), expected);
     }
 }
