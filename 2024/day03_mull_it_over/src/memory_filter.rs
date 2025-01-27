@@ -1,6 +1,5 @@
 use regex::Regex;
 
-// ****REFACTOR THIS MESS
 pub fn filter_dont_commands(corrupted_memory: Vec<String>) -> Vec<String> {
     if corrupted_memory.is_empty() {
         return vec![];
@@ -11,7 +10,7 @@ pub fn filter_dont_commands(corrupted_memory: Vec<String>) -> Vec<String> {
     let mut result = line.clone();
     if dont_regex.captures(line).is_some() {
         let dont_chunks: Vec<&str> = line.split("don't()").collect();
-        result = dont_chunks.iter().map(|s| *s).collect();
+        result = dont_chunks[0].to_string();
     }
 
     let do_regex = Regex::new(r"do\(\)").unwrap();
@@ -72,6 +71,13 @@ mod tests {
     fn only_dont_command() {
         let corrupted_memory = vec!["don't()".to_string()];
         let expected = vec![""];
+        assert_eq!(filter_dont_commands(corrupted_memory), expected);
+    }
+
+    #[test]
+    fn remove_everything_after_dont() {
+        let corrupted_memory = vec!["frqgrdon't()huireuyverbyvuewrb".to_string()];
+        let expected = vec!["frqgr".to_string()];
         assert_eq!(filter_dont_commands(corrupted_memory), expected);
     }
 }
