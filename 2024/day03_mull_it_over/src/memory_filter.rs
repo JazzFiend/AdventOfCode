@@ -5,21 +5,45 @@ pub fn filter_dont_commands(corrupted_memory: Vec<String>) -> Vec<String> {
         return vec![];
     }
 
+    let line = corrupted_memory.first().unwrap().to_string();
+    let dos = find_dos(line.clone());
+    let donts = find_donts(line.clone());
+
+    if donts.is_empty() {
+        return vec![line]
+    }
+    let remove_sections = calculate_remove_sections(dos, donts, line.len());
+
+    return vec![remove_chunk(line, remove_sections.0, remove_sections.1)];
+}
+
+fn find_donts(line: String) -> Vec<(usize, usize)> {
     let dont_regex = Regex::new(r"don't\(\)").unwrap();
-    let line = corrupted_memory.first().unwrap();
-    let mut result = line.clone();
-    if dont_regex.captures(line).is_some() {
-        let dont_chunks: Vec<&str> = line.split("don't()").collect();
-        result = dont_chunks[0].to_string();
-    }
+    return find_command_locations(line.to_string(), dont_regex.clone());
+}
 
+fn find_dos(line: String) -> Vec<(usize, usize)> {
     let do_regex = Regex::new(r"do\(\)").unwrap();
-    if do_regex.captures(&result).is_some() {
-        let do_chunks: Vec<&str> = line.split("do()").collect();
-        result = do_chunks.iter().map(|s| *s).collect();
-    }
+    return find_command_locations(line.to_string(), do_regex.clone());
+}
 
-    return vec![result];
+fn find_command_locations(line: String, command: Regex) -> Vec<(usize, usize)> {
+    if let Some(mat) = command.find(&line) {
+        return vec![(mat.start(), mat.end())];
+    }
+    return vec![];
+}
+
+fn calculate_remove_sections(do_matches: Vec<(usize, usize)>, dont_matches: Vec<(usize, usize)>, string_length: usize) -> (usize, usize) {
+    if do_matches.is_empty() {
+        (dont_matches.first().unwrap().1, string_length)
+    } else {
+        return (dont_matches.first().unwrap().1, do_matches.first().unwrap().0);
+    }
+}
+
+fn remove_chunk(s: String, start: usize, end: usize) -> String {
+    format!("{}{}", &s[..start], &s[end..])
 }
 
 #[cfg(test)]
@@ -56,28 +80,35 @@ mod tests {
     #[test]
     fn only_do_command() {
         let corrupted_memory = vec!["do()".to_string()];
-        let expected = vec![""];
+        let expected = vec!["do()".to_string()];
         assert_eq!(filter_dont_commands(corrupted_memory), expected);
     }
 
     #[test]
     fn do_with_other_chars() {
         let corrupted_memory = vec!["hfwiudo()vnmul()njk".to_string()];
-        let expected = vec!["hfwiuvnmul()njk"];
+        let expected = vec!["hfwiudo()vnmul()njk".to_string()];
         assert_eq!(filter_dont_commands(corrupted_memory), expected);
     }
 
     #[test]
     fn only_dont_command() {
         let corrupted_memory = vec!["don't()".to_string()];
-        let expected = vec![""];
+        let expected = vec!["don't()".to_string()];
         assert_eq!(filter_dont_commands(corrupted_memory), expected);
     }
 
     #[test]
     fn remove_everything_after_dont() {
         let corrupted_memory = vec!["frqgrdon't()huireuyverbyvuewrb".to_string()];
-        let expected = vec!["frqgr".to_string()];
+        let expected = vec!["frqgrdon't()".to_string()];
+        assert_eq!(filter_dont_commands(corrupted_memory), expected);
+    }
+
+    #[test]
+    fn remove_between_do_and_dont() {
+        let corrupted_memory = vec!["cniuwnidon't()dnhewjfnwuiwfryudo()jdewid".to_string()];
+        let expected = vec!["cniuwnidon't()do()jdewid".to_string()];
         assert_eq!(filter_dont_commands(corrupted_memory), expected);
     }
 }
