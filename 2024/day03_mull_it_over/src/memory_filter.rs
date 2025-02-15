@@ -132,4 +132,11 @@ mod tests {
         let expected = vec!["135".to_string()];
         assert_eq!(filter_dont_commands(corrupted_memory), expected);
     }
+
+    #[test]
+    fn out_of_order_commands() {
+        let corrupted_memory = vec!["1do()2don't()3don't()4do()5do()6don't()7don't()8".to_string()];
+        let expected = vec!["1256".to_string()];
+        assert_eq!(filter_dont_commands(corrupted_memory), expected);
+    }
 }
