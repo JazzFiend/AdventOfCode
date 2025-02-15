@@ -1,7 +1,5 @@
 use regex::Regex;
 
-// REFACTOR MESS THAT COPILOT GAVE ME
-
 pub fn filter_dont_commands(corrupted_memory: Vec<String>) -> Vec<String> {
     if corrupted_memory.is_empty() {
         return vec![];
@@ -10,7 +8,8 @@ pub fn filter_dont_commands(corrupted_memory: Vec<String>) -> Vec<String> {
     let line = corrupted_memory.first().unwrap().to_string();
     let pairs_removed = remove_regex(line, Regex::new(r"don't\(\).+do\(\)").unwrap());
     let donts_removed = remove_regex(pairs_removed, Regex::new(r"don't\(\).*").unwrap());
-    return vec![donts_removed];
+    let dos_removed = remove_regex(donts_removed, Regex::new(r"do\(\)").unwrap());
+    return vec![dos_removed];
 }
 
 fn remove_regex(text: String, regex: Regex) -> String {
@@ -38,7 +37,6 @@ fn remove_ranges(text: &str, ranges: &[(usize, usize)]) -> String {
     return add_remaining(ranges_removed, text.to_owned(), ranges);
 }
 
-// RENAME ME!!!
 fn add_next_range(
     full_text: String,
     accumulator: String,
@@ -89,14 +87,14 @@ mod tests {
     #[test]
     fn only_do_command() {
         let corrupted_memory = vec!["do()".to_string()];
-        let expected = vec!["do()".to_string()];
+        let expected = vec!["".to_string()];
         assert_eq!(filter_dont_commands(corrupted_memory), expected);
     }
 
     #[test]
     fn do_with_other_chars() {
         let corrupted_memory = vec!["hfwiudo()vnmul()njk".to_string()];
-        let expected = vec!["hfwiudo()vnmul()njk".to_string()];
+        let expected = vec!["hfwiuvnmul()njk".to_string()];
         assert_eq!(filter_dont_commands(corrupted_memory), expected);
     }
 
