@@ -1,49 +1,58 @@
 use regex::Regex;
 
+// REFACTOR MESS THAT COPILOT GAVE ME
+
 pub fn filter_dont_commands(corrupted_memory: Vec<String>) -> Vec<String> {
     if corrupted_memory.is_empty() {
         return vec![];
     }
 
     let line = corrupted_memory.first().unwrap().to_string();
-    let dos = find_dos(line.clone());
-    let donts = find_donts(line.clone());
+    let pairs_removed = remove_regex(line, Regex::new(r"don't\(\).+do\(\)").unwrap());
+    let donts_removed = remove_regex(pairs_removed, Regex::new(r"don't\(\).*").unwrap());
+    return vec![donts_removed];
+}
 
-    if donts.is_empty() {
-        return vec![line]
+fn remove_regex(text: String, regex: Regex) -> String {
+    return remove_ranges(&text, &find_all_matches(regex, &text));
+}
+
+fn find_all_matches(regex: Regex, text: &str) -> Vec<(usize, usize)> {
+    regex
+        .find_iter(text)
+        .map(|mat| (mat.start(), mat.end()))
+        .collect()
+}
+
+fn remove_ranges(text: &str, ranges: &[(usize, usize)]) -> String {
+    if ranges.is_empty() {
+        return text.to_string();
     }
-    let remove_sections = calculate_remove_sections(dos, donts, line.len());
 
-    return vec![remove_chunk(line, remove_sections.0, remove_sections.1)];
+    let ranges_removed = ranges
+        .iter()
+        .fold((String::new(), 0), |(acc, last_end), &(start, end)| {
+            return add_next_range(text.to_owned(), acc, (last_end, start), end);
+        })
+        .0;
+    return add_remaining(ranges_removed, text.to_owned(), ranges);
 }
 
-fn find_donts(line: String) -> Vec<(usize, usize)> {
-    let dont_regex = Regex::new(r"don't\(\)").unwrap();
-    return find_command_locations(line.to_string(), dont_regex.clone());
+// RENAME ME!!!
+fn add_next_range(
+    full_text: String,
+    accumulator: String,
+    boundary: (usize, usize),
+    next_start: usize,
+) -> (String, usize) {
+    return (
+        accumulator + (&full_text[boundary.0..boundary.1]),
+        next_start,
+    );
 }
 
-fn find_dos(line: String) -> Vec<(usize, usize)> {
-    let do_regex = Regex::new(r"do\(\)").unwrap();
-    return find_command_locations(line.to_string(), do_regex.clone());
-}
-
-fn find_command_locations(line: String, command: Regex) -> Vec<(usize, usize)> {
-    if let Some(mat) = command.find(&line) {
-        return vec![(mat.start(), mat.end())];
-    }
-    return vec![];
-}
-
-fn calculate_remove_sections(do_matches: Vec<(usize, usize)>, dont_matches: Vec<(usize, usize)>, string_length: usize) -> (usize, usize) {
-    if do_matches.is_empty() {
-        (dont_matches.first().unwrap().1, string_length)
-    } else {
-        return (dont_matches.first().unwrap().1, do_matches.first().unwrap().0);
-    }
-}
-
-fn remove_chunk(s: String, start: usize, end: usize) -> String {
-    format!("{}{}", &s[..start], &s[end..])
+fn add_remaining(result: String, full_text: String, ranges: &[(usize, usize)]) -> String {
+    return result + &full_text[ranges.last().unwrap().1..full_text.len()];
 }
 
 #[cfg(test)]
@@ -94,21 +103,28 @@ mod tests {
     #[test]
     fn only_dont_command() {
         let corrupted_memory = vec!["don't()".to_string()];
-        let expected = vec!["don't()".to_string()];
+        let expected = vec!["".to_string()];
         assert_eq!(filter_dont_commands(corrupted_memory), expected);
     }
 
     #[test]
     fn remove_everything_after_dont() {
         let corrupted_memory = vec!["frqgrdon't()huireuyverbyvuewrb".to_string()];
-        let expected = vec!["frqgrdon't()".to_string()];
+        let expected = vec!["frqgr".to_string()];
         assert_eq!(filter_dont_commands(corrupted_memory), expected);
     }
 
     #[test]
     fn remove_between_do_and_dont() {
         let corrupted_memory = vec!["cniuwnidon't()dnhewjfnwuiwfryudo()jdewid".to_string()];
-        let expected = vec!["cniuwnidon't()do()jdewid".to_string()];
+        let expected = vec!["cniuwnijdewid".to_string()];
+        assert_eq!(filter_dont_commands(corrupted_memory), expected);
+    }
+
+    #[test]
+    fn dont_do_dont() {
+        let corrupted_memory = vec!["fnirdon't()rbgegvvdo()bnefwdon't()eloep".to_string()];
+        let expected = vec!["fnirbnefw".to_string()];
         assert_eq!(filter_dont_commands(corrupted_memory), expected);
     }
 }
