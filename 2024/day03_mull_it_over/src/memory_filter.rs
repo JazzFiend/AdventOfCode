@@ -1,15 +1,12 @@
 use regex::Regex;
 
 pub fn filter_dont_commands(corrupted_memory: Vec<String>) -> Vec<String> {
-    if corrupted_memory.is_empty() {
-        return vec![];
-    }
-
-    let line = corrupted_memory.first().unwrap().to_string();
-    let pairs_removed = remove_regex(line, Regex::new(r"don't\(\).*?do\(\)").unwrap());
-    let donts_removed = remove_regex(pairs_removed, Regex::new(r"don't\(\).*").unwrap());
-    let dos_removed = remove_regex(donts_removed, Regex::new(r"do\(\)").unwrap());
-    return vec![dos_removed];
+    return corrupted_memory.iter().map(|line| {
+        let pairs_removed = remove_regex(line.to_string(), Regex::new(r"don't\(\).*?do\(\)").unwrap());
+        let donts_removed = remove_regex(pairs_removed, Regex::new(r"don't\(\).*").unwrap());
+        let dos_removed = remove_regex(donts_removed, Regex::new(r"do\(\)").unwrap());
+        return dos_removed;
+    }).collect();
 }
 
 fn remove_regex(text: String, regex: Regex) -> String {
@@ -137,6 +134,21 @@ mod tests {
     fn out_of_order_commands() {
         let corrupted_memory = vec!["1do()2don't()3don't()4do()5do()6don't()7don't()8".to_string()];
         let expected = vec!["1256".to_string()];
+        assert_eq!(filter_dont_commands(corrupted_memory), expected);
+    }
+
+    #[test]
+    fn bunch_of_memory_commands() {
+        let corrupted_memory = vec![
+            "don't()".to_string(),
+            "12don't()345".to_string(),
+            "1don't()2do()3".to_string()
+        ];
+        let expected = vec![
+            "",
+            "12",
+            "13"
+        ];
         assert_eq!(filter_dont_commands(corrupted_memory), expected);
     }
 }

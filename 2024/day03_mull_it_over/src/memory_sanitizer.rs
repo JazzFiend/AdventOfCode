@@ -1,6 +1,6 @@
 use regex::Regex;
 
-pub fn fix_corrupted(corrupted_memory: Vec<&str>) -> Vec<(i32, i32)> {
+pub fn fix_corrupted(corrupted_memory: Vec<String>) -> Vec<(i32, i32)> {
     let multiply_regex = Regex::new(r"mul\((\d+),(\d+)\)").unwrap();
 
     return corrupted_memory
@@ -51,14 +51,14 @@ mod tests {
 
             #[test]
             fn blank_memory() {
-                let corrupted_memory = vec![""];
+                let corrupted_memory = vec!["".to_string()];
                 let expected: Vec<(i32, i32)> = vec![];
                 assert_eq!(fix_corrupted(corrupted_memory), expected);
             }
 
             #[test]
             fn no_valid_instuctions() {
-                let corrupted_memory = vec!["nrn,(()vieu.;qhjw3223.[;[un64,,gb64326"];
+                let corrupted_memory = vec!["nrn,(()vieu.;qhjw3223.[;[un64,,gb64326".to_string()];
                 let expected: Vec<(i32, i32)> = vec![];
                 assert_eq!(fix_corrupted(corrupted_memory), expected);
             }
@@ -68,14 +68,14 @@ mod tests {
 
                 #[test]
                 fn single_digits() {
-                    let corrupted_memory = vec!["mul(2,3)"];
+                    let corrupted_memory = vec!["mul(2,3)".to_string()];
                     let expected: Vec<(i32, i32)> = vec![(2, 3)];
                     assert_eq!(fix_corrupted(corrupted_memory), expected);
                 }
 
                 #[test]
                 fn multi_digits() {
-                    let corrupted_memory = vec!["mul(47,589)"];
+                    let corrupted_memory = vec!["mul(47,589)".to_string()];
                     let expected: Vec<(i32, i32)> = vec![(47, 589)];
                     assert_eq!(fix_corrupted(corrupted_memory), expected);
                 }
@@ -83,7 +83,7 @@ mod tests {
 
             #[test]
             fn multiple_correct_instructions() {
-                let corrupted_memory = vec!["qqewdrmul(2,29)hgyuiymul(55,5)njjnrjrei"];
+                let corrupted_memory = vec!["qqewdrmul(2,29)hgyuiymul(55,5)njjnrjrei".to_string()];
                 let expected: Vec<(i32, i32)> = vec![(2, 29), (55, 5)];
                 assert_eq!(fix_corrupted(corrupted_memory), expected);
             }
@@ -91,7 +91,7 @@ mod tests {
 
         #[test]
         fn multiple_lines() {
-            let corrupted_memory = vec!["mul(2,3)", "mul)(mul(2,44)(5,9)mul(345)"];
+            let corrupted_memory = vec!["mul(2,3)".to_string(), "mul)(mul(2,44)(5,9)mul(345)".to_string()];
             let expected: Vec<(i32, i32)> = vec![(2, 3), (2, 44)];
             assert_eq!(fix_corrupted(corrupted_memory), expected);
         }
@@ -112,7 +112,7 @@ mod tests {
     #[test]
     fn acceptance_test() {
         let corrupted_memory =
-            vec!["xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))"];
+            vec!["xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))".to_string()];
         let tuples = fix_corrupted(corrupted_memory);
         let total = calculate_sum_of_products(tuples);
         assert_eq!(total, 161)
@@ -123,8 +123,7 @@ mod tests {
         let filename = "./src/input.txt";
         match read_lines(filename) {
             Ok(lines) => {
-                let corrupted_memory = lines.iter().map(|l| l.as_str()).collect();
-                let tuples = fix_corrupted(corrupted_memory);
+                let tuples = fix_corrupted(lines);
                 let total = calculate_sum_of_products(tuples);
                 assert_eq!(total, 179571322)
             }
