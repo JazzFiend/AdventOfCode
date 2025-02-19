@@ -1,6 +1,6 @@
 pub fn find_word(word_search: Vec<String>, word: String) -> i32 {
 
-    if word_search.is_empty() {
+    if word_search.is_empty() || word.is_empty() {
         return 0;
     }
 
@@ -17,6 +17,12 @@ mod tests {
     fn empty_word_search() {
         let word_search = vec![];
         assert_eq!(find_word(word_search, "w".to_string()), 0)
+    }
+
+    #[test]
+    fn no_word() {
+        let word_search = vec!["huwiwe".to_string()];
+        assert_eq!(find_word(word_search, "".to_string()), 0)
     }
 
     #[test]
