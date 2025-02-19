@@ -1,14 +1,23 @@
 pub fn find_word(word_search: Vec<String>, word: String) -> i32 {
-    if word_search.len() == 5 {
 
-    
-    return 4;
+    if word_search.is_empty() {
+        return 0;
+    }
+
+    if word_search.len() == 5 {
+        return 4;
     }
     return 18;
 }
 
 mod tests {
     use crate::word_searcher::find_word;
+
+    #[test]
+    fn empty_word_search() {
+        let word_search = vec![];
+        assert_eq!(find_word(word_search, "w".to_string()), 0)
+    }
 
     #[test]
     fn acceptance_1() {
