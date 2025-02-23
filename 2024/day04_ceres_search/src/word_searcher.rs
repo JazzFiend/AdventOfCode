@@ -10,12 +10,16 @@ pub fn find_word(word_search: Vec<String>, word: String) -> i32 {
         return 18;
     }
 
-    let first_line = word_search.first().unwrap();
-
-    return first_line
-        .chars()
-        .map(|word_search_char| word_search_char == word.chars().next().unwrap())
-        .map(|is_match| is_match as i32)
+    return word_search
+        .iter()
+        .map(|line| {
+            let found_word_count: i32 = line
+                .chars()
+                .map(|word_search_char| word_search_char == word.chars().next().unwrap())
+                .map(|is_match| is_match as i32)
+                .sum();
+            return found_word_count;
+        })
         .sum();
 }
 
@@ -48,6 +52,18 @@ mod tests {
     fn one_letter_word_multiple_entries() {
         let word_search = vec!["AAA".to_string()];
         assert_eq!(find_word(word_search, "A".to_string()), 3)
+    }
+
+    #[test]
+    fn one_letter_word_not_all_match() {
+        let word_search = vec!["A..A".to_string()];
+        assert_eq!(find_word(word_search, "A".to_string()), 2)
+    }
+
+    #[test]
+    fn one_letter_word_many_lines() {
+        let word_search = vec!["AA..".to_string(), ".A.A".to_string(), "..A.".to_string()];
+        assert_eq!(find_word(word_search, "A".to_string()), 5)
     }
 
     #[test]
