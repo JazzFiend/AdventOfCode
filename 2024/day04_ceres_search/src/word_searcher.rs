@@ -1,4 +1,3 @@
-// This is getting messy. Refactor.
 pub fn find_word(word_search: Vec<String>, word: String) -> i32 {
     if is_invalid_case(word_search.clone(), word.clone()) {
         return 0;
@@ -11,10 +10,13 @@ pub fn find_word(word_search: Vec<String>, word: String) -> i32 {
         return 18;
     }
 
-    if word_search.first().unwrap() == &word {
-        return 1;
-    }
-    return 0;
+    let first_line = word_search.first().unwrap();
+
+    return first_line
+        .chars()
+        .map(|word_search_char| word_search_char == word.chars().next().unwrap())
+        .map(|is_match| is_match as i32)
+        .sum();
 }
 
 fn is_invalid_case(word_search: Vec<String>, word: String) -> bool {
@@ -40,6 +42,12 @@ mod tests {
     fn one_letter_word_one_entry() {
         let word_search = vec!["A".to_string()];
         assert_eq!(find_word(word_search, "A".to_string()), 1)
+    }
+
+    #[test]
+    fn one_letter_word_multiple_entries() {
+        let word_search = vec!["AAA".to_string()];
+        assert_eq!(find_word(word_search, "A".to_string()), 3)
     }
 
     #[test]
