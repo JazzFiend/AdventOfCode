@@ -18,7 +18,7 @@ pub fn find_word(word_search: Vec<String>, word: String) -> i32 {
 
     return word_search_tokenized
         .iter()
-        .map(|line| find_word_count(word_tokenized.clone(), line))
+        .map(|line| count_matches(word_tokenized.clone(), line.to_vec()))
         .sum();
 }
 
@@ -30,11 +30,27 @@ fn tokenize_string(s: String) -> Vec<String> {
     s.chars().map(|char| char.to_string()).collect()
 }
 
-fn find_word_count(word_tokenized: Vec<String>, line: &Vec<String>) -> i32 {
-    line.into_iter()
-        .map(|word_search_char| word_search_char == word_tokenized.first().unwrap())
-        .map(|is_match| is_match as i32)
-        .sum()
+fn count_matches(word: Vec<String>, word_search_line: Vec<String>) -> i32 {
+    return word_search_line
+        .iter()
+        .enumerate()
+        .map(|(index, _line_char)| is_match((&word_search_line, index), (&word, 0)))
+        .map(|potential_match| potential_match as i32)
+        .sum();
+}
+
+fn is_match(word_search_line: (&[String], usize), word: (&[String], usize)) -> bool {
+    if word_search_line.0[word_search_line.1] != word.0[word.1] {
+        return false;
+    }
+    if word.1 == word.0.len() - 1 {
+        return true;
+    } else {
+        return is_match(
+            (word_search_line.0, word_search_line.1 + 1),
+            (word.0, word.1 + 1),
+        );
+    }
 }
 
 mod tests {
@@ -76,11 +92,11 @@ mod tests {
         assert_eq!(find_word(word_search, "A".to_string()), 5)
     }
 
-    // #[test]
-    // fn two_letter_word_one_lines() {
-    //     let word_search = vec!["A.AZ.Z.AZ.A.Z".to_string()];
-    //     assert_eq!(find_word(word_search, "AZ".to_string()), 2)
-    // }
+    #[test]
+    fn two_letter_word_one_lines() {
+        let word_search = vec!["A.AZ.Z.AZ.A.Z".to_string()];
+        assert_eq!(find_word(word_search, "AZ".to_string()), 2)
+    }
 
     #[test]
     fn acceptance_1() {
