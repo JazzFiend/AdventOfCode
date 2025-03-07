@@ -1,3 +1,7 @@
+use crate::word_matcher::{WordMatcher, WordMatcherLeft, WordMatcherRight};
+
+// REFACTOR TIME
+
 pub fn find_word(word_search: Vec<String>, word: String) -> i32 {
     if is_invalid_case(word_search.clone(), word.clone()) {
         return 0;
@@ -31,101 +35,126 @@ fn tokenize_string(s: String) -> Vec<String> {
 }
 
 fn count_matches(word: Vec<String>, word_search_line: Vec<String>) -> i32 {
-    return word_search_line
-        .iter()
-        .enumerate()
-        .map(|(index, _line_char)| is_match((&word_search_line, index), (&word, 0)))
-        .map(|potential_match| potential_match as i32)
-        .sum();
-}
+    let right = WordMatcherRight::new();
+    let left = WordMatcherLeft::new();
 
-fn is_match(word_search_line: (&[String], usize), word: (&[String], usize)) -> bool {
-    if word_search_line.0[word_search_line.1] != word.0[word.1] {
-        return false;
-    }
-    if word.1 == word.0.len() - 1 {
-        return true;
+    if word.len() == 1 {
+        return word_search_line
+            .iter()
+            .enumerate()
+            .map(|(index, _line_char)| {
+                right.match_word(&word_search_line, index, &word, 0)
+            })
+            .sum();
     } else {
-        return is_match(
-            (word_search_line.0, word_search_line.1 + 1),
-            (word.0, word.1 + 1),
-        );
+        return word_search_line
+            .iter()
+            .enumerate()
+            .map(|(index, _line_char)| {
+                right.match_word(&word_search_line, index, &word, 0)
+                    + left.match_word(&word_search_line, index, &word, 0)
+            })
+            .sum();
     }
 }
 
 mod tests {
+    use std::str::FromStr;
+
     use crate::word_searcher::find_word;
 
     #[test]
     fn empty_word_search() {
         let word_search = vec![];
-        assert_eq!(find_word(word_search, "w".to_string()), 0)
+        assert_eq!(find_word(word_search, String::from("w")), 0)
     }
 
     #[test]
     fn no_word() {
-        let word_search = vec!["huwiwe".to_string()];
-        assert_eq!(find_word(word_search, "".to_string()), 0)
+        let word_search = vec![String::from("huwiwe")];
+        assert_eq!(find_word(word_search, String::from("")), 0)
     }
 
     #[test]
     fn one_letter_word_one_entry() {
-        let word_search = vec!["A".to_string()];
-        assert_eq!(find_word(word_search, "A".to_string()), 1)
+        let word_search = vec![String::from("A")];
+        assert_eq!(find_word(word_search, String::from("A")), 1)
     }
 
     #[test]
     fn one_letter_word_multiple_entries() {
-        let word_search = vec!["AAA".to_string()];
-        assert_eq!(find_word(word_search, "A".to_string()), 3)
+        let word_search = vec![String::from("AAA")];
+        assert_eq!(find_word(word_search, String::from("A")), 3)
     }
 
     #[test]
     fn one_letter_word_not_all_match() {
-        let word_search = vec!["A..A".to_string()];
-        assert_eq!(find_word(word_search, "A".to_string()), 2)
+        let word_search = vec![String::from("A..A")];
+        assert_eq!(find_word(word_search, String::from("A")), 2)
     }
 
     #[test]
     fn one_letter_word_many_lines() {
-        let word_search = vec!["AA..".to_string(), ".A.A".to_string(), "..A.".to_string()];
-        assert_eq!(find_word(word_search, "A".to_string()), 5)
+        let word_search = vec![
+            String::from("AA.."),
+            String::from(".A.A"),
+            String::from("..A."),
+        ];
+        assert_eq!(find_word(word_search, String::from("A")), 5)
     }
 
     #[test]
     fn two_letter_word_one_lines() {
-        let word_search = vec!["A.AZ.Z.AZ.A.Z".to_string()];
-        assert_eq!(find_word(word_search, "AZ".to_string()), 2)
+        let word_search = vec![String::from("A.AZ.Z.AZ.A.Z")];
+        assert_eq!(find_word(word_search, String::from("AZ")), 2)
+    }
+
+    #[test]
+    fn check_word_backwards() {
+        let word_search = vec![String::from("ABC...CBA....")];
+        assert_eq!(find_word(word_search, String::from("ABC")), 2)
+    }
+
+    #[test]
+    fn point_contains_multiple_words() {
+        let word_search = vec![String::from("....ABCBA....")];
+        assert_eq!(find_word(word_search, String::from("ABC")), 2)
+    }
+
+    #[test]
+    fn many_letters_many_lines() {
+        let word_search = vec![String::from(".CBA...."), String::from("....ABC.")];
+        assert_eq!(find_word(word_search, String::from("ABC")), 2)
     }
 
     #[test]
     fn acceptance_1() {
         let word_search = vec![
-            "..X...".to_string(),
-            ".SAMX.".to_string(),
-            ".A..A.".to_string(),
-            "XMAS.S".to_string(),
-            ".X....".to_string(),
+            String::from("..X..."),
+            String::from(".SAMX."),
+            String::from(".A..A."),
+            String::from("XMAS.S"),
+            String::from(".X...."),
         ];
         let expected = 4;
-        assert_eq!(find_word(word_search, "XMAS".to_string()), expected);
+        assert_eq!(find_word(word_search, String::from("XMAS")), expected);
     }
 
     #[test]
     fn acceptance_2() {
         let word_search = vec![
-            "MMMSXXMASM".to_string(),
-            "MSAMXMSMSA".to_string(),
-            "AMXSXMAAMM".to_string(),
-            "MSAMASMSMX".to_string(),
-            "XMASAMXAMM".to_string(),
-            "XXAMMXXAMA".to_string(),
-            "SMSMSASXSS".to_string(),
-            "SAXAMASAAA".to_string(),
-            "MAMMMXMMMM".to_string(),
-            "MXMXAXMASX".to_string(),
+            String::from("MMMSXXMASM"),
+            String::from("MSAMXMSMSA"),
+            String::from("AMXSXMAAMM"),
+            String::from("MSAMASMSMX"),
+            String::from("XMASAMXAMM"),
+            String::from("XXAMMXXAMA"),
+            String::from("SMSMSASXSS"),
+            String::from("SAXAMASAAA"),
+            String::from("MAMMMXMMMM"),
+            String::from("MXMXAXMASX"),
         ];
         let expected = 18;
-        assert_eq!(find_word(word_search, "XMAS".to_string()), expected);
+        assert_eq!(find_word(word_search, String::from("XMAS")), expected);
     }
 }
