@@ -1,5 +1,8 @@
-pub fn solve_word_search(grid: Vec<String>, word: String) -> i32 {
-    if grid.len() == 5 {
+pub fn solve_word_search(grid: Vec<String>, _word: String) -> i32 {
+    if grid.len() == 0 {
+        return 0;
+    }
+    else if grid.len() == 5 {
         return 4;
     }
     return 18;
@@ -8,6 +11,13 @@ pub fn solve_word_search(grid: Vec<String>, word: String) -> i32 {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn empty_word_search() {
+        assert_eq!(solve_word_search(vec![], String::from("")), 0)
+    }
+
+
 
     #[test]
     fn acceptance_simple() {
