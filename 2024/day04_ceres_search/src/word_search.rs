@@ -8,10 +8,14 @@ pub fn solve_word_search(grid: Vec<String>, word: String) -> i32 {
     }
 
     if let Some(first_line) = grid.first() {
-        if word == *first_line {
-            return 1;
-        }
+        return (*first_line)
+            .chars()
+            .filter(|&letter| String::from(letter) == word)
+            .count()
+            .try_into()
+            .unwrap();
     }
+
     return 0;
 }
 
@@ -19,49 +23,70 @@ pub fn solve_word_search(grid: Vec<String>, word: String) -> i32 {
 mod tests {
     use super::*;
 
-    #[test]
-    fn empty_word_search() {
-        assert_eq!(solve_word_search(vec![], String::from("")), 0)
+    #[cfg(test)]
+    mod degenerate_tests {
+        use super::*;
+
+        #[test]
+        fn empty_word_search() {
+            assert_eq!(solve_word_search(vec![], String::from("")), 0)
+        }
+
+        #[test]
+        fn no_word_given() {
+            let grid = vec![String::from("abc")];
+            assert_eq!(solve_word_search(grid, String::from("")), 0)
+        }
     }
 
-    #[test]
-    fn no_word_given() {
-        let grid = vec![String::from("abc")];
-        assert_eq!(solve_word_search(grid, String::from("")), 0)
+    #[cfg(test)]
+    mod one_char_word {
+        use super::*;
+
+        #[test]
+        fn one_char_grid() {
+            let grid: Vec<String> = vec![String::from("A")];
+            assert_eq!(solve_word_search(grid, String::from("A")), 1)
+        }
+
+        #[test]
+        fn many_char_grid() {
+            let grid: Vec<String> = vec![String::from("ZZZAZZZ")];
+            assert_eq!(solve_word_search(grid, String::from("A")), 1)
+        }
     }
 
-    #[test]
-    fn one_char_word_one_char_grid() {
-        let grid: Vec<String> = vec![String::from("A")];
-        assert_eq!(solve_word_search(grid, String::from("A")), 1)
-    }
+    #[cfg(test)]
+    mod acceptance {
+        use super::*;
 
-    #[test]
-    fn acceptance_simple() {
-        let grid = vec![
-            String::from("..X..."),
-            String::from(".SAMX."),
-            String::from(".A..A."),
-            String::from("XMAS.S"),
-            String::from(".X...."),
-        ];
-        assert_eq!(solve_word_search(grid, String::from("XMAS")), 4)
-    }
+        #[test]
+        fn acceptance_simple() {
+            let grid = vec![
+                String::from("..X..."),
+                String::from(".SAMX."),
+                String::from(".A..A."),
+                String::from("XMAS.S"),
+                String::from(".X...."),
+            ];
+            assert_eq!(solve_word_search(grid, String::from("XMAS")), 4)
+        }
 
-    #[test]
-    fn acceptance_complex() {
-        let grid = vec![
-            String::from("MMMSXXMASM"),
-            String::from("MSAMXMSMSA"),
-            String::from("AMXSXMAAMM"),
-            String::from("MSAMASMSMX"),
-            String::from("XMASAMXAMM"),
-            String::from("XXAMMXXAMA"),
-            String::from("SMSMSASXSS"),
-            String::from("SAXAMASAAA"),
-            String::from("MAMMMXMMMM"),
-            String::from("MXMXAXMASX"),
-        ];
-        assert_eq!(solve_word_search(grid, String::from("XMAS")), 18)
+        #[test]
+        fn acceptance_complex() {
+            let grid = vec![
+                String::from("MMMSXXMASM"),
+                String::from("MSAMXMSMSA"),
+                String::from("AMXSXMAAMM"),
+                String::from("MSAMASMSMX"),
+                String::from("XMASAMXAMM"),
+                String::from("XXAMMXXAMA"),
+                String::from("SMSMSASXSS"),
+                String::from("SAXAMASAAA"),
+                String::from("MAMMMXMMMM"),
+                String::from("MXMXAXMASX"),
+            ];
+            assert_eq!(solve_word_search(grid, String::from("XMAS")), 18)
+        }
     }
 }
