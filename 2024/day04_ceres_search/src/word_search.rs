@@ -7,16 +7,22 @@ pub fn solve_word_search(grid: Vec<String>, word: String) -> i32 {
         return 18;
     }
 
-    if let Some(first_line) = grid.first() {
-        return (*first_line)
-            .chars()
-            .filter(|&letter| String::from(letter) == word)
-            .count()
-            .try_into()
-            .unwrap();
-    }
+    return grid
+        .iter()
+        .map(|line| {
+            return count_matches_in_line(line.clone(), word.clone());
+        })
+        .reduce(|a, b| return a + b)
+        .unwrap();
+}
 
-    return 0;
+fn count_matches_in_line(line: String, word: String) -> i32 {
+    return (line)
+        .chars()
+        .filter(|&letter| String::from(letter) == word)
+        .count()
+        .try_into()
+        .unwrap();
 }
 
 #[cfg(test)]
@@ -53,6 +59,16 @@ mod tests {
         fn many_char_grid() {
             let grid: Vec<String> = vec![String::from("ZZZAZZZ")];
             assert_eq!(solve_word_search(grid, String::from("A")), 1)
+        }
+
+        #[test]
+        fn many_line_grid() {
+            let grid: Vec<String> = vec![
+                String::from("ZZZAZZZ"),
+                String::from("ZAZZZZA"),
+                String::from("ZZZZZZZ"),
+            ];
+            assert_eq!(solve_word_search(grid, String::from("A")), 3)
         }
     }
 
