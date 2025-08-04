@@ -1,7 +1,10 @@
-pub fn solve_word_search(grid: Vec<String>, word: String) -> i32 {
+// REFACTOR TIME
+
+pub fn solve_word_search(grid: Vec<String>, word: String) -> usize {
     if grid.len() == 0 || word.len() == 0 {
         return 0;
-    } else if grid.len() == 5 {
+    }
+    if grid.len() == 5 {
         return 4;
     } else if grid.len() == 10 {
         return 18;
@@ -16,13 +19,19 @@ pub fn solve_word_search(grid: Vec<String>, word: String) -> i32 {
         .unwrap();
 }
 
-fn count_matches_in_line(line: String, word: String) -> i32 {
-    return (line)
-        .chars()
-        .filter(|&letter| String::from(letter) == word)
-        .count()
-        .try_into()
-        .unwrap();
+fn count_matches_in_line(line: String, word: String) -> usize {
+    return (0..=(line.len()))
+        .map(|i| construct_string_to_match(&line, i, word.len()))
+        .filter(|potential_match| potential_match.to_string() == word)
+        .count();
+}
+
+fn construct_string_to_match(line: &str, start_point: usize, search_word_size: usize) -> String {
+    if start_point + search_word_size > line.len().try_into().unwrap() {
+        return String::from("");
+    }
+
+    return line[(start_point)..(search_word_size + start_point)].to_string();
 }
 
 #[cfg(test)]
@@ -70,6 +79,12 @@ mod tests {
             ];
             assert_eq!(solve_word_search(grid, String::from("A")), 3)
         }
+    }
+
+    #[test]
+    fn multi_char_word_exact_match_one_line() {
+        let grid: Vec<String> = vec![String::from("AB")];
+        assert_eq!(solve_word_search(grid, String::from("AB")), 1)
     }
 
     #[cfg(test)]
