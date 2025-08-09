@@ -8,45 +8,76 @@ pub fn solve_word_search(grid: Vec<String>, word: String) -> usize {
         return 18;
     }
 
-    return grid
+    let grid_height_range = 0..=grid.len() - 1;
+    let grid_width_range = 0..=grid.first().unwrap().len() - 1;
+
+    let mut stringOptions: Vec<Option<String>> = Vec::new();
+    for y in grid_height_range.clone() {
+        for x in grid_width_range.clone() {
+            stringOptions.push(construct_string_to_match_left(&grid, x, y, &word));
+            stringOptions.push(construct_string_to_match_right(&grid, x, y, &word));
+            stringOptions.push(construct_string_to_match_up(&grid, x, y, &word));
+        }
+    }
+
+    return stringOptions
         .iter()
-        .map(|line| {
-            return count_matches_in_line(line.clone(), word.clone());
-        })
-        .reduce(|a, b| return a + b)
-        .unwrap();
+        .flatten()
+        .filter(|s| s.as_str() == word)
+        .count();
 }
 
-fn count_matches_in_line(line: String, word: String) -> usize {
-    // I'll fix up these calls in the next test. I expect things to change pretty drastically when we introduce up.
-    return (0..=(line.len()))
-        .map(|i| construct_string_to_match(&line, i, word.len()))
-        .filter(|potential_match| potential_match.to_string() == word)
-        .count()
-        + (0..=(line.len()))
-            .map(|i| construct_string_to_match_backwards(&line, i, word.len()))
-            .filter(|potential_match| potential_match.to_string() == word)
-            .count();
-}
-
-fn construct_string_to_match(line: &str, start_point: usize, search_word_size: usize) -> String {
-    if start_point + search_word_size > line.len().try_into().unwrap() {
-        return String::from("");
+// Return options instead. Bad case should be None
+fn construct_string_to_match_right(
+    grid: &[String],
+    x: usize,
+    y: usize,
+    search_word: &str,
+) -> Option<String> {
+    if x + search_word.len() > grid[y].len() {
+        return None;
     }
 
-    return line[(start_point)..(search_word_size + start_point)].to_string();
+    let this_line = &grid[y];
+    return Some((&this_line[x..x + search_word.len()]).to_string());
 }
 
-fn construct_string_to_match_backwards(
-    line: &str,
-    start_point: usize,
-    search_word_size: usize,
-) -> String {
-    let reverse: String = line.chars().rev().collect();
-    if start_point + search_word_size > reverse.len().try_into().unwrap() {
-        return String::from("");
+fn construct_string_to_match_left(
+    grid: &[String],
+    x: usize,
+    y: usize,
+    search_word: &str,
+) -> Option<String> {
+    if x < search_word.len() - 1 {
+        return None;
     }
-    return reverse[(start_point)..(search_word_size + start_point)].to_string();
+
+    let this_line = &grid[y];
+    return Some(
+        (&this_line[(1 + x - search_word.len())..=x])
+            .chars()
+            .rev()
+            .collect(),
+    );
+}
+
+fn construct_string_to_match_up(
+    grid: &[String],
+    x: usize,
+    y: usize,
+    search_word: &str,
+) -> Option<String> {
+    if y < search_word.len() - 1 {
+        return None;
+    }
+
+    return Some(
+        grid[(1 + y - search_word.len())..=y]
+            .iter()
+            .rev()
+            .map(|line| line.chars().nth(x).unwrap().to_string())
+            .collect(),
+    );
 }
 
 #[cfg(test)]
@@ -77,13 +108,13 @@ mod tests {
         #[test]
         fn one_char_grid() {
             let grid: Vec<String> = vec![String::from("A")];
-            assert_eq!(solve_word_search(grid, String::from("A")), 2)
+            assert_eq!(solve_word_search(grid, String::from("A")), 3)
         }
 
         #[test]
         fn many_char_grid() {
             let grid: Vec<String> = vec![String::from("ZZZAZZZ")];
-            assert_eq!(solve_word_search(grid, String::from("A")), 2)
+            assert_eq!(solve_word_search(grid, String::from("A")), 3)
         }
 
         #[test]
@@ -93,26 +124,37 @@ mod tests {
                 String::from("ZAZZZZA"),
                 String::from("ZZZZZZZ"),
             ];
-            assert_eq!(solve_word_search(grid, String::from("A")), 6)
+            assert_eq!(solve_word_search(grid, String::from("A")), 9)
         }
     }
 
-    #[test]
-    fn multi_char_word_exact_match_one_line() {
-        let grid: Vec<String> = vec![String::from("AB")];
-        assert_eq!(solve_word_search(grid, String::from("AB")), 1)
-    }
+    #[cfg(test)]
+    mod multi_char_word {
+        use super::*;
 
-    #[test]
-    fn multi_char_word_one_line_forwards() {
-        let grid: Vec<String> = vec![String::from("XXXABXX")];
-        assert_eq!(solve_word_search(grid, String::from("AB")), 1)
-    }
+        #[test]
+        fn exact_match_one_line() {
+            let grid: Vec<String> = vec![String::from("AB")];
+            assert_eq!(solve_word_search(grid, String::from("AB")), 1)
+        }
 
-    #[test]
-    fn multi_char_word_one_line_reverse() {
-        let grid: Vec<String> = vec![String::from("XXXBAXX")];
-        assert_eq!(solve_word_search(grid, String::from("AB")), 1)
+        #[test]
+        fn one_line_forwards() {
+            let grid: Vec<String> = vec![String::from("XXXABXX")];
+            assert_eq!(solve_word_search(grid, String::from("AB")), 1)
+        }
+
+        #[test]
+        fn one_line_reverse() {
+            let grid: Vec<String> = vec![String::from("XXXBAXX")];
+            assert_eq!(solve_word_search(grid, String::from("AB")), 1)
+        }
+
+        #[test]
+        fn find_word_up() {
+            let grid: Vec<String> = vec![String::from("..B."), String::from("..A.")];
+            assert_eq!(solve_word_search(grid, String::from("AB")), 1)
+        }
     }
 
     #[cfg(test)]
