@@ -51,3 +51,21 @@ pub fn construct_string_to_match_up(
             .collect(),
     );
 }
+
+pub fn construct_string_to_match_down(
+    grid: &[String],
+    x: usize,
+    y: usize,
+    search_word: &str,
+) -> Option<String> {
+    if y + search_word.len() > grid.len() {
+        return None;
+    }
+
+    return Some(
+        grid[y..=(y + search_word.len() - 1)]
+            .iter()
+            .map(|line| line.chars().nth(x).unwrap().to_string())
+            .collect(),
+    );
+}

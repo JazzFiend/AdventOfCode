@@ -1,14 +1,13 @@
 use crate::directions::{
-    DirectionFn,
-    construct_string_to_match_left,
-    construct_string_to_match_right,
-    construct_string_to_match_up,
+    construct_string_to_match_down, construct_string_to_match_left,
+    construct_string_to_match_right, construct_string_to_match_up, DirectionFn,
 };
 
 const DIRECTIONS: &[DirectionFn] = &[
     construct_string_to_match_left,
     construct_string_to_match_right,
     construct_string_to_match_up,
+    construct_string_to_match_down,
 ];
 
 pub fn solve_word_search(grid: Vec<String>, match_word: String) -> usize {
@@ -68,13 +67,13 @@ mod tests {
         #[test]
         fn one_char_grid() {
             let grid: Vec<String> = vec![String::from("A")];
-            assert_eq!(solve_word_search(grid, String::from("A")), 3)
+            assert_eq!(solve_word_search(grid, String::from("A")), 4)
         }
 
         #[test]
         fn many_char_grid() {
             let grid: Vec<String> = vec![String::from("ZZZAZZZ")];
-            assert_eq!(solve_word_search(grid, String::from("A")), 3)
+            assert_eq!(solve_word_search(grid, String::from("A")), 4)
         }
 
         #[test]
@@ -84,7 +83,7 @@ mod tests {
                 String::from("ZAZZZZA"),
                 String::from("ZZZZZZZ"),
             ];
-            assert_eq!(solve_word_search(grid, String::from("A")), 9)
+            assert_eq!(solve_word_search(grid, String::from("A")), 12)
         }
     }
 
@@ -113,6 +112,12 @@ mod tests {
         #[test]
         fn find_word_up() {
             let grid: Vec<String> = vec![String::from("..B."), String::from("..A.")];
+            assert_eq!(solve_word_search(grid, String::from("AB")), 1)
+        }
+
+        #[test]
+        fn find_word_down() {
+            let grid: Vec<String> = vec![String::from("A..."), String::from("B...")];
             assert_eq!(solve_word_search(grid, String::from("AB")), 1)
         }
     }
