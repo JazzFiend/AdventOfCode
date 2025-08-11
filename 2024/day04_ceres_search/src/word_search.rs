@@ -1,5 +1,13 @@
-pub fn solve_word_search(grid: Vec<String>, word: String) -> usize {
-    if grid.len() == 0 || word.len() == 0 {
+type DirectionFn = fn(&[String], usize, usize, &str) -> Option<String>;
+
+const DIRECTIONS: &[DirectionFn] = &[
+    construct_string_to_match_left,
+    construct_string_to_match_right,
+    construct_string_to_match_up,
+];
+
+pub fn solve_word_search(grid: Vec<String>, match_word: String) -> usize {
+    if grid.len() == 0 || match_word.len() == 0 {
         return 0;
     }
     if grid.len() == 5 {
@@ -11,23 +19,22 @@ pub fn solve_word_search(grid: Vec<String>, word: String) -> usize {
     let grid_height_range = 0..=grid.len() - 1;
     let grid_width_range = 0..=grid.first().unwrap().len() - 1;
 
-    let mut stringOptions: Vec<Option<String>> = Vec::new();
+    let mut potential_matches: Vec<Option<String>> = Vec::new();
     for y in grid_height_range.clone() {
         for x in grid_width_range.clone() {
-            stringOptions.push(construct_string_to_match_left(&grid, x, y, &word));
-            stringOptions.push(construct_string_to_match_right(&grid, x, y, &word));
-            stringOptions.push(construct_string_to_match_up(&grid, x, y, &word));
+            for dir in DIRECTIONS {
+                potential_matches.push(dir(&grid, x, y, &match_word));
+            }
         }
     }
 
-    return stringOptions
+    return potential_matches
         .iter()
         .flatten()
-        .filter(|s| s.as_str() == word)
+        .filter(|s| s.as_str() == match_word)
         .count();
 }
 
-// Return options instead. Bad case should be None
 fn construct_string_to_match_right(
     grid: &[String],
     x: usize,
