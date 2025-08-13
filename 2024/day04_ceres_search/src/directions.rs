@@ -76,8 +76,9 @@ pub fn construct_string_to_match_up_right(
     y: usize,
     search_word: &str,
 ) -> Option<String> {
-    // Extract these guys into functions
-    if out_of_bounds_up(y, search_word.len()) || out_of_bounds_right(x, search_word.len(), grid[y].len()) {
+    if out_of_bounds_up(y, search_word.len())
+        || out_of_bounds_right(x, search_word.len(), grid[y].len())
+    {
         return None;
     }
 
@@ -87,6 +88,71 @@ pub fn construct_string_to_match_up_right(
             .rev()
             .enumerate()
             .map(|(i, line)| line.chars().nth(x + i).unwrap().to_string())
+            .collect(),
+    );
+    return to_return;
+}
+
+pub fn construct_string_to_match_up_left(
+    grid: &[String],
+    x: usize,
+    y: usize,
+    search_word: &str,
+) -> Option<String> {
+    if out_of_bounds_up(y, search_word.len()) || out_of_bounds_left(x, search_word.len()) {
+        return None;
+    }
+
+    let to_return = Some(
+        relevant_range_up(grid, y, search_word.len())
+            .iter()
+            .rev()
+            .enumerate()
+            .map(|(i, line)| line.chars().nth(x - i).unwrap().to_string())
+            .collect(),
+    );
+    return to_return;
+}
+
+pub fn construct_string_to_match_down_right(
+    grid: &[String],
+    x: usize,
+    y: usize,
+    search_word: &str,
+) -> Option<String> {
+    if out_of_bounds_down(y, search_word.len(), grid.len())
+        || out_of_bounds_right(x, search_word.len(), grid[y].len())
+    {
+        return None;
+    }
+
+    let to_return = Some(
+        relevant_range_down(grid, y, search_word.len())
+            .iter()
+            .enumerate()
+            .map(|(i, line)| line.chars().nth(x + i).unwrap().to_string())
+            .collect(),
+    );
+    return to_return;
+}
+
+pub fn construct_string_to_match_down_left(
+    grid: &[String],
+    x: usize,
+    y: usize,
+    search_word: &str,
+) -> Option<String> {
+    if out_of_bounds_down(y, search_word.len(), grid.len())
+        || out_of_bounds_left(x, search_word.len())
+    {
+        return None;
+    }
+
+    let to_return = Some(
+        relevant_range_down(grid, y, search_word.len())
+            .iter()
+            .enumerate()
+            .map(|(i, line)| line.chars().nth(x - i).unwrap().to_string())
             .collect(),
     );
     return to_return;

@@ -1,6 +1,8 @@
 use crate::directions::{
-    construct_string_to_match_down, construct_string_to_match_left,
-    construct_string_to_match_right, construct_string_to_match_up, construct_string_to_match_up_right, DirectionFn,
+    construct_string_to_match_down, construct_string_to_match_down_left,
+    construct_string_to_match_down_right, construct_string_to_match_left,
+    construct_string_to_match_right, construct_string_to_match_up,
+    construct_string_to_match_up_left, construct_string_to_match_up_right, DirectionFn,
 };
 
 const DIRECTIONS: &[DirectionFn] = &[
@@ -8,17 +10,15 @@ const DIRECTIONS: &[DirectionFn] = &[
     construct_string_to_match_right,
     construct_string_to_match_up,
     construct_string_to_match_down,
-    construct_string_to_match_up_right
+    construct_string_to_match_up_right,
+    construct_string_to_match_up_left,
+    construct_string_to_match_down_right,
+    construct_string_to_match_down_left,
 ];
 
 pub fn solve_word_search(grid: Vec<String>, match_word: String) -> usize {
     if grid.len() == 0 || match_word.len() == 0 {
         return 0;
-    }
-    if grid.len() == 5 {
-        return 4;
-    } else if grid.len() == 10 {
-        return 18;
     }
 
     let grid_height_range = 0..=grid.len() - 1;
@@ -43,6 +43,9 @@ pub fn solve_word_search(grid: Vec<String>, match_word: String) -> usize {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::fs::File;
+    use std::io::{self, BufRead, BufReader};
+    use std::path::Path;
 
     #[cfg(test)]
     mod degenerate_tests {
@@ -68,13 +71,13 @@ mod tests {
         #[test]
         fn one_char_grid() {
             let grid: Vec<String> = vec![String::from("A")];
-            assert_eq!(solve_word_search(grid, String::from("A")), 5)
+            assert_eq!(solve_word_search(grid, String::from("A")), 8)
         }
 
         #[test]
         fn many_char_grid() {
             let grid: Vec<String> = vec![String::from("ZZZAZZZ")];
-            assert_eq!(solve_word_search(grid, String::from("A")), 5)
+            assert_eq!(solve_word_search(grid, String::from("A")), 8)
         }
 
         #[test]
@@ -84,7 +87,7 @@ mod tests {
                 String::from("ZAZZZZA"),
                 String::from("ZZZZZZZ"),
             ];
-            assert_eq!(solve_word_search(grid, String::from("A")), 15)
+            assert_eq!(solve_word_search(grid, String::from("A")), 24)
         }
     }
 
@@ -132,6 +135,24 @@ mod tests {
             let grid: Vec<String> = vec![String::from("..B."), String::from(".A..")];
             assert_eq!(solve_word_search(grid, String::from("AB")), 1)
         }
+
+        #[test]
+        fn find_word_up_left() {
+            let grid: Vec<String> = vec![String::from("..B."), String::from("...A")];
+            assert_eq!(solve_word_search(grid, String::from("AB")), 1)
+        }
+
+        #[test]
+        fn find_word_down_right() {
+            let grid: Vec<String> = vec![String::from("A..."), String::from(".B..")];
+            assert_eq!(solve_word_search(grid, String::from("AB")), 1)
+        }
+
+        #[test]
+        fn find_word_down_left() {
+            let grid: Vec<String> = vec![String::from(".A.."), String::from("B...")];
+            assert_eq!(solve_word_search(grid, String::from("AB")), 1)
+        }
     }
 
     #[cfg(test)]
@@ -165,6 +186,30 @@ mod tests {
                 String::from("MXMXAXMASX"),
             ];
             assert_eq!(solve_word_search(grid, String::from("XMAS")), 18)
+        }
+
+        #[test]
+        fn puzzle_part_one() {
+            let filename = "./src/input.txt";
+            match read_lines(filename) {
+                Ok(lines) => {
+                    let grid = vec![lines.join("")];
+                    assert_eq!(solve_word_search(grid, String::from("XMAS")), 0)
+                }
+                Err(e) => {
+                    println!("Error reading file: {}", e);
+                    assert!(false, "An error occured")
+                }
+            }
+        }
+
+        fn read_lines<P>(filename: P) -> io::Result<Vec<String>>
+        where
+            P: AsRef<Path>,
+        {
+            let file = File::open(filename)?;
+            let reader = BufReader::new(file);
+            return reader.lines().collect();
         }
     }
 }
