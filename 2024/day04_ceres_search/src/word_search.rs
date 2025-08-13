@@ -1,6 +1,6 @@
 use crate::directions::{
     construct_string_to_match_down, construct_string_to_match_left,
-    construct_string_to_match_right, construct_string_to_match_up, DirectionFn,
+    construct_string_to_match_right, construct_string_to_match_up, construct_string_to_match_up_right, DirectionFn,
 };
 
 const DIRECTIONS: &[DirectionFn] = &[
@@ -8,6 +8,7 @@ const DIRECTIONS: &[DirectionFn] = &[
     construct_string_to_match_right,
     construct_string_to_match_up,
     construct_string_to_match_down,
+    construct_string_to_match_up_right
 ];
 
 pub fn solve_word_search(grid: Vec<String>, match_word: String) -> usize {
@@ -67,13 +68,13 @@ mod tests {
         #[test]
         fn one_char_grid() {
             let grid: Vec<String> = vec![String::from("A")];
-            assert_eq!(solve_word_search(grid, String::from("A")), 4)
+            assert_eq!(solve_word_search(grid, String::from("A")), 5)
         }
 
         #[test]
         fn many_char_grid() {
             let grid: Vec<String> = vec![String::from("ZZZAZZZ")];
-            assert_eq!(solve_word_search(grid, String::from("A")), 4)
+            assert_eq!(solve_word_search(grid, String::from("A")), 5)
         }
 
         #[test]
@@ -83,12 +84,12 @@ mod tests {
                 String::from("ZAZZZZA"),
                 String::from("ZZZZZZZ"),
             ];
-            assert_eq!(solve_word_search(grid, String::from("A")), 12)
+            assert_eq!(solve_word_search(grid, String::from("A")), 15)
         }
     }
 
     #[cfg(test)]
-    mod multi_char_word {
+    mod cardinal_directions {
         use super::*;
 
         #[test]
@@ -118,6 +119,17 @@ mod tests {
         #[test]
         fn find_word_down() {
             let grid: Vec<String> = vec![String::from("A..."), String::from("B...")];
+            assert_eq!(solve_word_search(grid, String::from("AB")), 1)
+        }
+    }
+
+    #[cfg(test)]
+    mod diagonal_directions {
+        use super::*;
+
+        #[test]
+        fn find_word_up_right() {
+            let grid: Vec<String> = vec![String::from("..B."), String::from(".A..")];
             assert_eq!(solve_word_search(grid, String::from("AB")), 1)
         }
     }
