@@ -160,7 +160,7 @@ mod tests {
         use super::*;
 
         #[test]
-        fn acceptance_simple() {
+        fn simple() {
             let grid = vec![
                 String::from("..X..."),
                 String::from(".SAMX."),
@@ -172,7 +172,7 @@ mod tests {
         }
 
         #[test]
-        fn acceptance_complex() {
+        fn complex() {
             let grid = vec![
                 String::from("MMMSXXMASM"),
                 String::from("MSAMXMSMSA"),
@@ -189,12 +189,40 @@ mod tests {
         }
 
         #[test]
+        fn all_matches_from_one_spot() {
+            let grid = vec![
+                String::from("S..S..S"),
+                String::from(".A.A.A."),
+                String::from("..MMM.."),
+                String::from("SAMXMAS"),
+                String::from("..MMM.."),
+                String::from(".A.A.A."),
+                String::from("S..S..S"),
+            ];
+            assert_eq!(solve_word_search(grid, String::from("XMAS")), 8)
+        }
+
+        #[test]
+        fn all_matches_overlap() {
+            let grid = vec![
+                String::from("......."),
+                String::from("..X...."),
+                String::from(".XMAS.."),
+                String::from("..A.A.."),
+                String::from("..SAMX."),
+                String::from("....X.."),
+                String::from("......."),
+                String::from("......."),
+            ];
+            assert_eq!(solve_word_search(grid, String::from("XMAS")), 4)
+        }
+
+        #[test]
         fn puzzle_part_one() {
             let filename = "./src/input.txt";
             match read_lines(filename) {
-                Ok(lines) => {
-                    let grid = vec![lines.join("")];
-                    assert_eq!(solve_word_search(grid, String::from("XMAS")), 0)
+                Ok(grid) => {
+                    assert_eq!(solve_word_search(grid, String::from("XMAS")), 2493)
                 }
                 Err(e) => {
                     println!("Error reading file: {}", e);
