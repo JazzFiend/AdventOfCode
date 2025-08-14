@@ -11,6 +11,28 @@ pub fn solve_x_search(grid: Vec<String>, center: char, cross: (char, char)) -> u
 mod tests {
     use super::*;
 
+    mod degenerate {
+        use super::*;
+
+        #[test]
+        fn no_grid() {
+            assert_eq!(solve_x_search(vec![], 'B', ('A', 'C')), 0);
+        }
+
+        #[test]
+        fn no_matches() {
+            let grid = vec![
+                String::from("......."),
+                String::from("......."),
+                String::from("......."),
+                String::from("......."),
+                String::from("......."),
+                String::from("......."),
+            ];
+            assert_eq!(solve_x_search(grid, 'A', ('M', 'S')), 0);
+        }
+    }
+
     mod acceptance {
         use super::*;
 
