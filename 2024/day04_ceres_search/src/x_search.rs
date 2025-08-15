@@ -212,7 +212,7 @@ mod tests {
             let filename = "./src/input.txt";
             match read_lines(filename) {
                 Ok(grid) => {
-                    assert_eq!(solve_x_search(grid, 'A', ('M', 'S')), 0)
+                    assert_eq!(solve_x_search(grid, 'A', ('M', 'S')), 1890)
                 }
                 Err(e) => {
                     println!("Error reading file: {}", e);
