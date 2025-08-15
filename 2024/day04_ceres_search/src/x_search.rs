@@ -2,11 +2,6 @@ pub fn solve_x_search(grid: Vec<String>, center: char, cross: (char, char)) -> u
     if grid.len() == 0 {
         return 0;
     }
-    if grid.len() == 3 {
-        return 1;
-    } else if grid.len() == 10 {
-        return 9;
-    }
 
     let mut matches = 0;
 
@@ -15,10 +10,8 @@ pub fn solve_x_search(grid: Vec<String>, center: char, cross: (char, char)) -> u
 
     for y in y_range.clone() {
         for x in x_range.clone() {
-            if is_center_match(&grid, center, x, y) {
-                if is_cross_match(&grid, cross, x, y) {
-                    matches += 1;
-                }
+            if is_center_match(&grid, center, x, y) && is_cross_match(&grid, cross, x, y) {
+                matches += 1;
             }
         }
     }
@@ -34,39 +27,57 @@ fn is_cross_match(grid: &Vec<String>, cross: (char, char), x: usize, y: usize) -
 }
 
 fn is_match_positive_slope(grid: &Vec<String>, cross: (char, char), x: usize, y: usize) -> bool {
-    (get_down_left_point(&grid, x, y) == cross.0 && get_up_right_point(&grid, x, y) == cross.1)
-        || (get_down_left_point(&grid, x, y) == cross.1
-            && get_up_right_point(&grid, x, y) == cross.0)
+    (get_down_left_point(&grid, x, y).unwrap_or_default() == cross.0
+        && get_up_right_point(&grid, x, y).unwrap_or_default() == cross.1)
+        || (get_down_left_point(&grid, x, y).unwrap_or_default() == cross.1
+            && get_up_right_point(&grid, x, y).unwrap_or_default() == cross.0)
 }
 
 fn is_match_negative_slope(grid: &Vec<String>, cross: (char, char), x: usize, y: usize) -> bool {
-    (get_up_left_point(&grid, x, y) == cross.0 && get_down_right_point(&grid, x, y) == cross.1)
-        || (get_up_left_point(&grid, x, y) == cross.1
-            && get_down_right_point(&grid, x, y) == cross.0)
+    (get_up_left_point(&grid, x, y).unwrap_or_default() == cross.0
+        && get_down_right_point(&grid, x, y).unwrap_or_default() == cross.1)
+        || (get_up_left_point(&grid, x, y).unwrap_or_default() == cross.1
+            && get_down_right_point(&grid, x, y).unwrap_or_default() == cross.0)
 }
 
 fn get_point(grid: &Vec<String>, x: usize, y: usize) -> char {
     grid[y].chars().nth(x).unwrap()
 }
 
-fn get_up_right_point(grid: &Vec<String>, x: usize, y: usize) -> char {
-    grid[y - 1].chars().nth(x + 1).unwrap()
+fn get_up_right_point(grid: &Vec<String>, x: usize, y: usize) -> Option<char> {
+    if y == 0 || x == grid[y - 1].len() - 1 {
+        return None;
+    }
+    return Some(grid[y - 1].chars().nth(x + 1).unwrap());
 }
 
-fn get_down_right_point(grid: &Vec<String>, x: usize, y: usize) -> char {
-    grid[y + 1].chars().nth(x + 1).unwrap()
+fn get_down_right_point(grid: &Vec<String>, x: usize, y: usize) -> Option<char> {
+    if y == grid.len() - 1 || x == grid[y - 1].len() - 1 {
+        return None;
+    }
+    return Some(grid[y + 1].chars().nth(x + 1).unwrap());
 }
 
-fn get_up_left_point(grid: &Vec<String>, x: usize, y: usize) -> char {
-    grid[y - 1].chars().nth(x - 1).unwrap()
+fn get_up_left_point(grid: &Vec<String>, x: usize, y: usize) -> Option<char> {
+    if y == 0 || x == 0 {
+        return None;
+    }
+    return Some(grid[y - 1].chars().nth(x - 1).unwrap());
 }
 
-fn get_down_left_point(grid: &Vec<String>, x: usize, y: usize) -> char {
-    grid[y + 1].chars().nth(x - 1).unwrap()
+fn get_down_left_point(grid: &Vec<String>, x: usize, y: usize) -> Option<char> {
+    if y == 0 || x == grid[y - 1].len() - 1 {
+        return None;
+    }
+    return Some(grid[y + 1].chars().nth(x - 1).unwrap());
 }
 
 #[cfg(test)]
 mod tests {
+    use std::fs::File;
+    use std::io::{self, BufRead, BufReader};
+    use std::path::Path;
+
     use super::*;
 
     mod degenerate {
@@ -90,7 +101,15 @@ mod tests {
             assert_eq!(solve_x_search(grid, 'B', ('A', 'C')), 0);
         }
 
-        // NEED TEST WITH MIDDLE MATCH ON BORDERS
+        #[test]
+        fn center_on_borders() {
+            let grid = vec![
+                String::from("BBB"),
+                String::from("BBB"),
+                String::from("BBB"),
+            ];
+            assert_eq!(solve_x_search(grid, 'B', ('A', 'C')), 0);
+        }
     }
 
     mod one_match {
@@ -186,6 +205,29 @@ mod tests {
                 String::from(".........."),
             ];
             assert_eq!(solve_x_search(grid, 'A', ('M', 'S')), 9);
+        }
+
+        #[test]
+        fn puzzle_part_two() {
+            let filename = "./src/input.txt";
+            match read_lines(filename) {
+                Ok(grid) => {
+                    assert_eq!(solve_x_search(grid, 'A', ('M', 'S')), 0)
+                }
+                Err(e) => {
+                    println!("Error reading file: {}", e);
+                    assert!(false, "An error occured")
+                }
+            }
+        }
+
+        fn read_lines<P>(filename: P) -> io::Result<Vec<String>>
+        where
+            P: AsRef<Path>,
+        {
+            let file = File::open(filename)?;
+            let reader = BufReader::new(file);
+            return reader.lines().collect();
         }
     }
 }
