@@ -8,15 +8,21 @@ pub fn solve_x_search(grid: Vec<String>, center: char, cross: (char, char)) -> u
         return 9;
     }
 
-    let x = 1;
-    let y = 2;
+    let mut matches = 0;
 
-    if is_center_match(&grid, center, x, y) {
-        if is_cross_match(&grid, cross, x, y) {
-            return 1;
+    let y_range = 0..grid.len() - 1;
+    let x_range = 0..grid.first().unwrap().len();
+
+    for y in y_range.clone() {
+        for x in x_range.clone() {
+            if is_center_match(&grid, center, x, y) {
+                if is_cross_match(&grid, cross, x, y) {
+                    matches += 1;
+                }
+            }
         }
     }
-    return 0;
+    return matches;
 }
 
 fn is_center_match(grid: &Vec<String>, center: char, x: usize, y: usize) -> bool {
@@ -83,9 +89,11 @@ mod tests {
             ];
             assert_eq!(solve_x_search(grid, 'B', ('A', 'C')), 0);
         }
+
+        // NEED TEST WITH MIDDLE MATCH ON BORDERS
     }
 
-    mod matches {
+    mod one_match {
         use super::*;
 
         #[test]
@@ -130,6 +138,23 @@ mod tests {
                 String::from("A.A"),
             ];
             assert_eq!(solve_x_search(grid, 'B', ('A', 'C')), 1);
+        }
+    }
+
+    mod many_matches {
+        use super::*;
+
+        #[test]
+        fn many_matches() {
+            let grid = vec![
+                String::from(".....A.C."),
+                String::from("C.C...B.."),
+                String::from(".B.C.A.C."),
+                String::from("A.A.B...."),
+                String::from(".B.C.A..."),
+                String::from("C.C......"),
+            ];
+            assert_eq!(solve_x_search(grid, 'B', ('A', 'C')), 4);
         }
     }
 
