@@ -30,3 +30,6 @@ bin/
 
 # IntelliJ Files
 .idea/
+
+# AoC Input Files
+input.txt
