@@ -1,0 +1,26 @@
+# Cabal build directories
+dist-newstyle/
+dist/
+
+# Stack build directory (in case you use Stack later)
+.stack-work/
+
+# Compiled Object and Interface files
+*.hi
+*.hi-boot
+*.o
+*.o-boot
+*.dyn_hi
+*.dyn_o
+
+# Haskell Language Server / IDE Engine files
+.hie/
+
+# Cabal local project configuration (contains machine-specific settings)
+cabal.project.local
+cabal.project.local~
+
+# Editor / OS files
+.DS_Store
+.vscode/
+*.swp
