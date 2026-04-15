@@ -1,6 +1,1 @@
-import Test.Hspec
-import qualified Day01Spec
-
-main :: IO ()
-main = hspec $ do
-  Day01Spec.spec
+{-# OPTIONS_GHC -F -pgmF hspec-discover #-}
