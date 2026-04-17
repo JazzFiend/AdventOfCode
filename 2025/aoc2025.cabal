@@ -9,6 +9,7 @@ library
   build-depends:    base ^>=4.18
   exposed-modules:
       Day01
+      Day01SecretEntrance.CombinationLock
 
 executable aoc2025
   main-is:          Main.hs
@@ -32,3 +33,4 @@ test-suite aoc2025-test
       hspec-discover:hspec-discover ^>=2.11
   other-modules:
       Day01Spec
+      Day01SecretEntrance.CombinationLockSpec
