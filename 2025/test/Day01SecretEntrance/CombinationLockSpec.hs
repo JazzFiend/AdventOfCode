@@ -21,3 +21,11 @@ spec = describe "CombinationLock" $ do
   context "when given an invalid move" $ do
     it "throws an error" $ do
       evaluate (runCombinationFinalNumber "U20") `shouldThrow` anyErrorCall
+
+  context "when moving right and overflowing the dial" $ do
+    it "should wrap around" $ do
+      runCombinationFinalNumber "R50" `shouldBe` 0
+
+  context "when moving left and overflowing the dial" $ do
+    it "should wrap around" $ do
+      runCombinationFinalNumber "L60" `shouldBe` 90
