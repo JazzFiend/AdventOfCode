@@ -1,7 +1,10 @@
 module Day01SecretEntrance.CombinationLock where
 
+initialDial :: Int
+initialDial = 50
+
 runCombinationFinalNumber :: [String] -> Int
-runCombinationFinalNumber = foldl applyMove 50
+runCombinationFinalNumber = foldl applyMove initialDial
   where
     applyMove current "" = current
     applyMove current ('R' : distance) = (current + read distance) `mod` 100
@@ -9,4 +12,4 @@ runCombinationFinalNumber = foldl applyMove 50
     applyMove _ badInput = error ("Invalid direction: " ++ badInput ++ ". Expected an L or R.")
 
 runCombinationCountNumber :: [String] -> Int -> Int
-runCombinationCountNumber _ _ = 0
+runCombinationCountNumber _ trackingNumber = if trackingNumber == initialDial then 1 else 0

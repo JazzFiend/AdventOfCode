@@ -50,7 +50,12 @@ spec = describe "CombinationLock" $ do
             "L82"
           ]
           `shouldBe` 32
+
   describe "runCombinationCountNumber" $ do
     context "when given an empty input and tracking number is not the default" $ do
       it "the final count is 0" $ do
         runCombinationCountNumber [""] 0 `shouldBe` 0
+
+    context "when given an empty input and tracking number is the default" $ do
+      it "the final count is 1" $ do
+        runCombinationCountNumber [""] 50 `shouldBe` 1
