@@ -35,7 +35,7 @@ spec = describe "CombinationLock" $ do
       it "should calculate the final number" $ do
         runCombinationFinalNumber ["R20", "L10"] `shouldBe` 60
 
-    context "acceptance tests" $ do
+    context "acceptance test" $ do
       it "example 1: should calculate the final number" $ do
         runCombinationFinalNumber
           [ "L68",
@@ -67,3 +67,20 @@ spec = describe "CombinationLock" $ do
     context "when we hit the tracking number" $ do
       it "the final count should be equal to the number of times we hit the tracking number" $ do
         runCombinationCountNumber ["R50", "R50", "R50", "L100"] 0 `shouldBe` 3
+
+    context "acceptance test" $ do
+      it "example 1: should calculate the count" $ do
+        runCombinationCountNumber
+          [ "L68",
+            "L30",
+            "R48",
+            "L5",
+            "R60",
+            "L55",
+            "L1",
+            "L99",
+            "R14",
+            "L82"
+          ]
+          0
+          `shouldBe` 3
