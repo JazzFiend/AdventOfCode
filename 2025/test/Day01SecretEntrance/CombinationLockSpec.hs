@@ -54,8 +54,16 @@ spec = describe "CombinationLock" $ do
   describe "runCombinationCountNumber" $ do
     context "when given an empty input and tracking number is not the default" $ do
       it "the final count is 0" $ do
-        runCombinationCountNumber [""] 0 `shouldBe` 0
+        runCombinationCountNumber [] 0 `shouldBe` 0
 
     context "when given an empty input and tracking number is the default" $ do
       it "the final count is 1" $ do
-        runCombinationCountNumber [""] 50 `shouldBe` 1
+        runCombinationCountNumber [] 50 `shouldBe` 1
+
+    context "when we never hit the tracking number" $ do
+      it "the final count is 0" $ do
+        runCombinationCountNumber ["R10", "L20", "R30", "R20"] 0 `shouldBe` 0
+
+    context "when we hit the tracking number" $ do
+      it "the final count should be equal to the number of times we hit the tracking number" $ do
+        runCombinationCountNumber ["R50", "R50", "R50", "L100"] 0 `shouldBe` 3
