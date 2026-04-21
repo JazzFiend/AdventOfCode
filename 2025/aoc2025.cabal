@@ -32,5 +32,4 @@ test-suite aoc2025-test
   build-tool-depends:
       hspec-discover:hspec-discover ^>=2.11
   other-modules:
-      Day01Spec
       Day01SecretEntrance.CombinationLockSpec
