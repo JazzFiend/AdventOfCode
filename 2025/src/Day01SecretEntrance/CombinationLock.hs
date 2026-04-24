@@ -1,19 +1,19 @@
 module Day01SecretEntrance.CombinationLock where
 
+import Day01SecretEntrance.Move (Move, applyMove, parseMove)
+
 initialDial :: Int
 initialDial = 50
 
-applyMove :: Int -> String -> Int
-applyMove current "" = current
-applyMove current ('R' : distance) = (current + read distance) `mod` 100
-applyMove current ('L' : distance) = (current - read distance) `mod` 100
-applyMove _ badInput = error ("Invalid direction: " ++ badInput ++ ". Expected an L or R.")
-
 runCombinationFinalNumber :: [String] -> Int
-runCombinationFinalNumber = foldl applyMove initialDial
+runCombinationFinalNumber [] = initialDial
+runCombinationFinalNumber turnList = foldl applyMove initialDial moves
+  where
+    moves = map parseMove turnList
 
 runCombinationCountNumber :: [String] -> Int -> Int
-runCombinationCountNumber turnList trackingNumber = 
-    length $ filter (== trackingNumber) allPositions
+runCombinationCountNumber turnList trackingNumber =
+  length $ filter (== trackingNumber) allPositions
   where
-    allPositions = scanl applyMove initialDial turnList
+    allPositions = scanl applyMove initialDial moves
+    moves = map parseMove turnList

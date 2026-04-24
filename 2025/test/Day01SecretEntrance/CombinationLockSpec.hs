@@ -9,7 +9,7 @@ spec = describe "CombinationLock" $ do
   describe "runCombinationFinalNumber" $ do
     context "when given an empty input" $ do
       it "the counter should not move" $
-        runCombinationFinalNumber [""] `shouldBe` 50
+        runCombinationFinalNumber [] `shouldBe` 50
 
     context "when given a right move" $ do
       it "the counter should move right" $ do

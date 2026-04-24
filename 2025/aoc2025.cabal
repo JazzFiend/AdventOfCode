@@ -10,6 +10,7 @@ library
   exposed-modules:
       Day01
       Day01SecretEntrance.CombinationLock
+      Day01SecretEntrance.Move
 
 executable aoc2025
   main-is:          Main.hs
