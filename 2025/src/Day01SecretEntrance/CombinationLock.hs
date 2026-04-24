@@ -1,5 +1,6 @@
 module Day01SecretEntrance.CombinationLock where
 
+import Data.List (foldl')
 import Day01SecretEntrance.Move (Move, applyMove, parseMove)
 
 initialDial :: Int
@@ -7,7 +8,7 @@ initialDial = 50
 
 runCombinationFinalNumber :: [String] -> Int
 runCombinationFinalNumber [] = initialDial
-runCombinationFinalNumber turnList = foldl applyMove initialDial moves
+runCombinationFinalNumber turnList = foldl' applyMove initialDial moves
   where
     moves = map parseMove turnList
 
