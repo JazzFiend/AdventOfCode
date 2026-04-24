@@ -1,4 +1,10 @@
-module Day01SecretEntrance.Move where
+module Day01SecretEntrance.Move
+  ( Direction (L, R),
+    Move,
+    parseMove,
+    applyMove,
+  )
+where
 
 data Direction = L | R deriving (Show, Eq)
 

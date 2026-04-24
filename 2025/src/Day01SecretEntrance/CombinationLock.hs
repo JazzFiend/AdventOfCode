@@ -1,4 +1,4 @@
-module Day01SecretEntrance.CombinationLock where
+module Day01SecretEntrance.CombinationLock (runCombinationCountNumber, runCombinationFinalNumber) where
 
 import Data.List (foldl')
 import Day01SecretEntrance.Move (Move, applyMove, parseMove)
