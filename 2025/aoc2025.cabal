@@ -8,7 +8,7 @@ library
   default-language: Haskell2010
   build-depends:    base ^>=4.18
   exposed-modules:
-      Day01
+      CombinationLockWithTracker
 
 executable aoc2025
   main-is:          Main.hs
@@ -31,4 +31,4 @@ test-suite aoc2025-test
   build-tool-depends:
       hspec-discover:hspec-discover ^>=2.11
   other-modules:
-      Day01Spec
+      CombinationLockWithTrackerSpec
