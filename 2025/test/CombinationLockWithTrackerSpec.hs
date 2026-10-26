@@ -53,4 +53,4 @@ spec = describe "CombinationLockWithTracker" $ do
     it "should solve entire puzzle" $ do
       fileContents <- readFile "inputs/day01.txt"
       let puzzleInput = lines fileContents
-      runCombination puzzleInput `shouldBe` LockState {position = 23, zeroCount = 1152, zeroPassCount = -1}
+      runCombination puzzleInput `shouldBe` LockState {position = 23, zeroCount = 1152, zeroPassCount = 6671}

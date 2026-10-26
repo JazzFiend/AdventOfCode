@@ -20,27 +20,26 @@ runCombination :: [String] -> LockState
 runCombination = foldl' turnDial initialState
 
 turnDial :: LockState -> String -> LockState
-turnDial lockState turn =
+turnDial (LockState position zeroCount zeroPassCount) turn =
   LockState
     { position = calculatedPosition,
-      zeroCount = zeroCount lockState + zeroCountIncrement,
-      zeroPassCount = zeroPassCount lockState + zeroPassIncrement
+      zeroCount = zeroCount + zeroCountIncrement,
+      zeroPassCount = zeroPassCount + zeroPassIncrement
     }
   where
-    totalPosition = position lockState + parseTurn turn
+    totalPosition = position + parseTurn turn
     calculatedPosition = totalPosition `mod` 100
-    zeroCountIncrement =
-      if calculatedPosition == 0
-        then 1
-        else 0
+    zeroCountIncrement = fromEnum (calculatedPosition == 0)
+    --   if calculatedPosition == 0
+    --     then 1
+    --     else 0
     zeroPassIncrement =
-      (if isDoubleZero (position lockState) totalPosition then -1 else 0) + calculateZeroPasses totalPosition
+      (if isDoubleZero position totalPosition then -1 else 0) + calculateZeroPasses totalPosition
 
 parseTurn :: String -> Int
-parseTurn turn =
-  if take 1 turn == "R"
-    then read (drop 1 turn)
-    else (-1) * read (drop 1 turn)
+parseTurn ('R' : number) = read number
+parseTurn ('L' : number) = -read number
+parseTurn invalid = error $ "Invalid input: " ++ invalid
 
 isDoubleZero :: Int -> Int -> Bool
 isDoubleZero previousPosition currentPosition =
@@ -48,7 +47,7 @@ isDoubleZero previousPosition currentPosition =
 
 calculateZeroPasses :: Int -> Int
 calculateZeroPasses n
-  | n == 0 || n == 100 = 1
-  | n > 100 = 1 + calculateZeroPasses (n - 100)
-  | n < 0 = 1 + calculateZeroPasses (n + 100)
+  | n == 0 = 1
+  | n >= 100 = n `div` 100
+  | n < 0 = 1 + abs n `div` 100
   | otherwise = 0
