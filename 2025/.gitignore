@@ -24,3 +24,6 @@ cabal.project.local~
 .DS_Store
 .vscode/
 *.swp
+
+# AoC Inputs
+inputs/*
