@@ -5,16 +5,20 @@ where
 
 isValidProduct :: String -> Bool
 isValidProduct id =
-  not (null id) && all (containsDuplication id) sizesToCheck
+  if null id
+    then False
+    else not (any (containsDuplication id) sizesToCheck)
   where
     maxCheckSize = length id
     sizesToCheck = [1 .. maxCheckSize]
 
 containsDuplication :: String -> Int -> Bool
 containsDuplication id checkSize
-  | length id <= checkSize = True
-  | otherwise =
-      isNumberRepeated id checkSize && containsDuplication (drop checkSize id) checkSize
+  | length id <= checkSize = False
+  | isNumberRepeated id checkSize = True
+  | otherwise = False
+
+-- \| otherwise = containsDuplication (drop checkSize id) checkSize
 
 isNumberRepeated :: String -> Int -> Bool
-isNumberRepeated id checkSize = take checkSize id /= take checkSize (drop checkSize id)
+isNumberRepeated id checkSize = take checkSize id == take checkSize (drop checkSize id)
