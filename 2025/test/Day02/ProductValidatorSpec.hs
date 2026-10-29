@@ -15,3 +15,6 @@ spec = describe "Product Validator" $ do
     isValidProduct "88" `shouldBe` False
   it "should return false for duplicated digits later in the number" $
     isValidProduct "3599" `shouldBe` False
+
+  it "should return false when duplicating two numbers" $
+    isValidProduct "6767" `shouldBe` False

@@ -4,8 +4,17 @@ module Day02.ProductValidator
 where
 
 isValidProduct :: String -> Bool
-isValidProduct id
-  | null id = False
-  | length id == 1 = True
+isValidProduct id =
+  not (null id) && all (containsDuplication id) sizesToCheck
+  where
+    maxCheckSize = length id
+    sizesToCheck = [1 .. maxCheckSize]
+
+containsDuplication :: String -> Int -> Bool
+containsDuplication id checkSize
+  | length id <= checkSize = True
   | otherwise =
-      (head id /= (id !! 1)) && isValidProduct (tail id)
+      isNumberRepeated id checkSize && containsDuplication (drop checkSize id) checkSize
+
+isNumberRepeated :: String -> Int -> Bool
+isNumberRepeated id checkSize = take checkSize id /= take checkSize (drop checkSize id)
