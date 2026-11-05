@@ -28,3 +28,9 @@ spec = describe "Product Validator" $ do
 
   it "should return false when duplicating two numbers" $
     isValidProduct "6767" `shouldBe` False
+
+  it "should return false when duplicating a number three times" $
+    isValidProduct "111" `shouldBe` False
+
+  it "should return true when a multi digit duplicate is not always duplicated" $
+    isValidProduct "123123124" `shouldBe` True
