@@ -11,6 +11,7 @@ library
       Day01.CombinationLockWithTracker
       Day02.ProductRangeValidator
       Day02.ProductValidator
+      Day02.ProductCollector
 
 executable aoc2025
   main-is:          Main.hs
@@ -36,3 +37,4 @@ test-suite aoc2025-test
       Day01.CombinationLockWithTrackerSpec
       Day02.ProductRangeValidatorSpec
       Day02.ProductValidatorSpec
+      Day02.ProductCollectorSpec
