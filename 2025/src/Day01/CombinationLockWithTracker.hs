@@ -1,4 +1,4 @@
-module CombinationLockWithTracker
+module Day01.CombinationLockWithTracker
   ( LockState (..),
     runCombination,
   )
@@ -30,9 +30,6 @@ turnDial (LockState position zeroCount zeroPassCount) turn =
     totalPosition = position + parseTurn turn
     calculatedPosition = totalPosition `mod` 100
     zeroCountIncrement = fromEnum (calculatedPosition == 0)
-    --   if calculatedPosition == 0
-    --     then 1
-    --     else 0
     zeroPassIncrement =
       (if isDoubleZero position totalPosition then -1 else 0) + calculateZeroPasses totalPosition
 

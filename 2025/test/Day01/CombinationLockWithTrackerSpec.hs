@@ -1,6 +1,6 @@
-module CombinationLockWithTrackerSpec (spec) where
+module Day01.CombinationLockWithTrackerSpec (spec) where
 
-import CombinationLockWithTracker
+import Day01.CombinationLockWithTracker
 import Test.Hspec
 
 spec :: Spec
