@@ -1,7 +1,14 @@
 module Day02.ProductRangeValidator where
 
--- Finsihed class to validate a single product.
--- Now need to write class to turn X-Y into a list of potential products
+import Data.List (foldl')
+import Day02.ProductCollector (parseProducts)
+import Day02.ProductValidator (isValidProduct)
 
-validProductIdSum :: String -> Int
-validProductIdSum _ = 1227775554
+-- Now to put it all together.
+
+invalidProductIdSum :: String -> Int
+invalidProductIdSum productRanges = sum
+  where
+    allProductIds = parseProducts productRanges
+    invalidProductIds = filter (not . isValidProduct) allProductIds
+    sum = foldl' (+) 0 (map read invalidProductIds)

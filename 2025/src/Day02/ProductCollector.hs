@@ -3,7 +3,7 @@ module Day02.ProductCollector where
 import Data.List (nub)
 import Data.List.Split (splitOn)
 
-parseProducts :: String -> [Int]
+parseProducts :: String -> [String]
 parseProducts productRange =
   if null productRange
     then []
@@ -12,4 +12,4 @@ parseProducts productRange =
     endpoints = splitOn "-" productRange
     start = read (head endpoints) :: Int
     end = read (last endpoints) :: Int
-    result = nub [start .. end]
+    result = map show (nub [start .. end])
